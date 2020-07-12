@@ -37,7 +37,7 @@
         <textarea id="message" name="message" class="form-control" autocomplete="off" placeholder="Ecrire votre message ici" rows="3" style="width: 100%;"></textarea>
         <div class="input-group-btn">
           <button id="bS" class="btn btn-primary"><i class="glyphicon glyphicon-share"></i></button> &nbsp;
-          <button id="bF" class="btn btn-success" data-toggle="modal" data-target="#m_i"><i class="glyphicon glyphicon-file"></i></button>
+          <button id="bF" class="btn btn-success"><i class="glyphicon glyphicon-file"></i></button>
           <button id="bH" class="btn btn-default" data-original-title="Hint" data-content="Utilisez SHIFT-Enter pour envoyer votre message." data-toggle="popover" data-placement="top">
             <span class="glyphicon glyphicon-info-sign"></span>
           </button>
@@ -170,6 +170,8 @@
       return false;
     }
   });
+  
+  $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
 
   $('#bmSubmit').on('click', function(){
     ws.send(JSON.stringify({
@@ -238,7 +240,7 @@
     $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
     a1.play();
     fResize();
-    console.log('server 24');
+    console.log('server 25');
   });
 </script>
 </body>
