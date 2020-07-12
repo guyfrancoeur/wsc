@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>WebSocket Chat v2.1</title>
+  <title>WebSocket Chat v2.1b</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">  
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
@@ -176,7 +176,7 @@
   $('#bmSubmit').on('click', function(){
     ws.send(JSON.stringify({
        type: 'img',
-       name: name,
+       name: $('#name').val(),
        message: $('#preview').attr('src')
      }));
      $("#m_i").modal('hide');
