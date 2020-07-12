@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+a {-webkit-writing-mode: vertical-lr; vertical-align:middle;} //ceci fix un glyphicon verticallement
 body {
   font: 13px Helvetica, Arial;
   margin: 0; 
