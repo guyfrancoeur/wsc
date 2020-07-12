@@ -4,7 +4,7 @@
 <head>
   <title>WebSocket Chat v2.1b</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
@@ -89,14 +89,10 @@
   </div>
   <div class="toast-body text-center">
     <div id ="firstline" style="cursor:default;">
-      <p class="mr-auto">
-        <span id="usagersconnectes">Usagers connectés :  </span>
-        <span id="nbconnectes" class="label label-success">2</span></p>
+      <p class="mr-auto"><span>Usagers connectés : </span><span id="count" class="label label-success"></span></p>
     </div>
     <hr class="style-two" style="height:1px; width:150px;margin-left:auto !important;margin-right:auto !important;">
-      <ul class="listeusagers">
-        <li>Guy</li>
-        <li>Marie</li>
+      <ul class="listeusagers" id="users">
       </ul>
     <br/>
   </div>
@@ -114,7 +110,7 @@
   $('#closeToast').click(function() {
     $('#toast1').hide();
   });
-  
+
   function fResize() {
     $('#bS').height($('#message').height());
     $('#bF').height($('#message').height());
@@ -123,12 +119,21 @@
   }
 
   ws.onmessage = function(evt) {
-    // besoin de typer les messages de retour. (liste des usagers)
-    var text = evt.data;
-    text = text.replace(/\r?\n/g, '<br />');
-    $('#messages').append($('<li>').html(text));
-    a2.play();
-    elem.scrollTop = elem.scrollHeight;
+    console.log(evt);
+    if (evt.data != "") {
+      data = JSON.parse(evt.data);
+      console.log(data);
+      switch (data.type) {
+       case 'lnk' : $('#users').empty(); $('#users').append(data.message); break;
+       case 'tlk' :
+         var text = data.message;
+         text = text.replace(/\r?\n/g, '<br />');
+         $('#messages').append($('<li>').html(text));
+         a2.play();
+         elem.scrollTop = elem.scrollHeight;
+         break;
+      }
+    }
   };
 
   ws.onerror = function(evt) {
@@ -156,7 +161,7 @@
       return false;
     }
   });
-  
+
   $('#bS').on('click', function(){
   	$('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0) {
@@ -170,7 +175,7 @@
       return false;
     }
   });
-  
+
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
 
   $('#bmSubmit').on('click', function(){
@@ -209,18 +214,18 @@
 
   function readURL(input) {
     var reader = new FileReader();
-      
+
     reader.onloadend = function () {
       $('#preview').attr('src', this.result);
-    };    
-       
+    };
+
     if (input.files && input.files[0]) {
       reader.readAsDataURL(input.files[0]);
     } else {
       $('#preview').attr('src', "");
     }
   }
-  
+
   function KeyPress(e) {
     var evtobj = window.event ? event : e
     if (evtobj.keyCode == 13 && evtobj.shiftKey) {
@@ -231,7 +236,7 @@
     }
   }
   document.onkeydown = KeyPress;
-  
+
   $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="popover"]').popover();
@@ -240,7 +245,7 @@
     $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
     a1.play();
     fResize();
-    console.log('server 25');
+    console.log('server 24');
   });
 </script>
 </body>
