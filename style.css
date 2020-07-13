@@ -131,7 +131,7 @@ hr.style-two {
 }
 .divIconeModale {
   position: absolute;
-  top: 9px;
+  top: 7px;
   left: -25px;
   background: radial-gradient(circle at center, rgba(236, 102, 0, 1), rgb(203, 92, 11));
   border-top-left-radius: 3px;
@@ -157,3 +157,6 @@ hr.style-two {
   color:rgb(80,80,80);
   cursor:pointer;
 }
+#bmodaleusers:hover{
+  color:rgb(255, 165, 0);
+} 
