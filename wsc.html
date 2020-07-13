@@ -38,7 +38,7 @@
         <div class="input-group-btn">
           <button id="bS" class="btn btn-primary"><i class="glyphicon glyphicon-share"></i></button> &nbsp;
           <button id="bF" class="btn btn-success"><i class="glyphicon glyphicon-file"></i></button>
-          <a tabIndex="0" id="bH" class="btn btn-default" role="button" data-trigger="focus" data-original-title="Hint" data-content="<ul><li>Utilisez SHIFT-Enter pour envoyer votre message.</li> <li>Clic ici<a href='#'><span class='glyphicon glyphicon-user'></a></span></li></ul>" data-toggle="popover" data-placement="top">
+          <a tabIndex="0" id="bH" class="btn btn-default" role="button" data-trigger="focus" data-original-title="Hint" data-content="<ul><li>Utilisez SHIFT-Enter pour envoyer votre message.</li> <li>Clic ici &#160;<span id='bmodaleusers'><span class='glyphicon glyphicon-user'></span></span></li></ul>" data-toggle="popover" data-placement="top">
             <span class="glyphicon glyphicon-info-sign"></span>
           </a>
         </div>
@@ -236,6 +236,13 @@
     }
   }
   document.onkeydown = KeyPress;
+
+  // Ouverture modal start
+  $("[data-toggle='popover']").on('shown.bs.popover', function(){
+    $('#bmodaleusers').click(function() {
+      $("#toast1").show();
+    });
+  });
 
   $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();

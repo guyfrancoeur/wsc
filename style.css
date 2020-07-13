@@ -153,3 +153,10 @@ hr.style-two {
   top: 35px;
   position: absolute;
 }
+#bmodaleusers{
+  color:rgb(80,80,80);
+  cursor:pointer;
+}
+#bmodaleusers:hover{
+  color:rgb(120,120,120);
+}
