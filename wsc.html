@@ -26,19 +26,22 @@
           <button class="btn btn-sm btn-primary" id="bName"><i class="glyphicon glyphicon-ok"></i></button>
         </div>
       </div>
+      <br/>
     </div>
-    <div id="welcome"></div>
+    <div id="welcome"><span id="arrow" class="glyphicon glyphicon-menu-right"></span> <span id="welcometext"></span></div>
     <div id="msgs">
-      <ul id="messages" class="scrollbar"></ul>
+      <ul id="messages" class="scrollbar">
+        <li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li><li>7/14/2020, 5:15:59 AM <strong>Test</strong> : juste pour tester</li>
+      </ul>
     </div>
     <div id="input-div">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+      <div id="divdubas" class="input-group">
+        <span id="eltG" class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
         <textarea id="message" name="message" class="form-control" autocomplete="off" placeholder="Ecrire votre message ici" rows="3" style="width: 100%;"></textarea>
         <div class="input-group-btn">
           <button id="bS" class="btn btn-primary"><i class="glyphicon glyphicon-share"></i></button> &nbsp;
           <button id="bF" class="btn btn-success"><i class="glyphicon glyphicon-file"></i></button>
-          <a tabIndex="0" id="bH" class="btn btn-default" role="button" data-trigger="focus" data-original-title="Hint" data-content="<ul><li>Utilisez SHIFT-Enter pour envoyer votre message.</li> <li>Cliquer &#160;<span id='bmodaleusers' class='glyphicon glyphicon-user'></span>, pour voir les usagers connectés</li></ul>" data-toggle="popover" data-placement="top">
+          <a tabIndex="0" id="bH" class="btn btn-default" role="button" data-trigger="focus" data-original-title="<strong>Hint</strong>" data-content="<ul style='padding-left:10px;'><li>Utilisez SHIFT-Enter pour envoyer votre message.</li> <li>Cliquer &#160;<span id='bmodaleusers' class='glyphicon glyphicon-user'></span>, pour voir les usagers connectés</li></ul>" data-toggle="popover" data-placement="top">
             <span class="glyphicon glyphicon-info-sign"></span>
           </a>
         </div>
@@ -54,7 +57,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h3 class="modal-title">Image</h3>
+        <h3 class="modal-title col text-center">Image</h3>
       </div>
       <div class="modal-body">
         <div class="input-group">
@@ -89,7 +92,7 @@
   </div>
   <div class="toast-body text-center">
     <div id ="firstline" style="cursor:default;">
-      <p class="mr-auto"><span>Usagers connectés : </span><span id="count" class="label label-success"></span></p>
+      <p class="mr-auto"><span id="usagersconnectes">Usagers connectés : </span><span id="count" class="label label-success">2</span></p>
     </div>
     <hr class="style-two" style="height:1px; width:150px;margin-left:auto !important;margin-right:auto !important;">
       <ul class="listeusagers" id="users">
@@ -116,6 +119,14 @@
     $('#bF').height($('#message').height());
     $('#bH').height($('#message').height());
     $('#message').css('width','100%');
+    if (connecte == 0){
+      $('#msgs').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
+      $('#messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
+    }
+    else{
+      $('#msgs').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
+      $('#messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
+    }
   }
 
   ws.onmessage = function(evt) {
@@ -148,16 +159,21 @@
      }));
   };
 
+  var connecte = 0;
   $('#bName').on('click', function(){
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0) {
       $('#name-div').hide();
-      $('#welcome').text('Bonjour ' + $('#name').val());
+      $('#welcome').show();
+      $('#welcometext').text('Bonjour ' + $('#name').val());
       ws.send(JSON.stringify({
        type: 'name',
        name: $('#name').val(),
        message: navigator.tell
       }));
+      connecte = 1;
+      fResize();
+      $('#toast1').css('top','5rem');
       return false;
     }
   });
@@ -191,8 +207,8 @@
 
   $(window).on('resize', function(){
     var win = $(this); //this = window
-    $('#msgs').height(win.height() - $('#name-div').height() - $('#input-div').height() - 10);
-    $('#messages').height(win.height() - $('#name-div').height() - $('#input-div').height() - 10);
+    $('#msgs').height(win.height() - $('#name-div').height() - $('#input-div').height() - 40);
+    $('#messages').height(win.height() - $('#name-div').height() - $('#input-div').height() - 40);
     $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
     fResize();
   });
@@ -246,9 +262,10 @@
 
   $(document).ready(function(){
     //$('[data-toggle="tooltip"]').tooltip();
+    $('#welcome').hide();
     $('[data-toggle="popover"]').popover({html: true});
-    $('#msgs').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 10);
-    $('#messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 10);
+    $('#msgs').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
+    $('#messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
     $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
     a1.play();
     fResize();
