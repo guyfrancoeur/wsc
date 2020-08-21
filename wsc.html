@@ -2,9 +2,10 @@
 <html>
 
 <head>
-  <title>WebSocket Chat v2.1d</title>
+  <title>wsc v2.1g</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" id="favicon">
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
@@ -15,7 +16,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.0/umd/popper.min.js"></script>
   <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
 </head>
-
 <body>
   <form>
     <div id="name-div">
@@ -30,7 +30,9 @@
     </div>
     <div id="welcome"><span id="arrow" class="glyphicon glyphicon-menu-right"></span> <span id="welcometext"></span></div>
     <div id="msgs">
-      <ul id="messages" class="scrollbar"></ul>
+      <ul id="messages" class="scrollbar">
+        <!--<li>7/14/2020, 5:15:59 AM <strong> User</strong> : lol</li>-->
+      </ul>
     </div>
     <div id="input-div">
       <div id="divdubas" class="input-group">
@@ -90,7 +92,7 @@
   </div>
   <div class="toast-body text-center">
     <div id ="firstline" style="cursor:default;">
-      <p class="mr-auto"><span id="usagersconnectes">Usagers connectés : </span><span id="count" class="label label-success"></span></p>
+      <p class="mr-auto"><span id="usagersconnectes">Usagers connectés : </span><span id="count" class="label label-success">2</span></p>
     </div>
     <hr class="style-two" style="height:1px; width:150px;margin-left:auto !important;margin-right:auto !important;">
       <ul class="listeusagers" id="users">
@@ -104,8 +106,18 @@
 <script>
   var a1 = new Audio('./consequence.mp3');
   var a2 = new Audio('./inbox.mp3');
-  ws = new WebSocket("ws://www.salutem.co:1337/");
+  ws = new WebSocket("wss://www.salutem.co:1337/");
   var elem = document.getElementById('messages'); //pour scroll-auto
+  
+  const ico = document.getElementById('favicon');
+
+  function newUpdate() {
+    ico.href = './ico/favicon.ico';
+  }
+
+  $(window).on("blur focus", function(e) {
+    ico.href = './favicon.ico';
+  });
 
   //Fermeture en cliquant sur la croix
   $('#closeToast').click(function() {
@@ -128,17 +140,17 @@
   }
 
   ws.onmessage = function(evt) {
-    console.log(evt);
+    //console.log(evt);
     if (evt.data != "") {
       data = JSON.parse(evt.data);
-      console.log(data);
+      //console.log(data);
       switch (data.type) {
        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); break;
        case 'tlk' :
+         if (!document.hasFocus()) { newUpdate(); a2.play(); }
          var text = data.message;
          text = text.replace(/\r?\n/g, '<br />');
          $('#messages').append($('<li>').html(text));
-         a2.play();
          elem.scrollTop = elem.scrollHeight;
          break;
       }
