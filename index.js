@@ -126,15 +126,6 @@ ws.onerror = function(evt) {
   $('#messages').append($('<li>').html('<span style="color: red;">ERROR:</span> ' + evt.data));
 };
 
-ws.onopen = function(evt) {
-  ws.send(JSON.stringify({
-     type: 'link',
-     name: '',
-     message: navigator.tell
-   }));
-};
-}
-
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
   $('#welcome').hide();
@@ -150,21 +141,25 @@ $('#bName').on('click', function(e){
   $('#name').val($.trim($('#name').val()));
   if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
     ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
-    init();
-    $('#name-div').hide();
-    $('#welcome').show();
-    $('#welcometext').text('Bonjour ' + $('#name').val());
-    console.log(ws.OPEN);
-    console.log(ws.OPEN);
-    while (ws.readyState != ws.OPEN) { connecte=0; }
-    ws.send(JSON.stringify({
-     type: 'name',
-     name: $('#name').val(),
-     message: navigator.tell
-    }));
-    connecte = 1;
-    fResize();
-    $('#toast1').css('top','5rem');
+    ws.onopen = function() {
+      ws.send(JSON.stringify({
+        type: 'link',
+        name: '',
+        message: navigator.tell
+      }));
+      init();
+      $('#name-div').hide();
+      $('#welcome').show();
+      $('#welcometext').text('Bonjour ' + $('#name').val());
+      ws.send(JSON.stringify({
+       type: 'name',
+       name: $('#name').val(),
+       message: navigator.tell
+      }));
+      connecte = 1;
+      fResize();
+      $('#toast1').css('top','5rem');
+    }
   }
 });
 
