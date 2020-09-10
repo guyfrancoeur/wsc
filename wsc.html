@@ -1,8 +1,7 @@
 <!doctype html>
 <html>
-
 <head>
-  <title>wsc v2.1g</title>
+  <title>wsc v2.1h</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" id="favicon">
@@ -259,6 +258,19 @@
       if ($("#message").val().length > 0) {
         $('#bS').click();
       }
+      return true;
+    }
+    if (evtobj.ctrlKey && evtobj.keyCode == '0'.charCodeAt(0)) {
+      var text = $("#message").val();
+      text = text.replace(/\</g, '&#60;');
+      $("#message").val(text);
+      return true;
+    }
+    if (evtobj.ctrlKey && evtobj.keyCode == '9'.charCodeAt(0)) {
+      var text = $("#message").val();
+      var text = '<pre>'+ $("#message").val() +'</pre>';
+      $("#message").val(text);
+      return true;
     }
   }
   document.onkeydown = KeyPress;
