@@ -124,7 +124,8 @@ ws.onmessage = function(evt) {
 
 ws.onerror = function(evt) {
   $('#messages').append($('<li>').html('<span style="color: red;">ERROR:</span> ' + evt.data));
-};
+}
+}
 
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
