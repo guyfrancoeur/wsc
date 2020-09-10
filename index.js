@@ -70,7 +70,7 @@ $('#bName').on('click', function(){
   if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
     $('#name-div').hide();
     $('#welcome').show();
-    $('#welcometext').text('Bonjour ' + $('#name').val());
+    $('#welcometext').text('Bonjour ' + $('#name').val() +' at '+ ws._socket.remoteAddress);
     ws.send(JSON.stringify({
      type: 'name',
      name: $('#name').val(),
