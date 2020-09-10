@@ -104,7 +104,6 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 });
 
 function init() {
-while (ws.CONNECTING) { ; }
 ws.onmessage = function(evt) {
   //console.log(evt);
   if (evt.data != "") {
@@ -155,6 +154,7 @@ $('#bName').on('click', function(e){
     $('#name-div').hide();
     $('#welcome').show();
     $('#welcometext').text('Bonjour ' + $('#name').val());
+    while (ws.CONNECTING != 0) { connecte=0; }
     ws.send(JSON.stringify({
      type: 'name',
      name: $('#name').val(),
