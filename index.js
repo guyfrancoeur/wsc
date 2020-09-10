@@ -35,6 +35,7 @@ function fResize() {
 
 var connecte = 0;
 $('#bName').on('click', function(e){
+  e.preventDefault();
   $('#name').val($.trim($('#name').val()));
   if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
     ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
@@ -51,8 +52,6 @@ $('#bName').on('click', function(e){
     fResize();
     $('#toast1').css('top','5rem');
   }
-  e.preventDefault();
-  return false;
 });
 
 $('#bS').on('click', function(){
