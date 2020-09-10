@@ -153,7 +153,7 @@ $('#bName').on('click', function(e){
     init();
     $('#name-div').hide();
     $('#welcome').show();
-    $('#welcometext').text('Bonjour ' + $('#name').val() +' at '+ ws._socket.remoteAddress);
+    $('#welcometext').text('Bonjour ' + $('#name').val());
     ws.send(JSON.stringify({
      type: 'name',
      name: $('#name').val(),
