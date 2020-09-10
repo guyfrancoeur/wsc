@@ -17,13 +17,25 @@
 </head>
 <body>
   <form>
-    <div id="name-div">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input type="text" class="input-sm" name="name" id="name" placeholder="Quel est votre pseudo/nickname" required />
-        <div class="input-group-btn">
-          <button class="btn btn-sm btn-primary" id="bName"><i class="glyphicon glyphicon-ok"></i></button>
+    <div id="name-div" class="row">
+      <div class="col-sm-5">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input type="text" class="input-sm" name="name" id="name" placeholder="Quel est votre pseudo/nickname" required />
         </div>
+      </div>
+      <div class="col-sm-2  col-sm-offset-2">
+        <div class="input-group">
+          <input type="text" class="input-sm" name="port" id="port" placeholder="Port" required />
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="input-group">
+          <input type="text" class="input-sm" name="motsecret" id="motsecret" placeholder="Mot secret" required />
+        </div>
+      </div>
+      <div class="col-sm-1 text-right">
+        <button class="btn btn-sm btn-primary" id="bName"><i class="glyphicon glyphicon-ok"></i></button>
       </div>
       <br/>
     </div>
@@ -105,7 +117,7 @@
 <script>
   var a1 = new Audio('./consequence.mp3');
   var a2 = new Audio('./inbox.mp3');
-  ws = new WebSocket("wss://www.salutem.co:1337/");
+  //ws = new WebSocket("wss://www.salutem.co:1337/");
   var elem = document.getElementById('messages'); //pour scroll-auto
   
   const ico = document.getElementById('favicon');
@@ -171,7 +183,7 @@
   var connecte = 0;
   $('#bName').on('click', function(){
     $('#name').val($.trim($('#name').val()));
-    if ($('#name').val().length > 0) {
+    if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
       $('#name-div').hide();
       $('#welcome').show();
       $('#welcometext').text('Bonjour ' + $('#name').val());
