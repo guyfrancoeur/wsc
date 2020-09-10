@@ -65,7 +65,7 @@ ws.onopen = function(evt) {
 
 var connecte = 0;
 $('#bName').on('click', function(){
-  ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val+"/");
+  ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
   $('#name').val($.trim($('#name').val()));
   if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
     $('#name-div').hide();
