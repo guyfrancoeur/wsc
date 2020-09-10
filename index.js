@@ -27,10 +27,12 @@ function fResize() {
   if (connecte == 0){
     $('#msgs').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
     $('#messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
+    if($(window).width() < 768) $('#toast1').css('top','23rem');
+    else $('#toast1').css('top','6rem');
   }
   else{
     $('#msgs').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
-     $('#messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
+    $('#messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
   }
 }
 
@@ -104,27 +106,27 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 });
 
 function init() {
-ws.onmessage = function(evt) {
-  //console.log(evt);
-  if (evt.data != "") {
-    data = JSON.parse(evt.data);
-    //console.log(data);
-    switch (data.type) {
-     case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); break;
-     case 'tlk' :
-       if (!document.hasFocus()) { newUpdate(); a2.play(); }
-       var text = data.message;
-       text = text.replace(/\r?\n/g, '<br />');
-       $('#messages').append($('<li>').html(text));
-       elem.scrollTop = elem.scrollHeight;
-       break;
+  ws.onmessage = function(evt) {
+    //console.log(evt);
+    if (evt.data != "") {
+      data = JSON.parse(evt.data);
+      //console.log(data);
+      switch (data.type) {
+      case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); break;
+      case 'tlk' :
+        if (!document.hasFocus()) { newUpdate(); a2.play(); }
+        var text = data.message;
+        text = text.replace(/\r?\n/g, '<br />');
+        $('#messages').append($('<li>').html(text));
+        elem.scrollTop = elem.scrollHeight;
+        break;
+      }
     }
   }
-};
 
-ws.onerror = function(evt) {
-  $('#messages').append($('<li>').html('<span style="color: red;">ERROR:</span> ' + evt.data));
-}
+  ws.onerror = function(evt) {
+    $('#messages').append($('<li>').html('<span style="color: red;">ERROR:</span> ' + evt.data));
+  }
 }
 
 $(document).ready(function(){
@@ -137,57 +139,57 @@ $(document).ready(function(){
   fResize();
   console.log('ready!');
 
-$('#bName').on('click', function(e){
-  e.preventDefault();
-  $('#name').val($.trim($('#name').val()));
-  if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
-    ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
-    ws.onopen = function() {
-      ws.send(JSON.stringify({
-        type: 'link',
-        name: '',
+  $('#bName').on('click', function(e){
+    e.preventDefault();
+    $('#name').val($.trim($('#name').val()));
+    if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
+      ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
+      ws.onopen = function() {
+        ws.send(JSON.stringify({
+          type: 'link',
+          name: '',
+          message: navigator.tell
+        }));
+        init();
+        $('#name-div').hide();
+        $('#welcome').show();
+        $('#welcometext').text('Bonjour ' + $('#name').val());
+        ws.send(JSON.stringify({
+        type: 'name',
+        name: $('#name').val(),
         message: navigator.tell
-      }));
-      init();
-      $('#name-div').hide();
-      $('#welcome').show();
-      $('#welcometext').text('Bonjour ' + $('#name').val());
-      ws.send(JSON.stringify({
-       type: 'name',
-       name: $('#name').val(),
-       message: navigator.tell
-      }));
-      connecte = 1;
-      fResize();
-      $('#toast1').css('top','5rem');
+        }));
+        connecte = 1;
+        fResize();
+        $('#toast1').css('top','5rem');
+      }
     }
-  }
-});
+  });
 
-$('#bS').on('click', function(){
-  $('#name').val($.trim($('#name').val()));
-  if ($('#name').val().length > 0) {
+  $('#bS').on('click', function(){
+    $('#name').val($.trim($('#name').val()));
+    if ($('#name').val().length > 0) {
+      ws.send(JSON.stringify({
+        type: 'talk',
+        name: $('#name').val(),
+        message: $('#message').val()
+      }));
+      $('#message').focus();
+      $('#message').val('');
+      return false;
+    }
+  });
+
+  $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
+
+  $('#bmSubmit').on('click', function(){
     ws.send(JSON.stringify({
-      type: 'talk',
+      type: 'img',
       name: $('#name').val(),
-      message: $('#message').val()
+      message: $('#preview').attr('src')
     }));
-    $('#message').focus();
-    $('#message').val('');
-    return false;
-  }
-});
-
-$('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
-
-$('#bmSubmit').on('click', function(){
-  ws.send(JSON.stringify({
-     type: 'img',
-     name: $('#name').val(),
-     message: $('#preview').attr('src')
-   }));
-   $("#m_i").modal('hide');
-});
-  console.log('event done!');
+    $("#m_i").modal('hide');
+  });
+    console.log('event done!');
 
 });
