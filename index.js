@@ -188,7 +188,6 @@ $(document).ready(function(){
   $('#msgs').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
   $('#messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
   $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
-  a1.play();
   fResize();
-  console.log('server 24');
+  console.log('ready!');
 });
