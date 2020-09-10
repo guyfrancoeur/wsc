@@ -1,6 +1,6 @@
 var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./inbox.mp3');
-var ws;
+var ws = new WebSocket();
 var elem = document.getElementById('messages'); //pour scroll-auto
 
 const ico = document.getElementById('favicon');
