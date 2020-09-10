@@ -1,6 +1,6 @@
 var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./inbox.mp3');
-ws = new WebSocket("wss://www.salutem.co:1337/");
+var ws;
 var elem = document.getElementById('messages'); //pour scroll-auto
 
 const ico = document.getElementById('favicon');
@@ -65,6 +65,7 @@ ws.onopen = function(evt) {
 
 var connecte = 0;
 $('#bName').on('click', function(){
+  ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val+"/");
   $('#name').val($.trim($('#name').val()));
   if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
     $('#name-div').hide();
