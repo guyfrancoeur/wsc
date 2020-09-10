@@ -103,7 +103,8 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
   });
 });
 
-function init(){
+function init() {
+while (ws.CONNECTING) { ; }
 ws.onmessage = function(evt) {
   //console.log(evt);
   if (evt.data != "") {
