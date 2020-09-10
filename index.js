@@ -1,6 +1,6 @@
 var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./inbox.mp3');
-var ws = new WebSocket('wss://www.salutem.co:3135/');
+var ws; //= new WebSocket('wss://www.salutem.co:3135/');
 var elem = document.getElementById('messages'); //pour scroll-auto
 
 const ico = document.getElementById('favicon');
@@ -33,41 +33,12 @@ function fResize() {
   }
 }
 
-ws.onmessage = function(evt) {
-  //console.log(evt);
-  if (evt.data != "") {
-    data = JSON.parse(evt.data);
-    //console.log(data);
-    switch (data.type) {
-     case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); break;
-     case 'tlk' :
-       if (!document.hasFocus()) { newUpdate(); a2.play(); }
-       var text = data.message;
-       text = text.replace(/\r?\n/g, '<br />');
-       $('#messages').append($('<li>').html(text));
-       elem.scrollTop = elem.scrollHeight;
-       break;
-    }
-  }
-};
-
-ws.onerror = function(evt) {
-  $('#messages').append($('<li>').html('<span style="color: red;">ERROR:</span> ' + evt.data));
-};
-
-ws.onopen = function(evt) {
-  ws.send(JSON.stringify({
-     type: 'link',
-     name: '',
-     message: navigator.tell
-   }));
-};
-
 var connecte = 0;
 $('#bName').on('click', function(){
-  ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
   $('#name').val($.trim($('#name').val()));
   if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
+    ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
+    init();
     $('#name-div').hide();
     $('#welcome').show();
     $('#welcometext').text('Bonjour ' + $('#name').val() +' at '+ ws._socket.remoteAddress);
@@ -81,10 +52,11 @@ $('#bName').on('click', function(){
     $('#toast1').css('top','5rem');
     return false;
   }
+  return false;
 });
 
 $('#bS').on('click', function(){
-	$('#name').val($.trim($('#name').val()));
+  $('#name').val($.trim($('#name').val()));
   if ($('#name').val().length > 0) {
     ws.send(JSON.stringify({
       type: 'talk',
@@ -135,7 +107,6 @@ return M.join(' ');
 
 function readURL(input) {
   var reader = new FileReader();
-
   reader.onloadend = function () {
     $('#preview').attr('src', this.result);
   };
@@ -177,6 +148,38 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
     $("#toast1").show();
   });
 });
+
+function init(){
+ws.onmessage = function(evt) {
+  //console.log(evt);
+  if (evt.data != "") {
+    data = JSON.parse(evt.data);
+    //console.log(data);
+    switch (data.type) {
+     case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); break;
+     case 'tlk' :
+       if (!document.hasFocus()) { newUpdate(); a2.play(); }
+       var text = data.message;
+       text = text.replace(/\r?\n/g, '<br />');
+       $('#messages').append($('<li>').html(text));
+       elem.scrollTop = elem.scrollHeight;
+       break;
+    }
+  }
+};
+
+ws.onerror = function(evt) {
+  $('#messages').append($('<li>').html('<span style="color: red;">ERROR:</span> ' + evt.data));
+};
+
+ws.onopen = function(evt) {
+  ws.send(JSON.stringify({
+     type: 'link',
+     name: '',
+     message: navigator.tell
+   }));
+};
+}
 
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
