@@ -2,6 +2,7 @@ var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./inbox.mp3');
 var ws; //= new WebSocket('wss://www.salutem.co:3135/');
 var elem = document.getElementById('messages'); //pour scroll-auto
+var connecte = 0;
 
 const ico = document.getElementById('favicon');
 
@@ -32,52 +33,6 @@ function fResize() {
      $('#messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
   }
 }
-
-var connecte = 0;
-$('#bName').on('click', function(e){
-  e.preventDefault();
-  $('#name').val($.trim($('#name').val()));
-  if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
-    ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
-    init();
-    $('#name-div').hide();
-    $('#welcome').show();
-    $('#welcometext').text('Bonjour ' + $('#name').val() +' at '+ ws._socket.remoteAddress);
-    ws.send(JSON.stringify({
-     type: 'name',
-     name: $('#name').val(),
-     message: navigator.tell
-    }));
-    connecte = 1;
-    fResize();
-    $('#toast1').css('top','5rem');
-  }
-});
-
-$('#bS').on('click', function(){
-  $('#name').val($.trim($('#name').val()));
-  if ($('#name').val().length > 0) {
-    ws.send(JSON.stringify({
-      type: 'talk',
-      name: $('#name').val(),
-      message: $('#message').val()
-    }));
-    $('#message').focus();
-    $('#message').val('');
-    return false;
-  }
-});
-
-$('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
-
-$('#bmSubmit').on('click', function(){
-  ws.send(JSON.stringify({
-     type: 'img',
-     name: $('#name').val(),
-     message: $('#preview').attr('src')
-   }));
-   $("#m_i").modal('hide');
-});
 
 $('#message').on('mouseup', fResize);
 
@@ -189,4 +144,51 @@ $(document).ready(function(){
   $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
   fResize();
   console.log('ready!');
+
+$('#bName').on('click', function(e){
+  e.preventDefault();
+  $('#name').val($.trim($('#name').val()));
+  if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
+    ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
+    init();
+    $('#name-div').hide();
+    $('#welcome').show();
+    $('#welcometext').text('Bonjour ' + $('#name').val() +' at '+ ws._socket.remoteAddress);
+    ws.send(JSON.stringify({
+     type: 'name',
+     name: $('#name').val(),
+     message: navigator.tell
+    }));
+    connecte = 1;
+    fResize();
+    $('#toast1').css('top','5rem');
+  }
+});
+
+$('#bS').on('click', function(){
+  $('#name').val($.trim($('#name').val()));
+  if ($('#name').val().length > 0) {
+    ws.send(JSON.stringify({
+      type: 'talk',
+      name: $('#name').val(),
+      message: $('#message').val()
+    }));
+    $('#message').focus();
+    $('#message').val('');
+    return false;
+  }
+});
+
+$('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
+
+$('#bmSubmit').on('click', function(){
+  ws.send(JSON.stringify({
+     type: 'img',
+     name: $('#name').val(),
+     message: $('#preview').attr('src')
+   }));
+   $("#m_i").modal('hide');
+});
+  console.log('event done!');
+
 });
