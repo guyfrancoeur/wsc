@@ -154,7 +154,9 @@ $('#bName').on('click', function(e){
     $('#name-div').hide();
     $('#welcome').show();
     $('#welcometext').text('Bonjour ' + $('#name').val());
-    while (ws.CONNECTING != 0) { connecte=0; }
+    console.log(ws.OPEN);
+    console.log(ws.OPEN);
+    while (ws.readyState != ws.OPEN) { connecte=0; }
     ws.send(JSON.stringify({
      type: 'name',
      name: $('#name').val(),
