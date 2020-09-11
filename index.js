@@ -143,6 +143,7 @@ $(document).ready(function(){
     e.preventDefault();
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
+      $("#loading").show();
       ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
       ws.onopen = function() {
         ws.send(JSON.stringify({
@@ -164,6 +165,7 @@ $(document).ready(function(){
         $('#toast1').css('top','5rem');
       }
     }
+    $("#loading").hide("slow");
   });
 
   $('#bS').on('click', function(){
@@ -192,4 +194,5 @@ $(document).ready(function(){
   });
     console.log('event done!');
 
+  $("#loading").hide("slow");
 });
