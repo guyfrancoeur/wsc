@@ -139,6 +139,10 @@ function init() {
   ws.onerror = function(evt) {
     $('#messages').append($('<li>').html('<span style="color: red;">ERROR:</span> ' + evt.data));
   }
+  
+  ws.onclose = function () {
+    window.location.reload(true);
+  };
 }
 
 $(document).ready(function(){
@@ -170,9 +174,9 @@ $(document).ready(function(){
         $('#welcometext').text('Bonjour ' + $('#name').val());
         $('#croom').text($('#room').val());
         ws.send(JSON.stringify({
-        type: 'name',
-        name: $('#name').val(),
-        message: navigator.tell
+          type: 'name',
+          name: $('#name').val(),
+          message: navigator.tell
         }));
         connecte = 1;
         fResize();
