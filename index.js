@@ -89,6 +89,7 @@ function KeyPress(e) {
       name: $('#name').val(),
       message: $('#message').val()
     }));
+    $('#message').val('');
     return false;
   }
   if (evtobj.ctrlKey && evtobj.keyCode == '9'.charCodeAt(0)) {
