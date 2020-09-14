@@ -83,17 +83,25 @@ function KeyPress(e) {
     }
     return true;
   }
-  if (evtobj.ctrlKey && evtobj.keyCode == '0'.charCodeAt(0)) {
-    var text = $("#message").val();
-    text = text.replace(/\</g, '&#60;');
-    $("#message").val(text);
-    return true;
+  if (evtobj.ctrlKey && evtobj.keyCode == '1'.charCodeAt(0)) {
+    ws.send(JSON.stringify({
+      type: 'clean',
+      name: $('#name').val(),
+      message: $('#message').val()
+    }));
+    return false;
   }
   if (evtobj.ctrlKey && evtobj.keyCode == '9'.charCodeAt(0)) {
     var text = $("#message").val();
     var text = '<pre>'+ $("#message").val() +'</pre>';
     $("#message").val(text);
-    return true;
+    return false;
+  }
+  if (evtobj.ctrlKey && evtobj.keyCode == '0'.charCodeAt(0)) {
+    var text = $("#message").val();
+    text = text.replace(/\</g, '&#60;');
+    $("#message").val(text);
+    return false;
   }
 }
 document.onkeydown = KeyPress;
