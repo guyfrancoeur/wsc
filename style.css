@@ -247,6 +247,47 @@ input[type=number] {
   outline:none !important;
   box-shadow:none;
 }
+input:focus{
+  outline-color: #5c7183;
+  box-shadow:none;
+}
+#divWelcome{
+  padding:0px;
+}
+#divRoom{
+  background-color:#c3ad64;
+  box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
+  padding:5px 20px;
+  width:150px;
+  text-align:center;
+  margin-left:auto;
+  color:#ffffff;
+}
+#divRoom > p{
+  margin-top:auto;
+  margin-bottom:auto;
+}
+#divRoom > p > span:nth-child(1){
+  font-size:13px;
+}
+#welcome{
+  margin:0px;
+  display: flex;
+  align-items: center;
+}
+@media screen and (max-width:400px) {
+  #welcome{
+    display: flex;
+    flex-direction: column;
+  }
+  #divWelcome{
+    padding-bottom:10px;
+  }
+  #divRoom{
+    margin:0px;
+  }
+}
+
 #loading{
   position:fixed;
   left:0px;

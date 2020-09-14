@@ -33,6 +33,8 @@ function fResize() {
   else{
     $('#msgs').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
     $('#messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
+    if($(window).width() < 400) $('#toast1').css('top','9rem');
+    else $('#toast1').css('top','6rem');
   }
 }
 
@@ -141,6 +143,7 @@ function init() {
 
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
+  $('#name').focus();
   $('#welcome').hide();
   $('[data-toggle="popover"]').popover({html: true});
   $('#msgs').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
@@ -152,9 +155,9 @@ $(document).ready(function(){
   $('#bName').on('click', function(e){
     e.preventDefault();
     $('#name').val($.trim($('#name').val()));
-    if ($('#name').val().length > 0 && $('#port').val().length > 0 && $('#motsecret').val().length > 0) {
+    if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#motsecret').val().length > 0) {
       $("#loading").show();
-      ws = new WebSocket("wss://www.salutem.co:"+ $('#port').val() +"/");
+      ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
       ws.onopen = function() {
         ws.send(JSON.stringify({
           type: 'link',
@@ -165,6 +168,7 @@ $(document).ready(function(){
         $('#name-div').hide();
         $('#welcome').show();
         $('#welcometext').text('Bonjour ' + $('#name').val());
+        $('#croom').text($('#room').val());
         ws.send(JSON.stringify({
         type: 'name',
         name: $('#name').val(),
@@ -172,7 +176,6 @@ $(document).ready(function(){
         }));
         connecte = 1;
         fResize();
-        $('#toast1').css('top','5rem');
       }
     }
     $("#loading").hide("slow");

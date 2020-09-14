@@ -28,7 +28,7 @@
       </div>
       <div class="col-sm-3 col-lg-2">
         <div class="input-group">
-          <input type="number" class="input-sm" name="port" id="port" placeholder="Port" pattern="[0-9]{4}" required />
+          <input type="number" class="input-sm" name="room" id="room" placeholder="Room" pattern="[0-9]{4}" required />
         </div>
       </div>
       <div class="col-sm-3 col-lg-2">
@@ -41,7 +41,14 @@
       </div>
       <br/>
     </div>
-    <div id="welcome"><span id="arrow" class="glyphicon glyphicon-menu-right"></span> <span id="welcometext"></span></div>
+    <div id="welcome">
+      <div id="divWelcome">
+        <span id="arrow" class="glyphicon glyphicon-menu-right"></span> <span id="welcometext"></span>
+      </div>
+        <div id="divRoom">
+          <p><span>ROOM : </span><span id ="croom"></span></p>
+        </div>
+    </div>
     <div id="msgs">
       <ul id="messages" class="scrollbar">
         <!--<li>7/14/2020, 5:15:59 AM <strong> User</strong> : lol</li>-->
