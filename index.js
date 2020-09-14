@@ -129,6 +129,7 @@ function init() {
         $('#messages').append($('<li>').html(text));
         elem.scrollTop = elem.scrollHeight;
         break;
+      case 'cln' : window.location.reload(true); break;
       }
     }
   }
