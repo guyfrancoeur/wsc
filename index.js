@@ -150,6 +150,23 @@ function init() {
   };
 }
 
+// Disable print screen
+function copyToClipboard() {
+  var aux = document.createElement("input");
+  aux.setAttribute("value", "print screen disabled!");      
+  document.body.appendChild(aux);
+  aux.select();
+  document.execCommand("copy");
+  document.body.removeChild(aux);
+}
+$(window).on("blur focus", function(e) {
+  $("body").click();
+  copyToClipboard();
+});
+$(window).keyup(function(e){
+  if(e.keyCode == 44) copyToClipboard();
+});
+
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
   $('#name').focus();
