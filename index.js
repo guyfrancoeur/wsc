@@ -2,7 +2,7 @@ var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./inbox.mp3');
 var ws; //= new WebSocket('wss://www.salutem.co:3135/');
 var elem = document.getElementById('messages'); //pour scroll-auto
-var connecte = 0;
+connecte = 0;
 
 const ico = document.getElementById('favicon');
 
@@ -20,30 +20,35 @@ $('#closeToast').click(function() {
 });
 
 function fResize() {
-  $('#bS').height($('#message').height());
-  $('#bF').height($('#message').height());
-  $('#bH').height($('#message').height());
+  $('#bS, #bF, #bH').height($('#message').height());
   $('#message').css('width','100%');
   if (connecte == 0){
-    $('#msgs').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
-    $('#messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
+    $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
     if($(window).width() < 768) $('#toast1').css('top','23rem');
     else $('#toast1').css('top','6rem');
   }
   else{
-    $('#msgs').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
-    $('#messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
+    $('#msgs, #messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
     if($(window).width() < 400) $('#toast1').css('top','9rem');
     else $('#toast1').css('top','6rem');
   }
+
+  // Scrollbar modale Usagers Connectés (-> si hauteur de la modale dépasse l'écran, ajout de scrollbar)
+  if (connecte == 0) h  = $(window).height() - ($('#name-div').height() + $('#input-div').height() + 250);
+  else h  = $(window).height() - ($('#welcome').height() + $('#input-div').height() + 250);
+  if(($("li").length * 18.5) > h){
+    if (h < (18.5 * 2)) $("#users").height(18.5 * 2);
+    else $("#users").height(h);
+    $("#users").css("overflow-y","scroll");
+  }
+  else $("#users").css("overflow-y","hidden");
 }
 
 $('#message').on('mouseup', fResize);
 
 $(window).on('resize', function(){
   var win = $(this); //this = window
-  $('#msgs').height(win.height() - $('#name-div').height() - $('#input-div').height() - 40);
-  $('#messages').height(win.height() - $('#name-div').height() - $('#input-div').height() - 40);
+  $('#msgs, #messages').height(win.height() - $('#name-div').height() - $('#input-div').height() - 40);
   $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
   fResize();
 });
@@ -150,8 +155,7 @@ $(document).ready(function(){
   $('#name').focus();
   $('#welcome').hide();
   $('[data-toggle="popover"]').popover({html: true});
-  $('#msgs').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
-  $('#messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
+  $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
   $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
   fResize();
   console.log('ready!');
