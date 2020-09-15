@@ -60,6 +60,15 @@ input {
 .popover {
   max-width:350px;
   min-width:250px;
+  border:0px;
+  box-shadow:5px 5px 10px #00000033;
+  box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
+}
+.popover-title{
+  text-align:center;
+  background-color:#f7f7f7;
+  letter-spacing:1px;
+  text-transform:uppercase;
 }
 textarea {
   min-height:7px; /* (min-height au lieu de height) Pour empêcher de resize plus petit que la taille initale du textarea */
@@ -160,11 +169,16 @@ hr.style-two {
   position:absolute;
 }
 #bmodaleusers{
-  color:#505050;
+  color:#f1eee5;
   cursor:pointer;
+  background-color:#c3ad64;
+  padding:4px 6px;
+  border-radius:4px;
+  box-shadow: 0 2px 4px 0 #00000033, 0 3px 10px 0 #00000033;
 }
 #bmodaleusers:hover{
-  color:#ffa500;
+  background-color:#c8ba84;
+  color:#faf4e0;
 } 
 #bName{
   background-color:#e6e6e6;
@@ -287,7 +301,14 @@ input:focus{
     margin:0px;
   }
 }
-
+code{
+  color:#5c7183;
+  background-color:#f3f3f3;
+}
+.racc{
+  color:#6a89a3;
+  font-weight:600;
+}
 #loading{
   position:fixed;
   left:0px;

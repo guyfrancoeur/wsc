@@ -39,7 +39,6 @@
       <div class="col-sm-1 text-right">
         <button class="btn btn-sm btn-primary" id="bName"><i class="glyphicon glyphicon-ok"></i></button>
       </div>
-      <br/>
     </div>
     <div id="welcome">
       <div id="divWelcome">
@@ -61,7 +60,13 @@
         <div class="input-group-btn">
           <button id="bS" class="btn btn-primary"><i class="glyphicon glyphicon-share"></i></button> &nbsp;
           <button id="bF" class="btn btn-success"><i class="glyphicon glyphicon-file"></i></button>
-          <a tabIndex="0" id="bH" class="btn btn-default" role="button" data-trigger="focus" data-original-title="<strong>Hint</strong>" data-content="<ul style='padding-left:10px;'><li>Utilisez SHIFT-Enter pour envoyer votre message.</li> <li>Cliquer &#160;<span id='bmodaleusers' class='glyphicon glyphicon-user'></span>, pour voir les usagers connectés</li></ul>" data-toggle="popover" data-placement="top">
+          <a tabIndex="0" id="bH" class="btn btn-default" role="button" data-trigger="focus" data-original-title="<strong>Hint</strong>" 
+            data-content="<ul style='padding-left:10px;'><li>Utilisez <span class='racc'>SHIFT-Enter</span> pour envoyer votre message.</li> 
+              <li>Cliquez &#160;<div id='bmodaleusers' class='glyphicon glyphicon-user'></div>, pour voir les usagers connectés</li>
+            <li>Pour partager du code dans le chat, vous pouvez tout simplement utiliser la balise html <code>&#60; pre> ... &#60; /pre></code>. <br/>
+              Attention, si vous utilisez cette balise, vous devrez faire <span class='racc'>CTRL-0</span> puis <span class='racc'>CTRL-9</span> 
+              quand vous aurez terminé d'écrire (juste avant d'envoyer votre message).
+            </li> </ul>" data-toggle="popover" data-placement="top">
             <span class="glyphicon glyphicon-info-sign"></span>
           </a>
         </div>
