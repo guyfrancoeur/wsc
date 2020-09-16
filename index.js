@@ -1,6 +1,6 @@
 var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./inbox.mp3');
-var ws; //= new WebSocket('wss://www.salutem.co:3135/');
+var ws;
 var elem = document.getElementById('messages'); //pour scroll-auto
 connecte = 0;
 
