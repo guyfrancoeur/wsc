@@ -24,7 +24,7 @@ function fResize() {
   $('#message').css('width','100%');
   if (connecte == 0){
     $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
-    if($(window).width() < 768) $('#m_start').css('top','23rem');
+    if($(window).width() < 768) $('#m_start').css('top','17rem');
     else $('#m_start').css('top','6rem');
   }
   else{
