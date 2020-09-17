@@ -16,7 +16,7 @@ $(window).on("blur focus", function(e) {
 
 //Fermeture en cliquant sur la croix
 $('#closeToast').click(function() {
-  $('#toast1').hide();
+  $('#m_start').hide();
 });
 
 function fResize() {
@@ -24,13 +24,13 @@ function fResize() {
   $('#message').css('width','100%');
   if (connecte == 0){
     $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
-    if($(window).width() < 768) $('#toast1').css('top','23rem');
-    else $('#toast1').css('top','6rem');
+    if($(window).width() < 768) $('#m_start').css('top','23rem');
+    else $('#m_start').css('top','6rem');
   }
   else{
     $('#msgs, #messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
-    if($(window).width() < 400) $('#toast1').css('top','9rem');
-    else $('#toast1').css('top','6rem');
+    if($(window).width() < 400) $('#m_start').css('top','9rem');
+    else $('#m_start').css('top','6rem');
   }
 
   // Scrollbar modale Usagers Connectés (-> si hauteur de la modale dépasse l'écran, ajout de scrollbar)
@@ -117,7 +117,7 @@ document.onkeydown = KeyPress;
 // Ouverture modal start
 $("[data-toggle='popover']").on('shown.bs.popover', function(){
   $('#bmodaleusers').click(function() {
-    $("#toast1").show();
+    $("#m_start").show();
   });
 });
 

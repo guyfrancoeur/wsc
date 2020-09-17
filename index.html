@@ -62,7 +62,7 @@
         <div class="input-group-btn">
           <button id="bS" class="btn btn-primary"><i class="glyphicon glyphicon-share"></i></button> &nbsp;
           <button id="bF" class="btn btn-success"><i class="glyphicon glyphicon-file"></i></button>
-          <a tabIndex="0" id="bH" class="btn btn-default" role="button" data-trigger="focus" data-original-title="<strong>Hint</strong>" 
+          <a tabIndex="0" id="bH" class="btn btn-default" role="button" data-container="body" data-trigger="focus" data-original-title="<strong>Hint</strong>" 
             data-content="<ul style='padding-left:10px;'><li>Utilisez <span class='racc'>SHIFT-Enter</span> pour envoyer votre message.</li> 
               <li>Cliquez &#160;<div id='bmodaleusers' class='glyphicon glyphicon-user'></div>, pour voir les usagers connectés</li>
             <li>Pour partager du code dans le chat, vous pouvez tout simplement utiliser la balise html <code>&#60; pre> ... &#60; /pre></code>. <br/>
@@ -103,9 +103,9 @@
   </div>
 </div>
 <!-- modal start -->
-<div class="toast m-0" id="toast1" data-autohide="false" data-animation="true" aria-live="polite" aria-atomic="true">
-  <div class="toast-header pb-4">
-    <div class="container-fluid p-0">
+<div id="m_start">
+  <div>
+    <div class="container-fluid">
       <div class="divIconeModale"><i id="iconuser" class="glyphicon glyphicon-user"></i></div>
       <div id="ticket"></div>
       <div class="col"></div>
@@ -117,11 +117,11 @@
       </div>
     </div>
   </div>
-  <div class="toast-body text-center">
+  <div class="text-center">
     <div id ="firstline" style="cursor:default;">
-      <p class="mr-auto"><span id="usagersconnectes">Usagers connectés : </span><span id="count" class="label label-success"></span></p>
+      <p><span id="usagersconnectes">Usagers connectés : </span><span id="count" class="label label-success"></span></p>
     </div>
-    <hr class="style-two" style="height:1px; width:150px;margin-left:auto !important;margin-right:auto !important;">
+    <hr class="style-two">
       <ul id="users"></ul>
     <br/>
   </div>
