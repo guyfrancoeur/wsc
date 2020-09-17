@@ -169,8 +169,8 @@ $(window).keyup(function(e){
 
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
-  if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#m_aye').load('./m.aye.html');
+  if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();
   $('#welcome').hide();
   $('[data-toggle="popover"]').popover({html: true});
