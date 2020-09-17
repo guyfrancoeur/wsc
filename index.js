@@ -36,7 +36,7 @@ function fResize() {
   // Scrollbar modale Usagers Connectés (-> si hauteur de la modale dépasse l'écran, ajout de scrollbar)
   if (connecte == 0) h  = $(window).height() - ($('#name-div').height() + $('#input-div').height() + 250);
   else h  = $(window).height() - ($('#welcome').height() + $('#input-div').height() + 250);
-  if(($("li").length * 18.5) > h){
+  if(($("#users > li").length * 18.5) > h){
     if (h < (18.5 * 2)) $("#users").height(18.5 * 2);
     else $("#users").height(h);
     $("#users").css("overflow-y","scroll");
@@ -159,10 +159,6 @@ function copyToClipboard() {
   document.execCommand("copy");
   document.body.removeChild(aux);
 }
-$(window).on("blur focus", function(e) {
-  $("body").click();
-  copyToClipboard();
-});
 $(window).keyup(function(e){
   if(e.keyCode == 44) copyToClipboard();
 });
@@ -170,7 +166,7 @@ $(window).keyup(function(e){
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
   $('#m_aye').load('./m.aye.html');
-  if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
+  //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();
   $('#welcome').hide();
   $('[data-toggle="popover"]').popover({html: true});
