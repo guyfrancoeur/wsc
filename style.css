@@ -46,7 +46,7 @@ input {
   overflow-y:auto;
   overflow-x:hidden;
 }
-.modal-body {
+#m_i .modal-body {
     position:relative; /* This avoids whatever it's absolute inside of it to go off the container */
     height:450px; /* let's imagine that your login box height is 250px . This height needs to be added, otherwise .img-responsive will be like "Oh no, I need to be vertically aligned?! but from which value I need to be aligned??" */
 }
@@ -309,6 +309,41 @@ code{
   color:#6a89a3;
   font-weight:600;
 }
+
+/* Modale m.aye.html */
+#m_aye{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#m_aye .modal-content{
+  color:#ffffff;
+  background-color:#af5757;
+  border:5px solid #b16262;
+}
+.divIconAye{
+  text-align:center;
+  color:#ffffff;
+  font-size:40px;
+  padding-bottom:15px;
+}
+#bAye{
+  background-color:#f6f6f6;
+  color:#7a2d2d;
+  border-radius:3px;
+  padding:7px 20px;
+  margin-bottom:10px;
+  box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
+}
+#bAye_f:hover{
+  background-color:white;
+  box-shadow:0 5px 11px 0 #00000042, 0 4px 15px 0 #00000042;
+}
+.iconAye{
+  filter:drop-shadow(3px 3px 2px #0000004d);
+}
+
 #loading{
   position:fixed;
   left:0px;

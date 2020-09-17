@@ -169,6 +169,8 @@ $(window).keyup(function(e){
 
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
+  if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
+  $('#m_aye').load('./m.aye.html');
   $('#name').focus();
   $('#welcome').hide();
   $('[data-toggle="popover"]').popover({html: true});
@@ -203,7 +205,7 @@ $(document).ready(function(){
         fResize();
       }
     }
-    $("#loading").hide("slow");
+    $("#loading").hide();
   });
 
   $('#bS').on('click', function(){
@@ -232,5 +234,33 @@ $(document).ready(function(){
   });
     console.log('event done!');
 
-  $("#loading").hide("slow");
+  $("#loading").hide();
+});
+
+// Superposer plusieurs modales
+$(document).on('show.bs.modal', '.modal', function() {
+  var zIndex = 1040 + (10 * $('.modal:visible').length);
+  $(this).css('z-index', zIndex);
+  setTimeout(function() {
+    $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+  }, 0);
+});
+
+// anti inspect
+document.onkeydown = function(e) {
+  if(e.keyCode == 123 || e.keyCode == 27 || e.keyCode == 122) return false;
+  if(e.metaKey && e.altKey && e.keyCode == 74) { return false; }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 73) { return false; }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'u'.charCodeAt(0)) { return false; }
+  if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0) || e.keyCode == 's'.charCodeAt(0)) { return false; }
+}
+
+window.addEventListener('devtoolschange', event => {
+  if (event.detail.isOpen) {
+    console.log('Devtools');
+    $('#m_aye').modal({backdrop: 'static', keyboard: false});
+  }
 });
