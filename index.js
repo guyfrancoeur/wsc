@@ -44,8 +44,6 @@ function fResize() {
   else $("#users").css("overflow-y","hidden");
 }
 
-$('#message').on('mouseup', fResize);
-
 $(window).on('resize', function(){
   var win = $(this); //this = window
   $('#msgs, #messages').height(win.height() - $('#name-div').height() - $('#input-div').height() - 40);
@@ -82,6 +80,14 @@ function readURL(input) {
 }
 
 function KeyPress(e) {
+  if(e.keyCode == 123 || e.keyCode == 27 || e.keyCode == 122) return false;
+  if(e.metaKey && e.altKey && e.keyCode == 74) { return false; }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 73) { return false; }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'u'.charCodeAt(0)) { return false; }
+  if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0) || e.keyCode == 's'.charCodeAt(0)) { return false; }
   var evtobj = window.event ? event : e
   if (evtobj.keyCode == 13 && evtobj.shiftKey) {
     e.preventDefault();
@@ -112,7 +118,6 @@ function KeyPress(e) {
     return false;
   }
 }
-document.onkeydown = KeyPress;
 
 // Ouverture modal start
 $("[data-toggle='popover']").on('shown.bs.popover', function(){
@@ -159,10 +164,8 @@ function copyToClipboard() {
   document.execCommand("copy");
   document.body.removeChild(aux);
 }
-$(window).keyup(function(e){
-  if(e.keyCode == 44) copyToClipboard();
-});
 
+// DOCUMENT READY ---------------------------------
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
   $('#m_aye').load('./m.aye.html');
@@ -173,8 +176,10 @@ $(document).ready(function(){
   $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
   $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
   fResize();
-  console.log('ready!');
 
+  console.log('event programming started!');
+  $('#message').on('mouseup', fResize);
+  
   $('#bName').on('click', function(e){
     e.preventDefault();
     $('#name').val($.trim($('#name').val()));
@@ -228,35 +233,32 @@ $(document).ready(function(){
     }));
     $("#m_i").modal('hide');
   });
-    console.log('event done!');
+
+  window.addEventListener('devtoolschange', event => {
+    if (event.detail.isOpen) {
+      console.log('Devtools');
+      $('#m_aye').modal({backdrop: 'static', keyboard: false});
+    }
+  });
+  
+  document.onkeydown = KeyPress;
+  
+  $(window).keyup(function(e) {
+    if(e.keyCode == 44) copyToClipboard();
+  });
+  
+  // Superposer plusieurs modales
+  $(document).on('show.bs.modal', '.modal', function() {
+    var zIndex = 1040 + (10 * $('.modal:visible').length);
+    $(this).css('z-index', zIndex);
+    setTimeout(function() {
+      $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+    }, 0);
+  });
+  
+  console.log('event programming done!');
 
   $("#loading").hide();
+  console.log('ready!');
 });
-
-// Superposer plusieurs modales
-$(document).on('show.bs.modal', '.modal', function() {
-  var zIndex = 1040 + (10 * $('.modal:visible').length);
-  $(this).css('z-index', zIndex);
-  setTimeout(function() {
-    $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-  }, 0);
-});
-
-// anti inspect
-document.onkeydown = function(e) {
-  if(e.keyCode == 123 || e.keyCode == 27 || e.keyCode == 122) return false;
-  if(e.metaKey && e.altKey && e.keyCode == 74) { return false; }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 73) { return false; }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
-  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'u'.charCodeAt(0)) { return false; }
-  if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0) || e.keyCode == 's'.charCodeAt(0)) { return false; }
-}
-
-window.addEventListener('devtoolschange', event => {
-  if (event.detail.isOpen) {
-    console.log('Devtools');
-    $('#m_aye').modal({backdrop: 'static', keyboard: false});
-  }
-});
+// DOCUMENT READY ---------------------------------
