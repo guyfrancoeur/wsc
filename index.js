@@ -152,6 +152,8 @@ function init() {
   
   ws.onclose = function () {
     window.location.reload(true);
+    $("#divMsgDeco").show();
+    $("#divGif").hide();
   };
 }
 
@@ -171,7 +173,7 @@ $(document).ready(function(){
   $('#m_aye').load('./m.aye.html');
   if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();
-  $('#welcome').hide();
+  $('#welcome, #divMsgDeco').hide();
   $('[data-toggle="popover"]').popover({html: true});
   $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
   $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
