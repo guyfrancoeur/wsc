@@ -184,7 +184,7 @@ $(document).ready(function(){
     e.preventDefault();
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#motsecret').val().length > 0) {
-      $("#loading").show();
+      //$("#loading").show();
       ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
       ws.onopen = function() {
         ws.send(JSON.stringify({
@@ -204,11 +204,11 @@ $(document).ready(function(){
         }));
         connecte = 1;
         fResize();
-        $("#divMsgDeco").hide();
-        $("#divGif").show();
+        //$("#divMsgDeco").hide();
+        //$("#divGif").show();
       }
     }
-    $("#loading").hide();
+    //$("#loading").hide();
   });
 
   $('#bS').on('click', function(){
@@ -260,7 +260,7 @@ $(document).ready(function(){
   
   console.log('event programming done!');
 
-  $("#loading").hide();
+  //$("#loading").hide();
   console.log('ready!');
 });
 // DOCUMENT READY ---------------------------------
