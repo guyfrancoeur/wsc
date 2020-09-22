@@ -129,9 +129,6 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 });
 
 function init() {
-  console.log("A", ws.readyState);
-  console.log("B", ws.url);
-  console.log("C", ws.readyState);
   ws.onopen = function() {
     console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms");
     ws.send(JSON.stringify({
@@ -211,9 +208,10 @@ $(document).ready(function(){
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#motsecret').val().length > 0) {
       //$("#loading").show();
-      init();
+      ws.onopen = null;
       start = new Date().getTime();
-      ws = WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
+      ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
+      init();
     }
   });
 
