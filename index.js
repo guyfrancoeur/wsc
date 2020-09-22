@@ -3,7 +3,7 @@ var a2 = new Audio('./inbox.mp3');
 var connecte = 0;
 var start = new Date().getTime();
 var ws = new WebSocket("wss://echo.websocket.org");
-ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); };
+ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); $('#bName').attr('disabled', false); };
 var elem = document.getElementById('messages'); //pour scroll-auto
 
 const ico = document.getElementById('favicon');
@@ -265,9 +265,6 @@ $(document).ready(function(){
   });
   
   console.log('event programming done!');
-  console.log("readyState : ", ws.readyState, ws.url);
-  //setTimeout(function(){ ws.close(); },500);
-  $('#bName').attr('disabled', false);
   console.log('ready!');
 });
 // DOCUMENT READY ---------------------------------
