@@ -129,8 +129,10 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 });
 
 function init() {
+  console.log("A", ws.readyState);
+  console.log("B", ws.url);
   if (ws.readyState == 1 && ws.url == "wss://echo.websocket.org/") { ws.close(); }
-  console.log(ws.readyState);
+  console.log("C", ws.readyState);
   ws.onopen = function() {
     ws.send(JSON.stringify({
       type: 'link',
