@@ -2,6 +2,7 @@ var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./inbox.mp3');
 var connecte = 0;
 var ws = new WebSocket("wss://echo.websocket.org");
+ws.onopen = function() { ws.close(); console.log('echo succès'); };
 var elem = document.getElementById('messages'); //pour scroll-auto
 
 const ico = document.getElementById('favicon');
@@ -263,8 +264,7 @@ $(document).ready(function(){
   
   console.log('event programming done!');
   console.log("readyState : ", ws.readyState, ws.url);
-  ws.close();
-  console.log('ws eho done!');
+  //setTimeout(function(){ ws.close(); },500);
   $('#bName').attr('disabled', false);
   console.log('ready!');
 });
