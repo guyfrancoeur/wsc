@@ -3,7 +3,7 @@ var a2 = new Audio('./inbox.mp3');
 var connecte = 0;
 var start = new Date().getTime();
 var ws = new WebSocket("wss://echo.websocket.org");
-ws.onopen = function(uri) { console.log("onopen of", uri, "in", (new Date().getTime() - start), "ms"); ws.close(); };
+ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); };
 var elem = document.getElementById('messages'); //pour scroll-auto
 
 const ico = document.getElementById('favicon');
@@ -132,8 +132,8 @@ function init() {
   console.log("A", ws.readyState);
   console.log("B", ws.url);
   console.log("C", ws.readyState);
-  ws.onopen = function(uri) {
-    console.log("onopen of", uri, "in", (new Date().getTime() - start), "ms");
+  ws.onopen = function() {
+    console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms");
     ws.send(JSON.stringify({
       type: 'link',
       name: '',
