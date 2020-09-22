@@ -131,7 +131,6 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 function init() {
   console.log("A", ws.readyState);
   console.log("B", ws.url);
-  if (ws.readyState == 1 && ws.url == "wss://echo.websocket.org/") { ws.close(); return; }
   console.log("C", ws.readyState);
   ws.onopen = function() {
     ws.send(JSON.stringify({
@@ -265,8 +264,9 @@ $(document).ready(function(){
   });
   
   console.log('event programming done!');
-  init();
-  console.log('init ws done!');
+  console.log("readyState : ", ws.readyState, ws.url);
+  ws.close();
+  console.log('ws eho done!');
   $('#bName').attr('disabled', false);
   console.log('ready!');
 });
