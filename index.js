@@ -129,8 +129,9 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 });
 
 function init() {
+  if (ws.readyState == 1 && ws.url == "wss://echo.websocket.org/") { ws.close(); }
+  console.log(ws.readyState);
   ws.onopen = function() {
-    if (ws.url == "wss://echo.websocket.org/") { ws.close(); return; } 
     ws.send(JSON.stringify({
       type: 'link',
       name: '',
@@ -261,7 +262,9 @@ $(document).ready(function(){
   });
   
   console.log('event programming done!');
-
+  init();
+  console.log('init ws done!');
+  $('#bName').attr('disabled', false);
   console.log('ready!');
 });
 // DOCUMENT READY ---------------------------------
