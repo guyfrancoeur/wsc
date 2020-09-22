@@ -204,11 +204,9 @@ $(document).ready(function(){
         }));
         connecte = 1;
         fResize();
-        //$("#divMsgDeco").hide();
-        //$("#divGif").show();
+        $("#divLive").attr('class','live');
       }
     }
-    //$("#loading").hide();
   });
 
   $('#bS').on('click', function(){
@@ -260,7 +258,6 @@ $(document).ready(function(){
   
   console.log('event programming done!');
 
-  //$("#loading").hide();
   console.log('ready!');
 });
 // DOCUMENT READY ---------------------------------
