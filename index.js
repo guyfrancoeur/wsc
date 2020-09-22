@@ -2,7 +2,8 @@ var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./inbox.mp3');
 var connecte = 0;
 var ws = new WebSocket("wss://echo.websocket.org");
-setTimeout(function() { if (ws.readyState == 1) { ws.close(); console.log('echo'); } else { console.log('not compatible'); } },500);
+init();
+//setTimeout(function() { if (ws.readyState == 1) { ws.close(); console.log('echo'); } else { console.log('not compatible'); } },500);
 var elem = document.getElementById('messages'); //pour scroll-auto
 
 const ico = document.getElementById('favicon');
@@ -129,6 +130,7 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 
 function init() {
   ws.onopen = function() {
+    if (ws.url == "wss://echo.websocket.org/") { ws.close(); return; } 
     ws.send(JSON.stringify({
       type: 'link',
       name: '',
@@ -206,7 +208,7 @@ $(document).ready(function(){
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#motsecret').val().length > 0) {
       //$("#loading").show();
-      init();
+      console.log("readyState :", ws.readyState);
       ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
     }
   });
