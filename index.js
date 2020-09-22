@@ -213,7 +213,7 @@ $(document).ready(function(){
       //$("#loading").show();
       init();
       start = new Date().getTime();
-      ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
+      ws = WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
     }
   });
 
