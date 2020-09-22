@@ -2,7 +2,7 @@ var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./inbox.mp3');
 var connecte = 0;
 var ws = new WebSocket("wss://echo.websocket.org");
-setTimeout(function() { if (socket.readyState == 1) { ws.close(); } else { /*not compatible*/ connecte = 0; } },1500);
+setTimeout(function() { if (ws.readyState == 1) { ws.close(); } else { /*not compatible*/ connecte = 0; } },1500);
 var elem = document.getElementById('messages'); //pour scroll-auto
 
 const ico = document.getElementById('favicon');
