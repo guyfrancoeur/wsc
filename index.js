@@ -131,7 +131,7 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 function init() {
   console.log("A", ws.readyState);
   console.log("B", ws.url);
-  if (ws.readyState == 1 && ws.url == "wss://echo.websocket.org/") { ws.close(); }
+  if (ws.readyState == 1 && ws.url == "wss://echo.websocket.org/") { ws.close(); return; }
   console.log("C", ws.readyState);
   ws.onopen = function() {
     ws.send(JSON.stringify({
@@ -213,6 +213,7 @@ $(document).ready(function(){
       //$("#loading").show();
       console.log("readyState :", ws.readyState);
       ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
+      init();
     }
   });
 
