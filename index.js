@@ -130,6 +130,7 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 
 function init() {
   ws.onopen = function() {
+    createAudio();
     console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms");
     ws.send(JSON.stringify({
       type: 'link',
@@ -165,6 +166,32 @@ function init() {
         elem.scrollTop = elem.scrollHeight;
         break;
       //case 'cln' : window.location.reload(true); break;
+
+      case 'start':
+        console.log("case start");
+        break;
+
+      case 'stop':
+        console.log("case stop");
+        $("#divEmission").show();
+        $("#divReception").hide();
+        audioReady = 0;
+        createAudio();
+        break;
+
+      case 'firstchunks':
+        fc = Uint8Array.from(data.data);
+        break;
+
+      case 'audio': // Réception des données audio
+        if(connecte == 1 && audioReady == 1 && sourceBuffer.updating == false){
+          if (mediaSource.readyState === 'open'){
+            sourceBuffer.appendBuffer(Uint8Array.from(data.data));
+          }else{
+            console.error("Ajout données audio au buffer impossible \n mediasource.readystate : " + mediaSource.readyState);
+          }
+        }
+        break;
       }
     }
   }
@@ -192,6 +219,7 @@ function copyToClipboard() {
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
   $('#m_aye').load('./m.aye.html');
+  $('#m_voix').load('./m.voix.html');
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();
   $('#welcome, #divGif').hide();
@@ -230,6 +258,7 @@ $(document).ready(function(){
   });
 
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
+  $('#bvoix').on('click', function(){ console.log("clicked"); $('#m_voix').modal('show'); return false; });
 
   $('#bmSubmit').on('click', function(){
     ws.send(JSON.stringify({
