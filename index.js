@@ -31,7 +31,7 @@ function fResize() {
   }
   else{
     $('#msgs, #messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
-    if($(window).width() < 400) $('#m_start').css('top','9rem');
+    if($(window).width() < 625) $('#m_start').css('top','12rem');
     else $('#m_start').css('top','6rem');
   }
 
@@ -192,7 +192,6 @@ function copyToClipboard() {
 $(document).ready(function(){
   //$('[data-toggle="tooltip"]').tooltip();
   $('#m_aye').load('./m.aye.html');
-  $('#m_voix').load('./m.voix.html');
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();
   $('#welcome, #divGif').hide();

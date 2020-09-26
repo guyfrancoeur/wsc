@@ -6,13 +6,12 @@ audioReady = 0;
 var stream, recorder;
 const mime = "audio/webm;codecs=opus";
 const audio = document.getElementById("audio");
+fc = []; // Sauvegarde des firstChunks reçus
 
 audio.addEventListener('playing', function(){
   $("#divEmission").hide();
   $("#divReception").show();
 });
-
-fc = []; // Sauvegarde des firstChunks reçus
 
 function eventOnUpdate() {
   audioReady = 1; 
@@ -86,13 +85,10 @@ async function startRecord() {
   }
 }
 
-$('#bvoix').on('click', function(){ $('#m_voix').modal('show'); return false; });
-
 $("#bstart").click(function(){
   console.log("button start");
   wsa.send(JSON.stringify({ type: "start" }));
   startRecord();
-  $("#statutenvoi").html("Appel en cours ...");
   $("#bstart").attr("disabled",true);
   $("#bstop, #bmuteRecord").attr("disabled",false);
 });

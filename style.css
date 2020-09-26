@@ -21,9 +21,6 @@ input {
   padding:10px;
   width:100%;
 }
-#welcome {
-  padding:7px 10px;
-}
 #input-div {
   background-color:transparent;
   padding-right:15px;
@@ -214,8 +211,12 @@ hr.style-two {
   border-bottom-left-radius:0px;
 }
 #welcome{
+  padding:7px 10px;
   color:#323232;
   letter-spacing:.5px;
+  margin:0px;
+  display: flex;
+  align-items: center;
 }
 #arrow{
   filter: drop-shadow(3px 3px 2px #0000004d);
@@ -271,11 +272,6 @@ input:focus{
 }
 #divRoom > p > span:nth-child(1){
   font-size:13px;
-}
-#welcome{
-  margin:0px;
-  display: flex;
-  align-items: center;
 }
 code{
   color:#5c7183;
@@ -377,20 +373,30 @@ textarea::-webkit-scrollbar-thumb {
   margin-left:auto;
   display:flex;
 }
-
-@media screen and (max-width:400px) {
+#divPrev, #divWelcome, #divAudio{
+  width:33.33333333%;
+}
+@media screen and (max-width:625px) {
   #welcome{
     display:flex;
     flex-direction:column;
   }
-  #divWelcome{
-    padding-bottom:10px;
+  #divPrev{ order:2; }
+  #divWelcome{ order:1; }
+  #divAudio{ order:3; }
+  #divPrev, #divWelcome, #divAudio{
+    width:100%;
+    display: flex;
+    justify-content:center;
+  }
+  #divPrev, #divWelcome{
+    margin-bottom:7px;
   }
   #divRoom{
     margin:0px;
   }
-  #divPrev{
-    margin-left:0px;
+  #welcome{
+    justify-content:center;
   }
 }
 @media screen and (max-width: 768px) {
@@ -411,62 +417,31 @@ textarea::-webkit-scrollbar-thumb {
   #divTwoInputs{
     padding-right:15px;
   }
-}
-#bvoix{
-  border:0px;
-  background-color:#e7e7e7;
-  color:#585858;
-  padding:0px 15px;
-  font-size:13px;
-  border-radius:3px;
-  margin-left:15px;
-  margin-right:15px;
-  letter-spacing:1px;
-  box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
-}
-#bvoix:hover{
-  background-color:#ffffff;
-}
-
-/* m.voix.html */
-#m_voix{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-}
-@media (min-width: 768px){
-  #m_voix > .modal-dialog{
-    width:400px !important;
+  #arrow{
+    padding-right: 5px
   }
 }
-#bstart, #bstop, #bmuteRecord{
+#bstart, #bstop, #bmuteRecord, #bmuteAudio{
   border:0px;
-  background-color:#6ea3a3;
-  background-color:#88a6be;
-  color:#fbfbfb;
-  padding:5px;
-  height:40px;
-  width:60px;
+  background-color:#e7e7e7;
+  color:#5c7183;
   border-radius:3px;
   box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
+}
+#bstart:hover, #bstop:hover, #bmuteRecord:hover, #bmuteAudio:hover{
+  background-color:#5c7183;
+  color:#e7e7e7;
+}
+#bstart:disabled, #bstop:disabled, #bmuteRecord:disabled{
+  background-color:#c3c3c3;
+  color:#5d5d5d;
 }
 #bstart, #bstop{
   margin-right:15px;
 }
-#bstart:hover, #bstop:hover, #bmuteRecord:hover{
-  background-color:#5c7183;
-}
-#bstart:disabled, #bstop:disabled, #bmuteRecord:disabled{
-  background-color:#bebebe;
-}
-#bmuteAudio{
-  background-color:white;
-  border:0px;
-  position:absolute;
-  top:0px;
-  right:0px;
-  color:#646464;
+#bstart, #bstop{
+  border-radius:100px;
+  padding:6px 9px;
 }
 #m_voix .modal-header{
   border:0px !important;
@@ -475,32 +450,39 @@ textarea::-webkit-scrollbar-thumb {
   text-align:center;
   font-size:24px;
 }
-#divReception, #divEmission{
-  border:1px solid #f1f1f1;
-  border-radius:3px;
-  width:300px;
-  height:100px;
-  padding:10px;
-  margin-right:auto;
-  margin-left:auto;
-  position:relative;
+#divEmission{
+  margin:auto;
+  display:inline-block;
+}
+#divAudio{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+#divReception{
+  display:flex;
 }
 #reception{
-  margin-left:auto;
-  margin-right:auto;
-  width:130px;
-  padding-top:13px;
-  padding-bottom:13px;
-  background-color:#88a6be;
-  border-radius:3px;
+  padding:5px 20px;
+  font-size:13px;
+  background-color:#e7e7e7;
+  border-radius:0px;
   margin-bottom:0px;
-  animation:dots 1s steps(5, end) infinite;
+  animation:dots 1s steps(5,end) infinite;
+  box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
+}
+#bmuteAudio{
+  margin-left:15px;
+  padding:0px 4px;
+  border-radius:100px;
+  display:flex;
+  align-items:center;
 }
 @keyframes dots {
-  0%, 20% { color:#88a6be; }
-  40% { color: #a8bccc; }
-  60% { color:#cfdae2; }
-  80%, 100% { color:#ffffff; }
+  0%, 20% { color:#5c7183; }
+  40% { color: #5c7183b7; }
+  60% { color:#5c718360; }
+  80%, 100% { color:#e7e7e7; }
 }
 
 .liveDeco{
@@ -520,6 +502,7 @@ textarea::-webkit-scrollbar-thumb {
   border-radius:25%;
 }
 .live{
+  margin-left:15px;
   border-radius:50%;
   width:30px;
   background-size:cover;
