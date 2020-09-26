@@ -381,15 +381,14 @@ textarea::-webkit-scrollbar-thumb {
     display:flex;
     flex-direction:column;
   }
-  #divPrev{ order:2; }
-  #divWelcome{ order:1; }
-  #divAudio{ order:3; }
-  #divPrev, #divWelcome, #divAudio{
+  #divPrev{ order:1; }
+  #divAudio{ order:2; }
+  #divPrev, #divAudio{
     width:100%;
     display: flex;
     justify-content:center;
   }
-  #divPrev, #divWelcome{
+  #divPrev{
     margin-bottom:7px;
   }
   #divRoom{
