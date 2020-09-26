@@ -373,29 +373,24 @@ textarea::-webkit-scrollbar-thumb {
   margin-left:auto;
   display:flex;
 }
-#divPrev, #divWelcome, #divAudio{
-  width:33.33333333%;
-}
 @media screen and (max-width:625px) {
-  #welcome{
-    display:flex;
-    flex-direction:column;
-  }
   #divPrev{ order:1; }
   #divAudio{ order:2; }
-  #divPrev, #divAudio{
-    width:100%;
-    display: flex;
-    justify-content:center;
+  #bstart, #bstop{
+    margin-right:0px !important;
   }
-  #divPrev{
-    margin-bottom:7px;
+  #divPrev, #divAudio{
+    padding:0px;
   }
   #divRoom{
     margin:0px;
+    padding:5px 0px;
   }
   #welcome{
     justify-content:center;
+  }
+  .live{
+    margin-left:0px !important;
   }
 }
 @media screen and (max-width: 768px) {
