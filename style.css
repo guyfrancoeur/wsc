@@ -260,8 +260,8 @@ input:focus{
 #divRoom{
   background-color:#c3ad64;
   box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
-  padding:5px 20px;
-  width:150px;
+  padding:5px 0px;
+  width:130px;
   text-align:center;
   margin-left:auto;
   color:#ffffff;
@@ -372,48 +372,7 @@ textarea::-webkit-scrollbar-thumb {
 #divPrev{
   margin-left:auto;
   display:flex;
-}
-@media screen and (max-width:625px) {
-  #divPrev{ order:1; }
-  #divAudio{ order:2; }
-  #bstart, #bstop{
-    margin-right:0px !important;
-  }
-  #divPrev, #divAudio{
-    padding:0px;
-  }
-  #divRoom{
-    margin:0px;
-    padding:5px 0px;
-  }
-  #welcome{
-    justify-content:center;
-  }
-  .live{
-    margin-left:0px !important;
-  }
-}
-@media screen and (max-width: 768px) {
-  #input-div {
-    padding-right:5px;
-    padding-left:5px;
-    padding-bottom:5px;
-  }
-  #name-div > div{
-    padding-top:15px;
-    display:flex;
-    justify-content:center;
-    width:100%;
-  }
-  #bName{
-    width:50px;
-  }
-  #divTwoInputs{
-    padding-right:15px;
-  }
-  #arrow{
-    padding-right: 5px
-  }
+  padding:0px;
 }
 #bstart, #bstop, #bmuteRecord, #bmuteAudio{
   border:0px;
@@ -452,6 +411,7 @@ textarea::-webkit-scrollbar-thumb {
   display:flex;
   justify-content:center;
   align-items:center;
+  padding:0px;
 }
 #divReception{
   display:flex;
@@ -478,6 +438,37 @@ textarea::-webkit-scrollbar-thumb {
   60% { color:#5c718360; }
   80%, 100% { color:#e7e7e7; }
 }
+@media screen and (max-width:768px) {
+  #bstart, #bstop{ margin-right:0px; }
+  .live{ margin-left:0px !important; }
+  #divEmission{ margin:0px; }
+  #divAudio{
+    margin-right:auto;
+    display:inline;
+  }
+}
+@media screen and (max-width: 768px) {
+  #input-div {
+    padding-right:5px;
+    padding-left:5px;
+    padding-bottom:5px;
+  }
+  #name-div > div{
+    padding-top:15px;
+    display:flex;
+    justify-content:center;
+    width:100%;
+  }
+  #bName{
+    width:50px;
+  }
+  #divTwoInputs{
+    padding-right:15px;
+  }
+  #arrow{
+    padding-right: 5px
+  }
+}
 
 .liveDeco{
   color:#fb2d47;
@@ -496,7 +487,7 @@ textarea::-webkit-scrollbar-thumb {
   border-radius:25%;
 }
 .live{
-  margin-left:15px;
+  margin-left:7px;
   border-radius:50%;
   width:30px;
   background-size:cover;
