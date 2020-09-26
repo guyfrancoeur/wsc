@@ -130,7 +130,6 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 
 function init() {
   ws.onopen = function() {
-    createAudio();
     console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms");
     ws.send(JSON.stringify({
       type: 'link',
@@ -166,32 +165,6 @@ function init() {
         elem.scrollTop = elem.scrollHeight;
         break;
       //case 'cln' : window.location.reload(true); break;
-
-      case 'start':
-        console.log("case start");
-        break;
-
-      case 'stop':
-        console.log("case stop");
-        $("#divEmission").show();
-        $("#divReception").hide();
-        audioReady = 0;
-        createAudio();
-        break;
-
-      case 'firstchunks':
-        fc = Uint8Array.from(data.data);
-        break;
-
-      case 'audio': // Réception des données audio
-        if(connecte == 1 && audioReady == 1 && sourceBuffer.updating == false){
-          if (mediaSource.readyState === 'open'){
-            sourceBuffer.appendBuffer(Uint8Array.from(data.data));
-          }else{
-            console.error("Ajout données audio au buffer impossible \n mediasource.readystate : " + mediaSource.readyState);
-          }
-        }
-        break;
       }
     }
   }
@@ -202,54 +175,6 @@ function init() {
   
   ws.onclose = function () {
     window.location.reload(true);
-  };
-}
-
-function initWsa() {
-  wsa.onopen = function() {
-    createAudio();
-    console.log("wsa ouvert");
-  }
-  
-  wsa.onmessage = function(evt) {
-    if (evt.data != "") {
-      data = JSON.parse(evt.data);
-      switch (data.type) {
-      case 'start':
-        console.log("case start");
-        break;
-
-      case 'stop':
-        console.log("case stop");
-        $("#divEmission").show();
-        $("#divReception").hide();
-        audioReady = 0;
-        createAudio();
-        break;
-
-      case 'firstchunks':
-        fc = Uint8Array.from(data.data);
-        break;
-
-      case 'audio': // Réception des données audio
-        if(connecte == 1 && audioReady == 1 && sourceBuffer.updating == false){
-          if (mediaSource.readyState === 'open'){
-            sourceBuffer.appendBuffer(Uint8Array.from(data.data));
-          }else{
-            console.error("Ajout données audio au buffer impossible \n mediasource.readystate : " + mediaSource.readyState);
-          }
-        }
-        break;
-      }
-    }
-  }
-
-  wsa.onerror = function() {
-    console.log("error wsa");;
-  }
-  
-  wsa.onclose = function () {
-    console.log("wsa closed");
   };
 }
 
