@@ -48,7 +48,7 @@ async function startRecord() {
         reader.addEventListener("loadend", function () {
           var res = [...new Uint8Array(reader.result)];
           if(cpt > 2){ // Ne pas envoyer les premiers paquets audio (à cause des firstChunks envoyés dès la connexion)
-            ws.send(JSON.stringify({
+            wsa.send(JSON.stringify({
               type: "audio",
               data: res
             }));
@@ -59,11 +59,11 @@ async function startRecord() {
         // Si (event.data.size == 1), ça bloque le sourceBuffer de la personne qui reçoit les données. Alors on ne l'envoie pas et on redémarre l'enregistrement.
         if(event.data.size == 1 && cpt > 2){ // (cpt == 2) => pour laisser passer les deux premiers paquets de données (le premier paquet de l'enregistrement a une taille de 1 lui aussi)
           console.warn("Data size : " + event.data.size + " => restart record");
-          ws.send(JSON.stringify({ type: "stop" }));
+          wsa.send(JSON.stringify({ type: "stop" }));
           if (recorder.state == 'recording') recorder.stop();
           console.log("recorder stop");
           setTimeout(function(){
-            ws.send(JSON.stringify({ type: "start" }));
+            wsa.send(JSON.stringify({ type: "start" }));
             startRecord();
             console.log("recorder re-start");
           }, 500);
@@ -81,7 +81,7 @@ async function startRecord() {
 
 $("#bstart").click(function(){
   console.log("button start");
-  ws.send(JSON.stringify({ type: "start" }));
+  wsa.send(JSON.stringify({ type: "start" }));
   startRecord();
   $("#statutenvoi").html("Appel en cours ...");
   $("#bstart").attr("disabled",true);
@@ -90,7 +90,7 @@ $("#bstart").click(function(){
 
 $("#bstop").click(function(){
   console.log("button stop");
-  ws.send(JSON.stringify({ type: "stop" }));
+  wsa.send(JSON.stringify({ type: "stop" }));
   if (recorder.state == 'recording') recorder.stop();
   $("#bstart").attr("disabled",false);
   $("#bstop, #bmuteRecord").attr("disabled",true);

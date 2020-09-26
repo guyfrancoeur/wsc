@@ -205,6 +205,54 @@ function init() {
   };
 }
 
+function initWsa() {
+  wsa.onopen = function() {
+    createAudio();
+    console.log("wsa ouvert");
+  }
+  
+  wsa.onmessage = function(evt) {
+    if (evt.data != "") {
+      data = JSON.parse(evt.data);
+      switch (data.type) {
+      case 'start':
+        console.log("case start");
+        break;
+
+      case 'stop':
+        console.log("case stop");
+        $("#divEmission").show();
+        $("#divReception").hide();
+        audioReady = 0;
+        createAudio();
+        break;
+
+      case 'firstchunks':
+        fc = Uint8Array.from(data.data);
+        break;
+
+      case 'audio': // Réception des données audio
+        if(connecte == 1 && audioReady == 1 && sourceBuffer.updating == false){
+          if (mediaSource.readyState === 'open'){
+            sourceBuffer.appendBuffer(Uint8Array.from(data.data));
+          }else{
+            console.error("Ajout données audio au buffer impossible \n mediasource.readystate : " + mediaSource.readyState);
+          }
+        }
+        break;
+      }
+    }
+  }
+
+  wsa.onerror = function() {
+    console.log("error wsa");;
+  }
+  
+  wsa.onclose = function () {
+    console.log("wsa closed");
+  };
+}
+
 // Disable print screen
 function copyToClipboard() {
   var aux = document.createElement("input");
@@ -239,7 +287,9 @@ $(document).ready(function(){
       ws.onopen = null;
       start = new Date().getTime();
       ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
+      wsa = new WebSocket("wss://www.salutem.co:1338");
       init();
+      initWsa();
     }
   });
 
