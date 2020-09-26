@@ -7,12 +7,17 @@ var stream, recorder;
 const mime = "audio/webm;codecs=opus";
 const audio = document.getElementById("audio");
 
-audio.onplaying = (e) => {
+audio.addEventListener('playing', function(){
   $("#divEmission").hide();
   $("#divReception").show();
-}
+});
 
 fc = []; // Sauvegarde des firstChunks reçus
+
+function eventOnUpdate() {
+  audioReady = 1; 
+  sourceBuffer.removeEventListener('updateend', eventOnUpdate);
+}
 
 function createAudio(){
   mediaSource = new MediaSource();
@@ -24,11 +29,13 @@ function createAudio(){
 
     if(fc.length != 0){ // Ajout firstChunks
       sourceBuffer.appendBuffer(fc);
-      sourceBuffer.onupdateend = (e) => { audioReady = 1; }
+      sourceBuffer.addEventListener('updateend', eventOnUpdate);
     }
 
-    sourceBuffer.addEventListener('error', e => {
-      console.error('SourceBuffer : ' + e.type);
+    sourceBuffer.addEventListener('error', function(e){
+      console.warn('SourceBuffer : ' + e.type + " => Reset audio");
+      audioReady = 0;
+      createAudio();
     });
   });
 }
@@ -45,7 +52,7 @@ async function startRecord() {
     recorder.ondataavailable = async event => {
       if (event.data.size > 0) {
         var reader = new FileReader();
-        reader.addEventListener("loadend", function () {
+        reader.addEventListener("loadend", function (){
           var res = [...new Uint8Array(reader.result)];
           if(cpt > 2){ // Ne pas envoyer les premiers paquets audio (à cause des firstChunks envoyés dès la connexion)
             wsa.send(JSON.stringify({
@@ -79,6 +86,8 @@ async function startRecord() {
   }
 }
 
+$('#bvoix').on('click', function(){ $('#m_voix').modal('show'); return false; });
+
 $("#bstart").click(function(){
   console.log("button start");
   wsa.send(JSON.stringify({ type: "start" }));
@@ -91,9 +100,10 @@ $("#bstart").click(function(){
 $("#bstop").click(function(){
   console.log("button stop");
   wsa.send(JSON.stringify({ type: "stop" }));
-  if (recorder.state == 'recording') recorder.stop();
+  if (recorder.state == 'recording' || recorder.state == 'paused') recorder.stop();
   $("#bstart").attr("disabled",false);
   $("#bstop, #bmuteRecord").attr("disabled",true);
+  $("#bmuteRecord").html('Mute');
 });
 
 $("#bmuteRecord").click(function(){
@@ -120,48 +130,44 @@ $("#bmuteAudio").click(function(){
 
 function initWsa() {
   wsa.onopen = function() {
+    console.log("onopen of", wsa.url, "in", (new Date().getTime() - start), "ms");
     createAudio();
-    console.log("wsa ouvert");
   }
   
   wsa.onmessage = function(evt) {
     if (evt.data != "") {
-      data = JSON.parse(evt.data);
-      switch (data.type) {
-      case 'start':
-        console.log("case start");
-        break;
+      msg = JSON.parse(evt.data);
+      switch(msg.type){
+        case 'start':
+          console.log("case start");
+          break;
 
-      case 'stop':
-        console.log("case stop");
-        $("#divEmission").show();
-        $("#divReception").hide();
-        audioReady = 0;
-        createAudio();
-        break;
+        case 'stop':
+          console.log("case stop");
+          $("#divEmission").show();
+          $("#divReception").hide();
+          audioReady = 0;
+          createAudio();
+          break;
 
-      case 'firstchunks':
-        fc = Uint8Array.from(data.data);
-        break;
+        case 'firstchunks':
+          fc = Uint8Array.from(msg.data);
+          break;
 
-      case 'audio': // Réception des données audio
-        if(connecte == 1 && audioReady == 1 && sourceBuffer.updating == false){
-          if (mediaSource.readyState === 'open'){
-            sourceBuffer.appendBuffer(Uint8Array.from(data.data));
-          }else{
-            console.error("Ajout données audio au buffer impossible \n mediasource.readystate : " + mediaSource.readyState);
+        case 'audio': // Réception des données audio
+          if(connecte == 1 && audioReady == 1 && sourceBuffer.updating == false){
+            if (mediaSource.readyState === 'open'){
+              sourceBuffer.appendBuffer(Uint8Array.from(msg.data));
+            }else{
+              console.error("Ajout données audio au buffer impossible \n mediasource.readystate : " + mediaSource.readyState + " | audioReady : " + audioReady);
+            }
           }
-        }
-        break;
+          break;
       }
     }
   }
 
   wsa.onerror = function() {
-    console.log("error wsa");;
+    console.log("error wsa");
   }
-  
-  wsa.onclose = function () {
-    console.log("wsa closed");
-  };
 }

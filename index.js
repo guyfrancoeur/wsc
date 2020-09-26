@@ -156,15 +156,15 @@ function init() {
       data = JSON.parse(evt.data);
       //console.log(data);
       switch (data.type) {
-      case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); break;
-      case 'tlk' :
-        if (!document.hasFocus()) { newUpdate(); a2.play(); }
-        var text = data.message;
-        text = text.replace(/\r?\n/g, '<br />');
-        $('#messages').append($('<li>').html(text));
-        elem.scrollTop = elem.scrollHeight;
-        break;
-      //case 'cln' : window.location.reload(true); break;
+        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); break;
+        case 'tlk' :
+          if (!document.hasFocus()) { newUpdate(); a2.play(); }
+          var text = data.message;
+          text = text.replace(/\r?\n/g, '<br />');
+          $('#messages').append($('<li>').html(text));
+          elem.scrollTop = elem.scrollHeight;
+          break;
+        //case 'cln' : window.location.reload(true); break;
       }
     }
   }
@@ -233,7 +233,6 @@ $(document).ready(function(){
   });
 
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
-  $('#bvoix').on('click', function(){ console.log("clicked"); $('#m_voix').modal('show'); return false; });
 
   $('#bmSubmit').on('click', function(){
     ws.send(JSON.stringify({
