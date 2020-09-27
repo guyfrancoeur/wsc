@@ -1,4 +1,4 @@
-$(document).ready(function(){
+//$(document).ready(function(){
 
 /*
       <span id="icon1" data-toggle="tooltip" data-placement="bottom" title="Ça va">&#128077;</span>
@@ -44,4 +44,4 @@ $(document).ready(function(){
     return false;
   });
 
-});
+//});
