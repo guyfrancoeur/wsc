@@ -13,7 +13,7 @@ $(document).ready(function(){
       <span id="icon8" data-toggle="tooltip" data-placement="bottom" title="Je veux parler!">&#128172;</span>
 */
       
-fIcon(i) {
+function fIcon(i) {
   if (i == icon) { i = 0; }
   switch(i) {
     case 0: v = '';
