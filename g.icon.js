@@ -14,9 +14,10 @@ $(document).ready(function(){
 */
       
 function fIcon(i) {
+  var v = '';
   if (i == gIcon) { gIcon = 0; }
   switch(gIcon) {
-    case 0: v = '';
+    case 0: v = ''; break;
     case 1: v = '&#128077; '; break;
     case 2: v = '&#128078; '; break;
     case 3: v = '&#128587;&#8205;&#9794;&#65039; '; break;
