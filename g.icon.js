@@ -1,3 +1,5 @@
+var icon = 0;
+
 $(document).ready(function(){
 
 /*
@@ -10,23 +12,20 @@ $(document).ready(function(){
       <span id="icon7" data-toggle="tooltip" data-placement="bottom" title="Non">&#10060;</span>
       <span id="icon8" data-toggle="tooltip" data-placement="bottom" title="Je veux parler!">&#128172;</span>
 */
-
-var icon = 0;
       
 fIcon(i) {
-  if (i = icon) {
-    i = 0;
-  }
+  if (i == icon) { i = 0; }
   switch(i) {
     case 0: v = '';
-    case 1: v = '&#128077; ';
-    case 2: v = '&#128078; ';
-    case 3: v = '&#128587;&#8205;&#9794;&#65039; ';
-    case 4: v = '&#127891; ';
-    case 5: v = '&#9917; ';
-    case 6: v = '&#128994;';
-    case 7: v = '&#10060;';
-    case 8: v = '&#128172;';
+    case 1: v = '&#128077; '; break;
+    case 2: v = '&#128078; '; break;
+    case 3: v = '&#128587;&#8205;&#9794;&#65039; '; break;
+    case 4: v = '&#127891; '; break;
+    case 5: v = '&#9917; '; break;
+    case 6: v = '&#128994;'; break;
+    case 7: v = '&#10060;'; break;
+    case 8: v = '&#128172;'; break;
+    default : return;
   }          
   ws.send(JSON.stringify({
     type: 'name',
@@ -35,6 +34,7 @@ fIcon(i) {
   }));
   $('#message').focus();
   icon = i;
+  return;
 }
 
   $('#icon1').on('click', function(e){
