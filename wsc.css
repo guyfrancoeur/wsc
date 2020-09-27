@@ -228,7 +228,6 @@ input:focus{
   box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
   padding:5px 20px;
   text-align:center;
-  margin-left:auto;
   color:#ffffff;
 }
 #divRoom > p{
@@ -321,14 +320,14 @@ textarea::-webkit-scrollbar-thumb {
   display:flex;
   padding-left:0px;
 }
-#bstart, #bstop, #bmuteRecord, #bmuteAudio{
+#bstart, #bstop, #bmuteRecord, #bmuteAudio, #bshareScreen{
   border:0px;
   background-color:#e7e7e7;
   color:#5c7183;
   border-radius:3px;
   box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
 }
-#bstart:hover, #bstop:hover, #bmuteRecord:hover, #bmuteAudio:hover{
+#bstart:hover, #bstop:hover, #bmuteRecord:hover, #bmuteAudio:hover, #bshareScreen:hover{
   background-color:#5c7183;
   color:#e7e7e7;
 }
@@ -374,6 +373,23 @@ textarea::-webkit-scrollbar-thumb {
   margin:0px 20px;
   border-radius:3px;
 }
+#bshareScreen{
+  padding:0px 10px;
+}
+#image{
+  width:80%;
+  height:80%;
+}
+#video{
+  display:none;
+}
+.normalSize{
+  width:90%;
+  height:90%;
+}
+#bShare{
+  margin:20px 0px;
+}
 @keyframes dots {
   0%, 20% { color:#5c7183; }
   40% { color: #5c7183b7; }
@@ -391,6 +407,9 @@ textarea::-webkit-scrollbar-thumb {
   #divAudio{
     margin-right:auto;
     display:inline;
+  }
+  #divRoom{
+    margin-left:auto;
   }
   #name-div > div{
     padding-bottom:10px;
