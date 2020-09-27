@@ -18,14 +18,12 @@ input {
 }
 #name-div, #welcome {
   background-color:#5580a3b3;
-  padding:10px;
+  padding:10px 0px;
   width:100%;
 }
 #input-div {
   background-color:transparent;
-  padding-right:15px;
-  padding-left:15px;
-  padding-bottom:7px;
+  padding:7px 15px;
   position:fixed;
   bottom:0;
   width:100%;
@@ -46,21 +44,19 @@ input {
   overflow-x:hidden;
 }
 #m_i .modal-body {
-    position:relative; /* This avoids whatever it's absolute inside of it to go off the container */
-    height:450px; /* let's imagine that your login box height is 250px . This height needs to be added, otherwise .img-responsive will be like "Oh no, I need to be vertically aligned?! but from which value I need to be aligned??" */
+  position:relative; /* This avoids whatever it's absolute inside of it to go off the container */
+  height:450px; /* let's imagine that your login box height is 250px . This height needs to be added, otherwise .img-responsive will be like "Oh no, I need to be vertically aligned?! but from which value I need to be aligned??" */
 }
 .img-responsive {
-    width: 50%; /* This value will depend on what size you want for your loading image, let's say it's 50px */
- /*   height:50%; */
-    position: absolute;
-    left:25%;
-    top:20%;
+  width: 50%; /* This value will depend on what size you want for your loading image, let's say it's 50px */
+  position: absolute;
+  left:25%;
+  top:20%;
 }
 .popover {
   max-width:350px;
   min-width:250px;
   border:0px;
-  box-shadow:5px 5px 10px #00000033;
   box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
 }
 .popover-title{
@@ -72,9 +68,8 @@ input {
 textarea {
   min-height:7px; /* (min-height au lieu de height) Pour empêcher de resize plus petit que la taille initale du textarea */
   resize:vertical;
-  border-top:0px !important;
-  border-bottom:0px !important;
-  border-left:0px !important;
+  border:0px !important;
+  width: 100%;
 }
 #m_start {
   position: absolute;
@@ -91,8 +86,7 @@ textarea {
   color:#323232 !important;
 }
 #closeToast{
-  padding:5px;
-  padding-right:7px;
+  padding:5px 7px;
   color:#3d3d3d !important;
 }
 #m_start div:nth-child(1){
@@ -101,32 +95,27 @@ textarea {
 #m_start div:nth-child(2){
   color:#464646;
 }
-hr.style-two {
+#m_start hr{
   border:0;
   background-image:linear-gradient(to right,#0000001a, #000000b3,#0000001a);
-  margin-top:12px;
-  margin-bottom:12px;
+  margin:12px auto !important;
   height:1px;
   width:150px;
-  margin-left:auto !important;
-  margin-right:auto !important;
 }
 #count{
   font-size:13px;
   border-radius:50px;
-  padding-left:5px;
-  padding-right:5px;
-  padding-top:2px;
-  padding-bottom:2px;
+  padding:2% 3%;
 }
 #usagersconnectes{
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   letter-spacing:.7px;
   font-weight:700;
 }
 #firstline{
   font-size:13px;
   text-transform:uppercase;
+  cursor:default;
 }
 #users li{
   text-align:center;
@@ -152,22 +141,19 @@ hr.style-two {
   left:-25px;
   background: radial-gradient(circle at center, #ec6600, #cb5c0b);
   border-top-left-radius:3px;
-  padding-right:11px;
-  padding-top:8px;
-  padding-bottom:8px;
-  padding-left:11px;
+  padding:8px 11px;
   box-shadow: 5px 5px 5px #0000001a;
   z-index:2;
   opacity:98%;
 }
 #ticket {
-  width: 0;
-  height: 0;
+  width:0;
+  height:0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-right: 20px solid #7C4204;
   left:-25px;
-  top: 35px;
+  top:35px;
   position:absolute;
 }
 #bmodaleusers{
@@ -183,53 +169,36 @@ hr.style-two {
   color:#faf4e0;
 } 
 #bName{
-  background-color:#e6e6e6;
   color:#5a5a5a;
-  border:0px;
-  padding:6.5px 10px;
-  width:70%;
 }
 #bName:hover{
   background-color:#dcdcdc;
 }
-#divdubas{
+#input-div > div{
   box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000033;
   border-radius:4px;
 }
-#eltG{
+#input-div > div > span{
   color:#6e6e6e;
   border:0px;
 }
 #bH{
   color:#5a5a5a;
-  border-top:0px;
-  border-right:0px;
-  border-bottom:0px;
+  border:0px;
 }
 #name{
   border-top-left-radius:0px;
   border-bottom-left-radius:0px;
 }
 #welcome{
-  padding:7px 10px;
+  padding:7px 0px;
   color:#323232;
   letter-spacing:.5px;
-  margin:0px;
-  display: flex;
-  align-items: center;
+  display:flex;
+  align-items:center;
 }
-#arrow{
+#divWelcome > span:nth-child(1){
   filter: drop-shadow(3px 3px 2px #0000004d);
-}
-#name-div > div > div{
-  width:100%;
-  margin:0px;
-}
-#name-div > div:nth-child(3){
-  padding-right:0px;
-}
-#name-div > div:nth-child(4){
-  padding-left:0px;
 }
 #name-div{
   margin:0px;
@@ -254,14 +223,10 @@ input:focus{
   outline-color: #5c7183;
   box-shadow:none;
 }
-#divWelcome{
-  padding:0px;
-}
 #divRoom{
   background-color:#c3ad64;
   box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
-  padding:5px 0px;
-  width:130px;
+  padding:5px 20px;
   text-align:center;
   margin-left:auto;
   color:#ffffff;
@@ -351,28 +316,10 @@ textarea::-webkit-scrollbar-thumb {
   background-color:#ebebeb;
   border-radius:50px;
 }
-
-#divTwoInputs{
-  padding-right:0px;
-}
-#divTwoInputs > div{
-  display:flex;
-}
-#divTwoInputs > div > div{
-  flex:auto;
-}
-#divTwoInputs > div > div:nth-child(1){
-  padding-left:0px;
-  padding-right:15px;
-}
-#divTwoInputs > div > div:nth-child(2){
-  padding-right:0px;
-  padding-left:15px;
-}
 #divPrev{
   margin-left:auto;
   display:flex;
-  padding:0px;
+  padding-left:0px;
 }
 #bstart, #bstop, #bmuteRecord, #bmuteAudio{
   border:0px;
@@ -396,27 +343,16 @@ textarea::-webkit-scrollbar-thumb {
   border-radius:100px;
   padding:6px 9px;
 }
-#m_voix .modal-header{
-  border:0px !important;
-}
-#m_voix h5{
-  text-align:center;
-  font-size:24px;
-}
-#divEmission{
-  margin:auto;
-  display:inline-block;
-}
 #divAudio{
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:0px;
+  padding-right:0px;
 }
 #divReception{
   display:flex;
 }
-#reception{
+#divReception > p{
   padding:5px 20px;
   font-size:13px;
   background-color:#e7e7e7;
@@ -446,38 +382,16 @@ textarea::-webkit-scrollbar-thumb {
 }
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }
-  .live{ margin-left:0px !important; }
-  #divEmission{ margin:0px; }
   #divAudio{
     margin-right:auto;
     display:inline;
   }
-}
-@media screen and (max-width: 768px) {
-  #input-div {
-    padding-right:5px;
-    padding-left:5px;
-    padding-bottom:5px;
-  }
   #name-div > div{
-    padding-top:15px;
-    display:flex;
-    justify-content:center;
-    width:100%;
-  }
-  #bName{
-    width:50px;
-  }
-  #divTwoInputs{
-    padding-right:15px;
-  }
-  #arrow{
-    padding-right: 5px
+    padding-bottom:10px;
   }
 }
 
 .live{
-  margin-left:7px;
   border-radius:50%;
   width:30px;
   background-size:cover;

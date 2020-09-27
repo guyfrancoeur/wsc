@@ -31,24 +31,30 @@
         </div>
       </div>
       <div id="divTwoInputs" class="col-sm-6 col-lg-4">
-        <div>
-          <div class="input-group">
-            <input type="number" class="input-sm" name="room" id="room" placeholder="Room" pattern="[0-9]{4}" required />
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="input-group col-xs-12">
+              <input type="number" class="input-sm" name="room" id="room" placeholder="Room" pattern="[0-9]{4}" required />
+            </div>
           </div>
-          <div class="input-group">
-            <input type="password" class="input-sm" name="motsecret" id="motsecret" placeholder="Mot secret" required />
+          <div class="col-xs-6">
+            <div class="input-group col-xs-12">
+              <input type="password" class="input-sm" name="motsecret" id="motsecret" placeholder="Mot secret" required />
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-1 text-right">
-        <button class="btn btn-sm btn-primary" id="bName" disabled><i class="glyphicon glyphicon-ok"></i></button>
+      <div class="col-sm-1 col-xs-12 text-center">
+        <div class="hidden-sm col-xs-4"></div>
+        <button class="btn btn-sm col-sm-12 col-xs-4" id="bName" disabled><i class="glyphicon glyphicon-ok"></i></button>
+        <div class="hidden-sm col-xs-4"></div>
       </div>
     </div>
     <div id="welcome">
-      <div id="divWelcome" class="hidden-xs col-sm-4">
-        <span id="arrow" class="glyphicon glyphicon-menu-right"></span> <span id="welcometext"></span>
+      <div class="hidden-xs col-sm-4">
+        <span  class="glyphicon glyphicon-menu-right"></span> <span id="welcometext"></span>
       </div>
-      <div id="divAudio" class="col-xs-5 col-sm-4">
+      <div id="divAudio" class="col-xs-6 col-sm-4">
         <div id="divEmission">
           <button id="bstart" class="btn" type="button">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-mic-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +70,7 @@
           <button id="bmuteRecord" class="btn" type="button" disabled>Mute</button>
         </div>
         <div id="divReception">
-          <p id="reception">RECEPTION</p>
+          <p >RECEPTION</p>
           <button id="bmuteAudio" class="btn" type="button">
             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-volume-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M8.717 3.55A.5.5 0 0 1 9 4v8a.5.5 0 0 1-.812.39L5.825 10.5H3.5A.5.5 0 0 1 3 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM8 5.04L6.312 6.39A.5.5 0 0 1 6 6.5H4v3h2a.5.5 0 0 1 .312.11L8 10.96V5.04z"/>
@@ -74,7 +80,7 @@
         </div>
         <audio id="audio" autoplay></audio>
       </div>
-      <div id="divPrev" class="col-xs-7 col-sm-4">
+      <div id="divPrev" class="col-xs-6 col-sm-4">
         <div id="divRoom"><p><span>ROOM : </span><span id ="croom"></span></p></div>
         &nbsp;<div class="live"></div>
       </div>
@@ -85,9 +91,9 @@
       </ul>
     </div>
     <div id="input-div">
-      <div id="divdubas" class="input-group">
-        <span id="eltG" class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-        <textarea id="message" name="message" class="form-control" autocomplete="off" placeholder="Ecrire votre message ici" rows="3" style="width: 100%;"></textarea>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+        <textarea id="message" name="message" class="form-control" autocomplete="off" placeholder="Ecrire votre message ici" rows="3"></textarea>
         <div class="input-group-btn">
           <button id="bS" class="btn btn-primary"><i class="glyphicon glyphicon-share"></i></button> &nbsp;
           <button id="bF" class="btn btn-success"><i class="glyphicon glyphicon-file"></i></button>
@@ -148,10 +154,10 @@
     </div>
   </div>
   <div class="text-center">
-    <div id ="firstline" style="cursor:default;">
+    <div id ="firstline">
       <p><span id="usagersconnectes">Usagers connectés : </span><span id="count" class="label label-success"></span></p>
     </div>
-    <hr class="style-two">
+    <hr>
     <ul id="users"></ul>
     <div id="listeIcons">
       <span id="icon1" data-toggle="tooltip" data-placement="bottom" title="Ça va">&#128077;</span>
