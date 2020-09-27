@@ -11,84 +11,69 @@ $(document).ready(function(){
       <span id="icon8" data-toggle="tooltip" data-placement="bottom" title="Je veux parler!">&#128172;</span>
 */
 
+var icon = 0;
+      
+fIcon(i) {
+  if (i = icon) {
+    i = 0;
+  }
+  switch(i) {
+    case 0: v = '';
+    case 1: v = '&#128077; ';
+    case 2: v = '&#128078; ';
+    case 3: v = '&#128587;&#8205;&#9794;&#65039; ';
+    case 4: v = '&#127891; ';
+    case 5: v = '&#9917; ';
+    case 6: v = '&#128994;';
+    case 7: v = '&#10060;';
+    case 8: v = '&#128172;';
+  }          
+  ws.send(JSON.stringify({
+    type: 'name',
+    name: v + $('#name').val(),
+    message: navigator.tell
+  }));
+  $('#message').focus();
+  icon = i;
+}
+
   $('#icon1').on('click', function(e){
-    ws.send(JSON.stringify({
-      type: 'name',
-      name: '&#128077; ' + $('#name').val(),
-      message: navigator.tell
-    }));
-    $('#message').focus();
+    fIcon(1);
     return false;
   });
 
   $('#icon2').on('click', function(e){
-    ws.send(JSON.stringify({
-      type: 'name',
-      name: '&#128078; ' + $('#name').val(),
-      message: navigator.tell
-    }));
-    $('#message').focus();
+    fIcon(2);
     return false;
   });
 
   $('#icon3').on('click', function(e){
-    ws.send(JSON.stringify({
-      type: 'name',
-      name: '&#128587;&#8205;&#9794;&#65039; ' + $('#name').val(),
-      message: navigator.tell
-    }));
-    $('#message').focus();
+    fIcon(3);
     return false;
   });
 
   $('#icon4').on('click', function(e){
-    ws.send(JSON.stringify({
-      type: 'name',
-      name: '&#127891; ' + $('#name').val(),
-      message: navigator.tell
-    }));
-    $('#message').focus();
+    fIcon(4);
     return false;
   });
 
   $('#icon5').on('click', function(e){
-    ws.send(JSON.stringify({
-      type: 'name',
-      name: '&#9917; ' + $('#name').val(),
-      message: navigator.tell
-    }));
-    $('#message').focus();
+    fIcon(5);
     return false;
   });
 
   $('#icon6').on('click', function(e){
-    ws.send(JSON.stringify({
-      type: 'name',
-      name: '&#128994; ' + $('#name').val(),
-      message: navigator.tell
-    }));
-    $('#message').focus();
+    fIcon(6);
     return false;
   });
 
   $('#icon7').on('click', function(e){
-
-    ws.send(JSON.stringify({
-      type: 'name',
-      name: '&#10060; ' + $('#name').val(),
-      message: navigator.tell
-    }));
-    $('#message').focus();
+    fIcon(7);
     return false;
   });
 
   $('#icon8').on('click', function(e){
-    ws.send(JSON.stringify({
-      type: 'name',
-      name: '&#128172; ' + $('#name').val(),
-      message: navigator.tell
-    }));
-    $('#message').focus();
+    fIcon(8);
     return false;
   });
 
