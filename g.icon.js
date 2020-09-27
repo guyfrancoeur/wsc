@@ -1,4 +1,4 @@
-//$(document).ready(function(){
+$(document).ready(function(){
 
 /*
       <span id="icon1" data-toggle="tooltip" data-placement="bottom" title="Ça va">&#128077;</span>
@@ -12,7 +12,6 @@
 */
 
   $('#icon1').on('click', function(e){
-    console.log('icon1');
     ws.send(JSON.stringify({
       type: 'name',
       name: '&#128077; ' + $('#name').val(),
@@ -23,7 +22,6 @@
   });
 
   $('#icon2').on('click', function(e){
-    console.log('icon2');
     ws.send(JSON.stringify({
       type: 'name',
       name: '&#128078; ' + $('#name').val(),
@@ -34,7 +32,6 @@
   });
 
   $('#icon3').on('click', function(e){
-    console.log('icon3');
     ws.send(JSON.stringify({
       type: 'name',
       name: '&#128587;&#8205;&#9794;&#65039; ' + $('#name').val(),
@@ -44,4 +41,55 @@
     return false;
   });
 
-//});
+  $('#icon4').on('click', function(e){
+    ws.send(JSON.stringify({
+      type: 'name',
+      name: '&#127891; ' + $('#name').val(),
+      message: navigator.tell
+    }));
+    $('#message').focus();
+    return false;
+  });
+
+  $('#icon5').on('click', function(e){
+    ws.send(JSON.stringify({
+      type: 'name',
+      name: '&#9917; ' + $('#name').val(),
+      message: navigator.tell
+    }));
+    $('#message').focus();
+    return false;
+  });
+
+  $('#icon6').on('click', function(e){
+    ws.send(JSON.stringify({
+      type: 'name',
+      name: '&#128994; ' + $('#name').val(),
+      message: navigator.tell
+    }));
+    $('#message').focus();
+    return false;
+  });
+
+  $('#icon7').on('click', function(e){
+
+    ws.send(JSON.stringify({
+      type: 'name',
+      name: '&#10060; ' + $('#name').val(),
+      message: navigator.tell
+    }));
+    $('#message').focus();
+    return false;
+  });
+
+  $('#icon8').on('click', function(e){
+    ws.send(JSON.stringify({
+      type: 'name',
+      name: '&#128172; ' + $('#name').val(),
+      message: navigator.tell
+    }));
+    $('#message').focus();
+    return false;
+  });
+
+});
