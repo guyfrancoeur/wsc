@@ -368,6 +368,12 @@ textarea::-webkit-scrollbar-thumb {
   display:flex;
   align-items:center;
 }
+#listeIcons{
+  border:1px solid #e7e7e7;
+  padding:5px;
+  margin:0px 20px;
+  border-radius:3px;
+}
 @keyframes dots {
   0%, 20% { color:#5c7183; }
   40% { color: #5c7183b7; }
