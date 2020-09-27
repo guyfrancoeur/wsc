@@ -147,7 +147,6 @@ function init() {
     }));
     connecte = 1;
     fResize();
-    $("#divLive").attr('class','live');
   }
   
   ws.onmessage = function(evt) {
@@ -207,7 +206,6 @@ $(document).ready(function(){
     e.preventDefault();
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#motsecret').val().length > 0) {
-      //$("#loading").show();
       ws.onopen = null;
       start = new Date().getTime();
       ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
