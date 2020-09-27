@@ -444,6 +444,12 @@ textarea::-webkit-scrollbar-thumb {
 #listeIcons > span{
   cursor:pointer;
 }
+.button-icon {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }
   .live{ margin-left:0px !important; }
