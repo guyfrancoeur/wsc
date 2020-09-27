@@ -15,7 +15,7 @@ $(document).ready(function(){
       
 function fIcon(i) {
   var v = '';
-  if (i == gIcon) { gIcon = 0; }
+  if (i == gIcon) { gIcon = 0; } else { gIcon = i; }
   switch(gIcon) {
     case 0: v = ''; break;
     case 1: v = '&#128077; '; break;
