@@ -11,7 +11,8 @@ $(document).ready(function(){
       <span id="icon8" data-toggle="tooltip" data-placement="bottom" title="Je veux parler!">&#128172;</span>
 */
 
-  $('#icon1').on('click', function(){
+  $('#icon1').on('click', function(e){
+    console.log('icon1');
     ws.send(JSON.stringify({
       type: 'name',
       name: '&#128077; ' + $('#name').val(),
@@ -21,7 +22,8 @@ $(document).ready(function(){
     return false;
   });
 
-  $('#icon2').on('click', function(){
+  $('#icon2').on('click', function(e){
+    console.log('icon2');
     ws.send(JSON.stringify({
       type: 'name',
       name: '&#128078; ' + $('#name').val(),
@@ -31,5 +33,15 @@ $(document).ready(function(){
     return false;
   });
 
+  $('#icon3').on('click', function(e){
+    console.log('icon3');
+    ws.send(JSON.stringify({
+      type: 'name',
+      name: '&#128587;&#8205;&#9794;&#65039; ' + $('#name').val(),
+      message: navigator.tell
+    }));
+    $('#message').focus();
+    return false;
+  });
 
 });
