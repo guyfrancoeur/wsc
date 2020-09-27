@@ -190,7 +190,7 @@ function copyToClipboard() {
 
 // DOCUMENT READY ---------------------------------
 $(document).ready(function(){
-  //$('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip();
   $('#m_aye').load('./m.aye.html');
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();

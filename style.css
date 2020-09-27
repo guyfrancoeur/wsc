@@ -438,6 +438,12 @@ textarea::-webkit-scrollbar-thumb {
   60% { color:#5c718360; }
   80%, 100% { color:#e7e7e7; }
 }
+.tooltip-inner {
+  color:white !important;
+}
+#listeIcons > span{
+  cursor:pointer;
+}
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }
   .live{ margin-left:0px !important; }
