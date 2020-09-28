@@ -1,8 +1,38 @@
 wsc = null;
 
-$(document).ready(function() {
-  $('#bstopSC').hide();
-});
+function initWSC() {
+  wsc.onopen = function() {
+    console.log("onopen of", wsa.url, "in", (new Date().getTime() - start), "ms");
+  }
+  
+  wsc.onmessage = function(evt) {
+    if (evt.data != "") {
+      msg = JSON.parse(evt.data);
+      switch(msg.type){
+        case 'share':
+          //rafraichir le partage video. dans la modale.
+          break;
+
+        case 'start':
+          console.log("case start");
+          //ouvrir la modale pour mettre le partage.
+          break;
+
+        case 'stop':
+          console.log("case stop");
+          // femeture du partage.
+          //$("#divEmission").show();
+          //$("#divReception").hide();
+          break;
+
+      }
+    }
+  }
+
+  wsc.onerror = function() {
+    console.log("error wsc");
+  }
+}
 
 var canvas = document.createElement('canvas');
 canvas.width = screen.width;
@@ -17,11 +47,16 @@ $('#bshareScreen').on('click', function(){
 $('#bShare').on('click', function(){
   p = parseInt($('#room').val())+10000;
   wsc = new WebSocket("wss://www.salutem.co:"+ p +"/");
+  initWSC();
   $('#bstopSC').show();
+  wsc.send(JSON.stringify({
+    type: 'start',
+    message: ''
+  }));
 
   const video = document.getElementById('video');
   //var constraints = { video: { width: 960, height: 520, frameRate: { ideal: 29, max: 30 }, facingMode: "user" } };
-  var constraints = { video: { frameRate: { ideal: 10, max: 15 } } };
+  var constraints = { video: { frameRate: { ideal: 8, max: 12 } } };
 
   getMedia(constraints);
 
@@ -29,7 +64,7 @@ $('#bShare').on('click', function(){
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     uri = canvas.toDataURL('image/jpeg', 1.0);
     wsc.send(JSON.stringify({
-      type: 'share',
+      type: 'master',
       image: uri
     }));
   }, 200);
@@ -47,13 +82,17 @@ $('#bShare').on('click', function(){
     }
 
     $('#bstopSC').on('click', function(){
-      streamVideo.getTracks().forEach(track => track.stop())
+      streamVideo.getTracks().forEach(track => track.stop());
       clearInterval(frameShare);
-      // Je crois pas besoin de faire le send après stop. (pas vraiment utile)
-      //ws.send(JSON.stringify({
-      //  type: 'stopShare',
-      //  image: uri
-      //}));
+      wsc.send(JSON.stringify({
+        type: 'stop',
+        message: ''
+      }));
     });
   }
+});
+
+//ready
+$(document).ready(function() {
+  $('#bstopSC').hide();
 });
