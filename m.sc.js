@@ -15,11 +15,13 @@ function initWsc() {
 
         case 'start':
           console.log("case start");
+          $("#m_sc").modal();
           //ouvrir la modale pour mettre le partage.
           break;
 
         case 'stop':
           console.log("case stop");
+          $("#m_sc").modal('hide');
           // femeture du partage.
           //$("#divEmission").show();
           //$("#divReception").hide();
