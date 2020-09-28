@@ -113,9 +113,7 @@ $("#nsecure").change(function(){
 
 //Toggle button
 $('.btn-toggle').click(function() {
-  if(master == 1){
-    $(this).find('.btn').toggleClass('active');
-    if ($(this).find('.btn-primary').size()>0) $(this).find('.btn').toggleClass('btn-primary');
-    $(this).find('.btn').toggleClass('btn-default');
-  }
+  $(this).find('.btn').toggleClass('active');
+  if ($(this).hasClass("btn-primary")) $(this).find('.btn').toggleClass('btn-primary');
+  $(this).find('.btn').toggleClass('btn-default');
 });
