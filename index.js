@@ -164,19 +164,6 @@ function init() {
           elem.scrollTop = elem.scrollHeight;
           break;
         //case 'cln' : window.location.reload(true); break;
-        case 'share' :
-          document.getElementById("image").src = data.image;
-          $('#image').show();
-          $('#modaleSC').removeClass('modal-sm');
-          $('#modaleSC').addClass('normalSize');
-          $("#bShare").hide();
-          break;
-        case 'stopShare':
-          $('#bShare').show();
-          $("#image, #bstopSC").hide();
-          $('#modaleSC').addClass('modal-sm');
-          $('#modaleSC').removeClass('normalSize');
-          break;
       }
     }
   }

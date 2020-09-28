@@ -22,9 +22,8 @@ function initWsc() {
         case 'stop':
           console.log("case stop");
           $("#m_sc").modal('hide');
+          $('#image').removeAttr("src");
           // femeture du partage.
-          //$("#divEmission").show();
-          //$("#divReception").hide();
           break;
 
       }
@@ -60,7 +59,6 @@ function share() {
         type: 'stop',
         message: ''
       }));
-      $('#bstopSC').hide();
       master = 0;
     });
   }
@@ -79,16 +77,13 @@ $('#bshareScreen').on('click', function(){
 $('#bShare').on('click', function(){
   master = 1;
   share();
-  $('#bstopSC').show();
   
   const video = document.getElementById('video');
-  //var constraints = { video: { width: 960, height: 520, frameRate: { ideal: 29, max: 30 }, facingMode: "user" } };
   var constraints = { video: { frameRate: { ideal: 8, max: 12 } } };
 
   getMedia(constraints);
 
   async function getMedia(constraints){
-    var streamVideo;
     try {
       streamVideo = await navigator.mediaDevices.getDisplayMedia(constraints);
       if ("srcObject" in video) video.srcObject = streamVideo
@@ -103,5 +98,18 @@ $('#bShare').on('click', function(){
 
 //ready
 $(document).ready(function() {
-  $('#bstopSC').hide();
+});
+
+//Slider
+$("#nsecure").slider({tooltip: 'always'});
+$("#nsecure").change(function(){
+  $("#modaleSC").width(parseInt(this.value)-7 + "%");
+  $("#modaleSC").height(parseInt(this.value)-2 + "%");
+});
+
+//Toggle button
+$('.btn-toggle').click(function() {
+  $(this).find('.btn').toggleClass('active');
+  if ($(this).find('.btn-primary').size()>0) $(this).find('.btn').toggleClass('btn-primary');
+  $(this).find('.btn').toggleClass('btn-default');
 });

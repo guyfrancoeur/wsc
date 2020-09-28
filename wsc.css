@@ -384,11 +384,8 @@ textarea::-webkit-scrollbar-thumb {
   display:none;
 }
 .normalSize{
-  width:90%;
-  height:90%;
-}
-#bShare{
-  margin:20px 0px;
+  height:53%;
+  width:43%;
 }
 @keyframes dots {
   0%, 20% { color:#5c7183; }
@@ -402,6 +399,16 @@ textarea::-webkit-scrollbar-thumb {
 #listeIcons > span{
   cursor:pointer;
 }
+
+#lslider{
+  color :#646464;
+  display:block;
+}
+.slider-handle {
+  background-color:#5e8ead !important;
+  background-image:none !important;
+}
+
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }
   #divAudio{
