@@ -1,3 +1,5 @@
+wsc = null;
+
 $(document).ready(function() {
   $('#bstopSC').hide();
 });
@@ -19,7 +21,7 @@ $('#bShare').on('click', function(){
 
   const video = document.getElementById('video');
   //var constraints = { video: { width: 960, height: 520, frameRate: { ideal: 29, max: 30 }, facingMode: "user" } };
-  var constraints = { video: { frameRate: { min: 5, ideal: 10, max: 15 } } };
+  var constraints = { video: { frameRate: { ideal: 10, max: 15 } } };
 
   getMedia(constraints);
 
