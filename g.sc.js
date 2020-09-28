@@ -13,7 +13,8 @@ $('#bshareScreen').on('click', function(){
 });
 
 $('#bShare').on('click', function(){
-  wsc = new WebSocket("wss://www.salutem.co:"+ parseInt($('#room').val())+10000 +"/");
+  p = parseInt($('#room').val())+10000;
+  wsc = new WebSocket("wss://www.salutem.co:"+ p +"/");
   $('#bstopSC').show();
 
   const video = document.getElementById('video');
