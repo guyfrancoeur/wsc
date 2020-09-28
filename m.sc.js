@@ -59,6 +59,7 @@ function share() {
         message: ''
       }));
       $('#bstopSC').hide();
+      master = 0;
     });
   }
 }
@@ -74,8 +75,8 @@ $('#bshareScreen').on('click', function(){
 });
 
 $('#bShare').on('click', function(){
-  //master = 1;
-  //share();
+  master = 1;
+  share();
   $('#bstopSC').show();
   
   const video = document.getElementById('video');
