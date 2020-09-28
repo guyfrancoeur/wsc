@@ -9,8 +9,8 @@ function initWsc() {
     if (evt.data != "") {
       msg = JSON.parse(evt.data);
       switch(msg.type){
-        case 'share':
-          //rafraichir le partage video. dans la modale.
+        case 'share': //rafraichir le partage video. dans la modale.
+          $('#image').attr('src', msg.message);
           break;
 
         case 'start':
@@ -42,26 +42,25 @@ function share() {
       message: ''
     }));
      
-      var frameShare = setInterval(function(){
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        uri = canvas.toDataURL('image/jpeg', 1.0);
-        wsc.send(JSON.stringify({
-          type: 'master',
-          image: uri
-        }));
-      }, 200);
+    var frameShare = setInterval(function(){
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      uri = canvas.toDataURL('image/jpeg', 1.0);
+      wsc.send(JSON.stringify({
+        type: 'master',
+        message: uri
+      }));
+    }, 200);
       
-      $('#bstopSC').on('click', function(){
-        streamVideo.getTracks().forEach(track => track.stop());
-        clearInterval(frameShare);
-        wsc.send(JSON.stringify({
-          type: 'stop',
-          message: ''
-        }));
-        this.hide();
-      });
-    }
-    //********************
+    $('#bstopSC').on('click', function(){
+      streamVideo.getTracks().forEach(track => track.stop());
+      clearInterval(frameShare);
+      wsc.send(JSON.stringify({
+        type: 'stop',
+        message: ''
+      }));
+      $('#bstopSC').hide();
+    });
+  }
 }
 
 var canvas = document.createElement('canvas');
