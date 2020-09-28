@@ -13,7 +13,7 @@ $('#bshareScreen').on('click', function(){
 });
 
 $('#bShare').on('click', function(){
-  ws = new WebSocket("wss://www.salutem.co:"+ parseInt($('#room').val())+10000 +"/");
+  wsc = new WebSocket("wss://www.salutem.co:"+ parseInt($('#room').val())+10000 +"/");
   $('#bstopSC').show();
 
   const video = document.getElementById('video');
@@ -25,7 +25,7 @@ $('#bShare').on('click', function(){
   var frameShare = setInterval(function(){
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     uri = canvas.toDataURL('image/jpeg', 1.0);
-    ws.send(JSON.stringify({
+    wsc.send(JSON.stringify({
       type: 'share',
       image: uri
     }));
