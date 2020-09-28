@@ -143,6 +143,7 @@ function init() {
     ws.send(JSON.stringify({
       type: 'name',
       name: $('#name').val(),
+      pass: $('#pass').val(),
       message: navigator.tell
     }));
     connecte = 1;
