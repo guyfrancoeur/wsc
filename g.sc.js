@@ -8,18 +8,21 @@ canvas.height = screen.height;
 var context = canvas.getContext('2d');
 var streamVideo;
 
-$('#bshareScreen').on('click', function(){ $('#m_sc').modal('show'); return false; });
+$('#bshareScreen').on('click', function(){
+  $('#m_sc').modal('show'); return false;
+});
 
 $('#bShare').on('click', function(){
+  ws = new WebSocket("wss://www.salutem.co:"+ parseInt($('#room').val())+10000 +"/");
   $('#bstopSC').show();
 
   const video = document.getElementById('video');
   //var constraints = { video: { width: 960, height: 520, frameRate: { ideal: 29, max: 30 }, facingMode: "user" } };
-  var constraints = { video: true };
+  var constraints = { video: true, { frameRate: { min: 5, ideal: 10, max: 15 } } };
 
   getMedia(constraints);
 
-  var frameShare = setInterval(function(){ 
+  var frameShare = setInterval(function(){
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     uri = canvas.toDataURL('image/jpeg', 1.0);
     ws.send(JSON.stringify({
@@ -28,7 +31,7 @@ $('#bShare').on('click', function(){
     }));
   }, 200);
 
-  async function getMedia(constraints) {
+  async function getMedia(constraints){
     var streamVideo;
     try {
       streamVideo = await navigator.mediaDevices.getDisplayMedia(constraints);
@@ -43,10 +46,11 @@ $('#bShare').on('click', function(){
     $('#bstopSC').on('click', function(){
       streamVideo.getTracks().forEach(track => track.stop())
       clearInterval(frameShare);
-      ws.send(JSON.stringify({
-        type: 'stopShare',
-        image: uri
-      }));
+      // Je crois pas besoin de faire le send après stop. (pas vraiment utile)
+      //ws.send(JSON.stringify({
+      //  type: 'stopShare',
+      //  image: uri
+      //}));
     });
   }
 });
