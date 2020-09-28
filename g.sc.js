@@ -1,8 +1,33 @@
 wsc = null;
+master = 0;
 
 function initWSC() {
   wsc.onopen = function() {
     console.log("onopen of", wsa.url, "in", (new Date().getTime() - start), "ms");
+    if (master == 1) {
+      wsc.send(JSON.stringify({
+        type: 'start',
+        message: ''
+      }));
+     
+      var frameShare = setInterval(function(){
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        uri = canvas.toDataURL('image/jpeg', 1.0);
+        wsc.send(JSON.stringify({
+          type: 'master',
+          image: uri
+        }));
+      }, 200);
+      
+      $('#bstopSC').on('click', function(){
+        streamVideo.getTracks().forEach(track => track.stop());
+        clearInterval(frameShare);
+        wsc.send(JSON.stringify({
+          type: 'stop',
+          message: ''
+        }));
+      });
+    }
   }
   
   wsc.onmessage = function(evt) {
@@ -49,25 +74,13 @@ $('#bShare').on('click', function(){
   wsc = new WebSocket("wss://www.salutem.co:"+ p +"/");
   initWSC();
   $('#bstopSC').show();
-  wsc.send(JSON.stringify({
-    type: 'start',
-    message: ''
-  }));
+  //master = 1;
 
   const video = document.getElementById('video');
   //var constraints = { video: { width: 960, height: 520, frameRate: { ideal: 29, max: 30 }, facingMode: "user" } };
   var constraints = { video: { frameRate: { ideal: 8, max: 12 } } };
 
   getMedia(constraints);
-
-  var frameShare = setInterval(function(){
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    uri = canvas.toDataURL('image/jpeg', 1.0);
-    wsc.send(JSON.stringify({
-      type: 'master',
-      image: uri
-    }));
-  }, 200);
 
   async function getMedia(constraints){
     var streamVideo;
@@ -80,15 +93,6 @@ $('#bShare').on('click', function(){
       console.log(err.name + ": " + err.message);
       $("#msgErrMedia").show();
     }
-
-    $('#bstopSC').on('click', function(){
-      streamVideo.getTracks().forEach(track => track.stop());
-      clearInterval(frameShare);
-      wsc.send(JSON.stringify({
-        type: 'stop',
-        message: ''
-      }));
-    });
   }
 });
 
