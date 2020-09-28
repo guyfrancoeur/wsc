@@ -58,6 +58,7 @@ function share() {
           type: 'stop',
           message: ''
         }));
+        this.hide();
       });
     }
     //********************
