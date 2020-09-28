@@ -101,7 +101,11 @@ $(document).ready(function() {
 });
 
 //Slider
-$("#nsecure").slider({tooltip: 'always'});
+$("#nsecure").slider({
+  formatter: function(value) {
+    return value + "%";
+  },
+});
 $("#nsecure").change(function(){
   $("#modaleSC").width(parseInt(this.value)-7 + "%");
   $("#modaleSC").height(parseInt(this.value)-2 + "%");

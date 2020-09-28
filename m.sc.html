@@ -4,18 +4,26 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <div id="divSlider" class="form-group text-center ">
-        <input type="text" id="nsecure" data-provider="slider" data-slider-min="50" data-slider-max="100" data-slider-step="25" data-slider-value="50"/>
+      <div class ="row">
+        <div class="col-sm-12 col-lg-6">
+          <div id="divSlider" class="form-group text-center">
+            <label id="lslider" for="nsecure" >Resize window</label>
+            <input type="text" id="nsecure" data-provider="slider" data-slider-min="50" data-slider-max="100" data-slider-step="25" data-slider-value="50"/>
+          </div>
+        </div>
+        <div class="col-sm-12 col-lg-6">
+          <div class="btn-group btn-toggle text-center"> 
+            <button id="bShare" class="btn btn-sm btn-default">Partager mon écran</button>
+            <button id="bstopSC" class="btn btn-sm btn-primary active">Arrêter le partage d'écran</button>
+          </div>
+        </div>
       </div>
-      <div class="btn-group btn-toggle"> 
-        <button id="bShare" class="btn btn-sm btn-default">Partager mon écran</button>
-        <button id="bstopSC" class="btn btn-sm btn-primary active">Arrêter le partage d'écran</button>
+      <div class="modal-body text-center">
+        <video id="video"></video>
+        <img id="image"></img>
       </div>
-    </div>
-    <div class="modal-body text-center">
-      <video id="video"></video>
-      <img id="image"></img>
-    </div>
+      </div>
+      
   </div>
 </div>
 <script>
