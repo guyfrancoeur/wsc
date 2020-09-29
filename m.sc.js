@@ -85,7 +85,6 @@ function share() {
 }
 
 function stopShare(){
-  console.log("stop function");
   streamVideo.getTracks().forEach(track => track.stop());
   clearInterval(frameShare);
   wsc.send(JSON.stringify({
@@ -96,8 +95,8 @@ function stopShare(){
 }
 
 var canvas = document.createElement('canvas');
-canvas.width = screen.width;
-canvas.height = screen.height;
+//canvas.width = screen.width;
+//canvas.height = screen.height;
 var context = canvas.getContext('2d');
 var streamVideo;
 
@@ -116,7 +115,11 @@ $('#bShare').on('click', function(){
       streamVideo = await navigator.mediaDevices.getDisplayMedia(constraints);
       if ("srcObject" in video) video.srcObject = streamVideo
       else video.src = window.URL.createObjectURL(streamVideo); // Avoid using this in new browsers.
-      video.onloadedmetadata = function(e) { video.play(); };
+      video.onloadedmetadata = function(e) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        video.play();
+      };
       streamVideo.getVideoTracks()[0].addEventListener('ended', () => 
         stopShare()
       );
@@ -127,6 +130,12 @@ $('#bShare').on('click', function(){
       console.log(err.name + ": " + err.message);
       $("#msgErrMedia").show();
     }
+
+    //Resize de la fenêtre en train d'être partagée -> resize du canvas
+    $(video).on('resize', function(){
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+    });
   }
 });
 
