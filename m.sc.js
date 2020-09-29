@@ -51,12 +51,12 @@ function share() {
       uri = canvas.toDataURL('image/jpeg', 0.8);
       v = LZString.compressToBase64(uri);
       a = v.length; b = uri.length;
-      c = 0;
       if (a < b) {
         s = v;
         moy = (moy + a) / 2;
         c = 1;
       } else {
+        c = 0;
         s = uri;
       }
       wsc.send(JSON.stringify({
