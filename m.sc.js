@@ -1,4 +1,5 @@
 master = 0;
+moy = 0;
 
 function initWsc() {
   wsc.onopen = function() {
@@ -46,8 +47,9 @@ function share() {
      
     var frameShare = setInterval(function(){
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      uri = canvas.toDataURL('image/jpeg', 1.0);
-      //v = LZString.compressToBase64(uri);
+      uri = canvas.toDataURL('image/jpeg', 0.8);
+      v = LZString.compressToBase64(uri);
+      moy = (moy + (v.length / uri.length))/2;
       wsc.send(JSON.stringify({
         type: 'master',
         message: uri
