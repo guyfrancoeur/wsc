@@ -19,16 +19,23 @@ function initWsc() {
         case 'start':
           console.log("case start");
           $("#m_sc").modal();
+          $("#image").show();
+          if(master == 0){
+            $("#divSlider").show();
+            $("#bShare").hide();
+          }
           //ouvrir la modale pour mettre le partage.
           break;
 
         case 'stop':
           console.log("case stop");
           $("#m_sc").modal('hide');
-          $('#image').removeAttr("src");
+          $("#divmoy, #divSlider, #image").hide();
+          $("#bShare").show();
+          $("#modaleSC").width("43%");
+          $("#modaleSC").height("48%");
           // femeture du partage.
           break;
-
       }
     }
   }
@@ -39,6 +46,7 @@ function initWsc() {
 }
 
 function share() {
+  $("#divmoy").show();
   cpt = 0;
 
    //********  todo
@@ -48,7 +56,7 @@ function share() {
       message: ''
     }));
      
-    var frameShare = setInterval(function(){
+    frameShare = setInterval(function(){
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
       uri = canvas.toDataURL('image/jpeg', 0.8);
       v = LZString.compressToBase64(uri);
@@ -59,7 +67,6 @@ function share() {
         s = v;
         moy = (moy + a) / 2;
         c = 1;
-
         cpt++; // Affichage de moy dans la modale 1 fois sur 4
         if(cpt == 3){
           $("#moy").html(moy.toFixed(2));
@@ -74,18 +81,18 @@ function share() {
         zip: c
       }));
     }, 250);
-      
-    $('#bstopSC').on('click', function(){
-      streamVideo.getTracks().forEach(track => track.stop());
-      clearInterval(frameShare);
-      wsc.send(JSON.stringify({
-        type: 'stop',
-        message: ''
-      }));
-      master = 0;
-      $("#divmoy").hide();
-    });
   }
+}
+
+function stopShare(){
+  console.log("stop function");
+  streamVideo.getTracks().forEach(track => track.stop());
+  clearInterval(frameShare);
+  wsc.send(JSON.stringify({
+    type: 'stop',
+    message: ''
+  }));
+  master = 0;
 }
 
 var canvas = document.createElement('canvas');
@@ -99,10 +106,6 @@ $('#bshareScreen').on('click', function(){
 });
 
 $('#bShare').on('click', function(){
-  $("#divmoy").show();
-  master = 1;
-  share();
-  
   const video = document.getElementById('video');
   var constraints = { video: { frameRate: { ideal: 8, max: 12 } } };
 
@@ -114,6 +117,12 @@ $('#bShare').on('click', function(){
       if ("srcObject" in video) video.srcObject = streamVideo
       else video.src = window.URL.createObjectURL(streamVideo); // Avoid using this in new browsers.
       video.onloadedmetadata = function(e) { video.play(); };
+      streamVideo.getVideoTracks()[0].addEventListener('ended', () => 
+        stopShare()
+      );
+      $("#bShare, #divSlider").hide();
+      master = 1;
+      share();
     } catch(err) {
       console.log(err.name + ": " + err.message);
       $("#msgErrMedia").show();
@@ -122,23 +131,12 @@ $('#bShare').on('click', function(){
 });
 
 //Slider
-$("#nsecure").slider({
-  formatter: function(value) {
-    return value + "%";
-  },
-});
+$("#nsecure").slider({formatter: function(value) {return value + "%";}});
 $("#nsecure").change(function(){
   $("#modaleSC").width(parseInt(this.value)-7 + "%");
   $("#modaleSC").height(parseInt(this.value)-2 + "%");
 });
 
-//Toggle button
-$('.btn-toggle').click(function() {
-  $(this).find('.btn').toggleClass('active');
-  if ($(this).hasClass("btn-primary")) $(this).find('.btn').toggleClass('btn-primary');
-  $(this).find('.btn').toggleClass('btn-default');
-});
-
 $(document).ready(function() {
-  $("#divmoy").hide();
+  $("#divmoy, #divSlider").hide();
 });
