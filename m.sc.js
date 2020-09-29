@@ -10,6 +10,7 @@ function initWsc() {
       msg = JSON.parse(evt.data);
       switch(msg.type){
         case 'share': //rafraichir le partage video. dans la modale.
+          v = LZString.decompressFromBase64(msg.message);
           $('#image').attr('src', msg.message);
           break;
 
@@ -46,9 +47,10 @@ function share() {
     var frameShare = setInterval(function(){
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
       uri = canvas.toDataURL('image/jpeg', 1.0);
+      v = LZString.compressToBase64(uri);
       wsc.send(JSON.stringify({
         type: 'master',
-        message: uri
+        message: v
       }));
     }, 200);
       
