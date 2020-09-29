@@ -138,7 +138,7 @@ function init() {
     }));
     $('#name-div').hide();
     $('#welcome').show();
-    $('#welcometext').text('Bonjour ' + $('#name').val());
+    //$('#welcometext').text('Bonjour ' + $('#name').val());
     $('#croom').text($('#room').val());
     ws.send(JSON.stringify({
       type: 'name',
@@ -157,7 +157,7 @@ function init() {
       data = JSON.parse(evt.data);
       //console.log(data);
       switch (data.type) {
-        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#name').text(data.messsage); break;
+        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#name').text(data.name); $('#welcometext').text('Bonjour ' + $('#name').val()); break;
         case 'tlk' :
           if (!document.hasFocus()) { newUpdate(); a2.play(); }
           var text = data.message;
