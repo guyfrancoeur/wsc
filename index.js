@@ -142,6 +142,7 @@ function init() {
     $('#croom').text($('#room').val());
     ws.send(JSON.stringify({
       type: 'name',
+      icon: '',
       name: $('#name').val(),
       pass: $('#pass').val(),
       message: navigator.tell
@@ -156,7 +157,7 @@ function init() {
       data = JSON.parse(evt.data);
       //console.log(data);
       switch (data.type) {
-        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); break;
+        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#name').text(data.messsage); break;
         case 'tlk' :
           if (!document.hasFocus()) { newUpdate(); a2.play(); }
           var text = data.message;
