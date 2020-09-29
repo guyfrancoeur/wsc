@@ -10,8 +10,8 @@ function initWsc() {
       msg = JSON.parse(evt.data);
       switch(msg.type){
         case 'share': //rafraichir le partage video. dans la modale.
-          v = LZString.decompressFromBase64(msg.message);
-          $('#image').attr('src', v);
+          //v = LZString.decompressFromBase64(msg.message);
+          $('#image').attr('src', msg.message);
           break;
 
         case 'start':
@@ -47,12 +47,12 @@ function share() {
     var frameShare = setInterval(function(){
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
       uri = canvas.toDataURL('image/jpeg', 1.0);
-      v = LZString.compressToBase64(uri);
+      //v = LZString.compressToBase64(uri);
       wsc.send(JSON.stringify({
         type: 'master',
-        message: v
+        message: uri
       }));
-    }, 200);
+    }, 250);
       
     $('#bstopSC').on('click', function(){
       streamVideo.getTracks().forEach(track => track.stop());
@@ -96,10 +96,6 @@ $('#bShare').on('click', function(){
       $("#msgErrMedia").show();
     }
   }
-});
-
-//ready
-$(document).ready(function() {
 });
 
 //Slider
