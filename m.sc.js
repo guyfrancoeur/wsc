@@ -39,6 +39,8 @@ function initWsc() {
 }
 
 function share() {
+  cpt = 0;
+
    //********  todo
   if (master == 1) {
     wsc.send(JSON.stringify({
@@ -57,6 +59,12 @@ function share() {
         s = v;
         moy = (moy + a) / 2;
         c = 1;
+
+        cpt++; // Affichage de moy dans la modale 1 fois sur 4
+        if(cpt == 3){
+          $("#moy").html(moy.toFixed(2));
+          cpt = 0;
+        }
       } else {
         s = uri;
       }
@@ -75,6 +83,7 @@ function share() {
         message: ''
       }));
       master = 0;
+      $("#divmoy").hide();
     });
   }
 }
@@ -90,6 +99,7 @@ $('#bshareScreen').on('click', function(){
 });
 
 $('#bShare').on('click', function(){
+  $("#divmoy").show();
   master = 1;
   share();
   
@@ -127,4 +137,8 @@ $('.btn-toggle').click(function() {
   $(this).find('.btn').toggleClass('active');
   if ($(this).hasClass("btn-primary")) $(this).find('.btn').toggleClass('btn-primary');
   $(this).find('.btn').toggleClass('btn-default');
+});
+
+$(document).ready(function() {
+  $("#divmoy").hide();
 });

@@ -418,6 +418,14 @@ textarea::-webkit-scrollbar-thumb {
   padding:0px 20px;
   margin:0px;
 }
+#divmoy{
+  font-size:11px;
+  position: absolute;
+  color:#a1a1a1;
+  left:7px;
+  margin-top:-11px;
+  
+}
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }
   #divAudio{
@@ -431,7 +439,6 @@ textarea::-webkit-scrollbar-thumb {
     padding-bottom:10px;
   }
 }
-
 .live{
   border-radius:50%;
   width:30px;
