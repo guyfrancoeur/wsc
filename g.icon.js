@@ -31,7 +31,7 @@ function fIcon(i) {
   ws.send(JSON.stringify({
     type: 'name',
     name: v + $('#name').val(),
-    pass: $('#name').val(),
+    pass: $('#pass').val(),
     message: navigator.tell
   }));
   $('#message').focus();
