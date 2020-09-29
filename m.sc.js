@@ -11,7 +11,7 @@ function initWsc() {
       switch(msg.type){
         case 'share': //rafraichir le partage video. dans la modale.
           v = LZString.decompressFromBase64(msg.message);
-          $('#image').attr('src', msg.message);
+          $('#image').attr('src', v);
           break;
 
         case 'start':
