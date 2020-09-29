@@ -62,7 +62,7 @@ function share() {
       }
       wsc.send(JSON.stringify({
         type: 'master',
-        message: s
+        message: s,
         zip: c
       }));
     }, 250);
