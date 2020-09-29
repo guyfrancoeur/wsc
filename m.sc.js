@@ -1,5 +1,5 @@
 master = 0;
-moy = 0;
+moy = 1.0;
 
 function initWsc() {
   wsc.onopen = function() {
