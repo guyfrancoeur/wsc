@@ -7,6 +7,7 @@ window.mobileCheck = function() {
 
 //devtools detect disabled on mobile
 if (mobileCheck() == false) {
-  var script = document.createElement('script');
-  script.src = "./js/e.dt.js";
+  var ds = document.createElement('script');
+  ds.type = "text/javascript";
+  ds.src = "./js/e.dt.js";
 }
