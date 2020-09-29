@@ -29,8 +29,9 @@ function fIcon(i) {
     default : return;
   }          
   ws.send(JSON.stringify({
-    type: 'icon',
-    name: v + $('#name').val(),
+    type: 'name',
+    icon: v,
+    name: $('#name').val(),
     pass: $('#pass').val(),
     message: navigator.tell
   }));
