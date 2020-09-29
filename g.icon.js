@@ -29,7 +29,7 @@ function fIcon(i) {
     default : return;
   }          
   ws.send(JSON.stringify({
-    type: 'name',
+    type: 'icon',
     name: v + $('#name').val(),
     pass: $('#pass').val(),
     message: navigator.tell
