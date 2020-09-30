@@ -1,5 +1,5 @@
 var master = 0;
-var frameRate = 250;  // pour test
+var frameRate = 500;  // pour test
 var imgQuality = 0.8;  // pour test
 
 function initWsc() {
