@@ -30,11 +30,12 @@ function initWsc() {
         case 'stop':
           console.log("case stop");
           $("#m_sc").modal('hide');
-          $("#image, #sliderReceveur, #sliderEmetteur").hide();
+          $("#image, #sliderReceveur, #sliderEmetteur, #divkbytes").hide();
           $('#image').removeAttr("src");
           $("#bShare").show();
           $("#modaleSC").width("43%");
           $("#modaleSC").height("48%");
+          $('#nresizeWindow').slider('refresh');
           // femeture du partage.
           break;
       }
@@ -81,6 +82,8 @@ function interval(){
     message: uri,
     zip: 0
   }));
+  var kbytes = (uri.length * (1000 / frameRate) / 1000)
+  $("#kbytes").html(kbytes);
 }
 
 function stopShare(){
@@ -120,7 +123,7 @@ $('#bShare').on('click', function(){
       streamVideo.getVideoTracks()[0].addEventListener('ended', () => 
         stopShare()
       );
-      $("#sliderEmetteur").show();
+      $("#sliderEmetteur, #divkbytes").show();
       $("#bShare").hide();
       master = 1;
       share();
@@ -167,5 +170,6 @@ $("#nrefresh").change(function(){
 });
 
 $(document).ready(function() {
-  $("#sliderReceveur, #sliderEmetteur").hide();
+  $('[data-toggle="tooltip"]').tooltip();
+  $("#sliderReceveur, #sliderEmetteur, #divkbytes").hide();
 });

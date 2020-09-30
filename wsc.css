@@ -377,15 +377,23 @@ textarea::-webkit-scrollbar-thumb {
   padding:0px 10px;
 }
 #image{
-  width:80%;
-  height:80%;
+  width:90%;
+  height:90%;
 }
 #video{
   display:none;
 }
 .normalSize{
+  margin:10px auto !important;
   height:48%;
   width:43%;
+}
+#divkbytes{
+  color:rgb(199, 199, 199);
+  position:absolute;
+  font-size:11px;
+  margin-top:-10px;
+  margin-left:-10px;
 }
 @keyframes dots {
   0%, 20% { color:#5c7183; }
@@ -411,11 +419,6 @@ textarea::-webkit-scrollbar-thumb {
   border:5px solid #f8f8f8cc;
   display:inline-block;
   padding:0px 20px;
-  margin:0px;
-}
-#sliderReceveur > div > label, #sliderEmetteur > div > label{
-  color :#646464;
-  display:block;
   margin:0px;
 }
 #bShare{
