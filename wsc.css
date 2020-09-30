@@ -421,6 +421,18 @@ textarea::-webkit-scrollbar-thumb {
 #bShare{
   margin-top:15px;
 }
+#bdeconnexion{
+  border:0px;
+  background-color:#a54949;
+  color:#e7e7e7;
+  padding:2px 7px;
+  border-radius:100px;
+  box-shadow:0 2px 5px 0 #0000002e, 0 3px 6px 0 #00000026;
+  opacity:70%;
+}
+#bdeconnexion:hover{
+  opacity:100%;
+}
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }
   #divAudio{

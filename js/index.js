@@ -269,6 +269,10 @@ $(document).ready(function(){
     }, 0);
   });
   
+  $('#bdeconnexion').on('click', function(){
+    window.location.reload(true);
+  });
+  
   console.log('event programming done!');
   console.log('ready!');
 });
