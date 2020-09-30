@@ -10,9 +10,9 @@
 - Video streaming : partage d'écran (application)
 
 Quelques suggestions possibles
-- émoicons (Windows key + ;)
-- html dans les messages
-- support de code avec `<pre>`
+- émoicons avec <kbd>Windows</kbd>+<kbd>;</kbd>
+- balise html dans les messages
+- support de code formaté avec `<pre>`
 
 ### Requis opérationnel
  - Un serveur (similaire a NodeJS) pour le dialogue entre les utilisateurs.
