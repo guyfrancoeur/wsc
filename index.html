@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <title>wsc v2.8b9</title>
+  <title>wsc v2.9b1</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" id="favicon">
@@ -18,10 +18,12 @@
   <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js" integrity="sha256-oj52qvIP5c7N6lZZoh9z3OYacAIOjsROAcZBHUaJMyw=" crossorigin="anonymous"></script>
   <!-- <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.5.2/bootstrap.min.js"></script> -->
-  <script src="./js/e.md.js"></script>
-  <script defer src="./g.voix.js"></script>
-  <script defer src="./g.icon.js"></script>
-  <script defer src="./index.js"></script>
+  <script>
+    $.getScript('./js/e.md.js', console.log('e.md.js loaded'));
+    $.getScript('./js/g.voix.js', console.log('voix.js loaded'));
+    $.getScript('./js/g.icon.js', console.log('icon.js loaded'));
+    $.getScript('./js/index.js', console.log('indexJS loaded'));
+  </script>
 </head>
 <body>
   <form>
