@@ -399,11 +399,6 @@ textarea::-webkit-scrollbar-thumb {
 #listeIcons > span{
   cursor:pointer;
 }
-#lslider{
-  color :#646464;
-  display:block;
-  margin:0px;
-}
 .slider-handle{
   background-color:#5e8ead !important;
   background-image:none !important;
@@ -411,19 +406,20 @@ textarea::-webkit-scrollbar-thumb {
 .slider.slider-horizontal {
   width: 150px;
 }
-#divSlider{
+#divResizeWindow, #divResizeCanvas, #divPurete, #divRefresh{
   border-radius:10px;
   border:5px solid #f8f8f8cc;
-  display: inline-block;
+  display:inline-block;
   padding:0px 20px;
   margin:0px;
 }
-#divmoy{
-  font-size:11px;
-  position: absolute;
-  color:#a1a1a1;
-  left:7px;
-  margin-top:-11px;
+#sliderReceveur > div > label, #sliderEmetteur > div > label{
+  color :#646464;
+  display:block;
+  margin:0px;
+}
+#bShare{
+  margin-top:15px;
 }
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }

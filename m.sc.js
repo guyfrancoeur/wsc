@@ -1,6 +1,7 @@
 var master = 0;
 var frameRate = 500;  // pour test
 var imgQuality = 0.8;  // pour test
+var scale = .75;
 
 function initWsc() {
   wsc.onopen = function() {
@@ -21,17 +22,16 @@ function initWsc() {
           console.log("case start");
           $("#m_sc").modal();
           $("#image").show();
-          if(master == 0){
-            $("#divSlider").show();
-            $("#bShare").hide();
-          }
+          $("#bShare").hide();
+          if(master == 0) $("#sliderReceveur").show();
           //ouvrir la modale pour mettre le partage.
           break;
 
         case 'stop':
           console.log("case stop");
           $("#m_sc").modal('hide');
-          $("#divmoy, #divSlider, #image").hide();
+          $("#image, #sliderReceveur, #sliderEmetteur").hide();
+          $('#image').removeAttr("src");
           $("#bShare").show();
           $("#modaleSC").width("43%");
           $("#modaleSC").height("48%");
@@ -47,42 +47,40 @@ function initWsc() {
 }
 
 function share() {
-  $("#divmoy").show();
-  cpt = 0;
-
    //********  todo
   if (master == 1) {
     wsc.send(JSON.stringify({
       type: 'start',
       message: ''
     }));
-     
-    frameShare = setInterval(function(){
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      uri = canvas.toDataURL('image/jpeg', imgQuality);
-      //v = LZString.compressToBase64(uri);
-      //a = v.length; b = uri.length;
-      //c = 0;
-      //s = "";
-      //if (a < b) {
-      //  s = v;
-      //  moy = (moy + a) / 2;
-      //  c = 1;
-      //  cpt++; // Affichage de moy dans la modale 1 fois sur 4
-      //  if(cpt == 3){
-      //    $("#moy").html(moy.toFixed(2));
-      //    cpt = 0;
-      //  }
-      //} else {
-      //  s = uri;
-      //}
-      wsc.send(JSON.stringify({
-        type: 'master',
-        message: uri,
-        zip: 0
-      }));
-    }, frameRate);
+    frameShare = setInterval(interval, frameRate);
   }
+}
+
+function interval(){
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  uri = canvas.toDataURL('image/jpeg', imgQuality);
+  //v = LZString.compressToBase64(uri);
+  //a = v.length; b = uri.length;
+  //c = 0;
+  //s = "";
+  //if (a < b) {
+  //  s = v;
+  //  moy = (moy + a) / 2;
+  //  c = 1;
+  //  cpt++; // Affichage de moy dans la modale 1 fois sur 4
+  //  if(cpt == 3){
+  //    $("#moy").html(moy.toFixed(2));
+  //    cpt = 0;
+  //  }
+  //} else {
+  //  s = uri;
+  //}
+  wsc.send(JSON.stringify({
+    type: 'master',
+    message: uri,
+    zip: 0
+  }));
 }
 
 function stopShare(){
@@ -96,8 +94,6 @@ function stopShare(){
 }
 
 var canvas = document.createElement('canvas');
-//canvas.width = screen.width;
-//canvas.height = screen.height;
 var context = canvas.getContext('2d');
 var streamVideo;
 
@@ -117,14 +113,15 @@ $('#bShare').on('click', function(){
       if ("srcObject" in video) video.srcObject = streamVideo
       else video.src = window.URL.createObjectURL(streamVideo); // Avoid using this in new browsers.
       video.onloadedmetadata = function(e) {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+        canvas.width = video.videoWidth * scale;
+        canvas.height = video.videoHeight * scale;
         video.play();
       };
       streamVideo.getVideoTracks()[0].addEventListener('ended', () => 
         stopShare()
       );
-      $("#bShare, #divSlider").hide();
+      $("#sliderEmetteur").show();
+      $("#bShare").hide();
       master = 1;
       share();
     } catch(err) {
@@ -134,19 +131,41 @@ $('#bShare').on('click', function(){
 
     //Resize de la fenêtre en train d'être partagée -> resize du canvas
     $(video).on('resize', function(){
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
+      canvas.width = video.videoWidth * scale;
+      canvas.height = video.videoHeight * scale;
     });
   }
 });
 
-//Slider
-$("#nsecure").slider({formatter: function(value) {return value + "%";}});
-$("#nsecure").change(function(){
+// Resize window
+$("#nresizeWindow").slider({formatter: function(value) {return value + "%";}});
+$("#nresizeWindow").change(function(){
   $("#modaleSC").width(parseInt(this.value)-7 + "%");
   $("#modaleSC").height(parseInt(this.value)-2 + "%");
 });
 
+//Scale du canvas en fonction de la capture 50% 75% 100% ; default 75%
+$("#nresizeCanvas").slider({formatter: function(value) {return value + "%";}});
+$("#nresizeCanvas").change(function(){
+  scale = parseInt(this.value) / 100;
+  canvas.width = video.videoWidth * scale;
+  canvas.height = video.videoHeight * scale;
+});
+
+//pureté image (cmpression jpg) 20% @ 100% step 20% :default 80%
+$("#npurete").slider({formatter: function(value) {return value + "%";}});
+$("#npurete").change(function(){
+  imgQuality = parseInt(this.value) / 100;
+});
+
+//refresh rate en ms, 200ms @ 2000ms step 50ms : default 500ms
+$("#nrefresh").slider({formatter: function(value) {return value + "ms";}});
+$("#nrefresh").change(function(){
+  frameRate = parseInt(this.value);
+  clearInterval(frameShare);
+  frameShare = setInterval(interval, frameRate);
+});
+
 $(document).ready(function() {
-  $("#divmoy, #divSlider").hide();
+  $("#sliderReceveur, #sliderEmetteur").hide();
 });
