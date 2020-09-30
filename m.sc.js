@@ -1,5 +1,6 @@
-master = 0;
-moy = 1.0;
+var master = 0;
+var frameRate = 250;  // pour test
+var imgQuality = 0.8;  // pour test
 
 function initWsc() {
   wsc.onopen = function() {
@@ -11,9 +12,9 @@ function initWsc() {
       msg = JSON.parse(evt.data);
       switch(msg.type){
         case 'share': //rafraichir le partage video. dans la modale.
-          if (msg.zip == 1) v = LZString.decompressFromBase64(msg.message);
-          else v = msg.message;
-          $('#image').attr('src', v);
+          //if (msg.zip == 1) v = LZString.decompressFromBase64(msg.message);
+          //else v = msg.message;
+          $('#image').attr('src', msg.message);
           break;
 
         case 'start':
@@ -58,29 +59,29 @@ function share() {
      
     frameShare = setInterval(function(){
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      uri = canvas.toDataURL('image/jpeg', 0.8);
-      v = LZString.compressToBase64(uri);
-      a = v.length; b = uri.length;
-      c = 0;
-      s = "";
-      if (a < b) {
-        s = v;
-        moy = (moy + a) / 2;
-        c = 1;
-        cpt++; // Affichage de moy dans la modale 1 fois sur 4
-        if(cpt == 3){
-          $("#moy").html(moy.toFixed(2));
-          cpt = 0;
-        }
-      } else {
-        s = uri;
-      }
+      uri = canvas.toDataURL('image/jpeg', imgQuality);
+      //v = LZString.compressToBase64(uri);
+      //a = v.length; b = uri.length;
+      //c = 0;
+      //s = "";
+      //if (a < b) {
+      //  s = v;
+      //  moy = (moy + a) / 2;
+      //  c = 1;
+      //  cpt++; // Affichage de moy dans la modale 1 fois sur 4
+      //  if(cpt == 3){
+      //    $("#moy").html(moy.toFixed(2));
+      //    cpt = 0;
+      //  }
+      //} else {
+      //  s = uri;
+      //}
       wsc.send(JSON.stringify({
         type: 'master',
-        message: s,
-        zip: c
+        message: uri,
+        zip: 0
       }));
-    }, 250);
+    }, frameRate);
   }
 }
 
