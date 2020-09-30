@@ -189,7 +189,7 @@ function copyToClipboard() {
   document.body.removeChild(aux);
 }
 
-// DOCUMENT READY ---------------------------------
+// ************************************************  DOCUMENT READY   **************************************************
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
   $('#m_aye').load('./m.aye.html');
@@ -212,12 +212,13 @@ $(document).ready(function(){
       ws.onopen = null;
       start = new Date().getTime();
       ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
-      wsa = new WebSocket("wss://www.salutem.co:1338");
       p = parseInt($('#room').val())+10000;
       wsc = new WebSocket("wss://www.salutem.co:"+ p +"/");
+      p+=10000;
+      wsa = new WebSocket("wss://www.salutem.co:"+ p +"/");
       init();
-      initWsa();
       initWsc();
+      initWsa();
     }
   });
 
