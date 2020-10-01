@@ -431,7 +431,17 @@ textarea::-webkit-scrollbar-thumb {
   margin:0px;
 }
 #bShare{
-  margin:35px 0px;
+  background-color:#ccaf6d;
+  border:0px;
+  border-bottom:2px solid #bea364;
+  padding:15px 35px;
+  color:#ffffff;
+  border-radius: 3px;
+  margin:65px 0px;
+}
+#bShare:hover{
+  background-color:#dfc077;
+  border-bottom:2px solid #cfb26c;
 }
 #sliderEmetteur, #sliderReceveur{
   margin-bottom:10px;
