@@ -33,8 +33,7 @@ function initWsc() {
           $("#image, #sliderReceveur, #sliderEmetteur, #divkbytes").hide();
           $('#image').removeAttr("src");
           $("#bShare").show();
-          $("#modaleSC").width("43%");
-          $("#modaleSC").height("48%");
+          $("#modaleSC").css({"min-width": "37%", "max-height": "42%"});
           $('#nresizeWindow').slider('refresh');
           // femeture du partage.
           break;
@@ -83,7 +82,7 @@ function interval(){
     zip: 0
   }));
   var kbytes = (uri.length * (1000 / frameRate) / 1000)
-  $("#kbytes").html(kbytes);
+  $("#kbytes").html(kbytes.toFixed(2));
 }
 
 function stopShare(){
@@ -143,8 +142,11 @@ $('#bShare').on('click', function(){
 // Resize window
 $("#nresizeWindow").slider({formatter: function(value) {return value + "%";}});
 $("#nresizeWindow").change(function(){
-  $("#modaleSC").width(parseInt(this.value)-7 + "%");
-  $("#modaleSC").height(parseInt(this.value)-2 + "%");
+  $("#modaleSC").css({
+    "min-width": parseInt(this.value)-13 + "%", 
+    "max-height": parseInt(this.value)-8 + "%"
+  });
+  $("#divResizeWindow").tooltip('hide');
 });
 
 //Scale du canvas en fonction de la capture 50% 75% 100% ; default 75%

@@ -1,6 +1,6 @@
 <div id="modaleSC" class="modal-dialog normalSize" role="document">
   <div class="modal-content">
-    <div class="modal-header text-center">
+    <div class="modal-body text-center">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -11,19 +11,20 @@
         </div>
       </div>
       <div id="sliderEmetteur">
-        <div id="divResizeCanvas" class="form-group text-center" data-toggle="tooltip" data-placement="bottom" title="Resize canvas">
+        <div id="divResizeCanvas" class="form-group text-center">
+          <label id="lresizeCanvas" for="nresizeCanvas">Resize canvas</label>
           <input type="text" id="nresizeCanvas" data-provider="slider" data-slider-min="50" data-slider-max="100" data-slider-step="10" data-slider-value="80"/>
         </div>
-        <div id="divPurete" class="form-group text-center" data-toggle="tooltip" data-placement="bottom" title="Pureté image">
+        <div id="divPurete" class="form-group text-center">
+          <label id="lpurete" for="npurete">Pureté image</label>
           <input type="text" id="npurete" data-provider="slider" data-slider-min="20" data-slider-max="100" data-slider-step="20" data-slider-value="80"/>
         </div>
-        <div id="divRefresh" class="form-group text-center" data-toggle="tooltip" data-placement="bottom" title="Refresh rate">
+        <div id="divRefresh" class="form-group text-center">
+          <label id="lrefresh" for="nrefresh">Refresh rate</label>
           <input type="text" id="nrefresh" data-provider="slider" data-slider-min="200" data-slider-max="2000" data-slider-step="50" data-slider-value="500"/>
         </div>
       </div>
       <button id="bShare" type="button" class="btn">Partager mon écran</button>
-    </div> 
-    <div class="modal-body text-center">
       <video id="video"></video>
       <img id="image"></img>
     </div>
