@@ -237,7 +237,7 @@ $(document).ready(function(){
         message: $('#message').val()
       }));
       str = $('#message').val();
-      if (str.findIndex('pre class="prettyprint') != -1) PR.prettyPrint();
+      if (str.IndexOf('pre class="prettyprint') != -1) PR.prettyPrint();
       $('#message').focus();
       $('#message').val('');
       return false;
