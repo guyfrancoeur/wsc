@@ -170,6 +170,7 @@ function init() {
           text = text.replace(/\r?\n/g, '<br />');
           $('#messages').append($('<li>').html(text));
           elem.scrollTop = elem.scrollHeight;
+          if ($('#message').val().indexOf('pre class="prettyprint') != -1) PR.prettyPrint();
           break;
         //case 'cln' : window.location.reload(true); break;
       }
@@ -236,7 +237,6 @@ $(document).ready(function(){
         name: $('#name').val(),
         message: $('#message').val()
       }));
-      if ($('#message').val().indexOf('pre class="prettyprint') != -1) PR.prettyPrint();
       $('#message').focus();
       $('#message').val('');
       return false;
