@@ -107,6 +107,12 @@ function KeyPress(e) {
     $('#message').val('');
     return false;
   }
+  if (evtobj.ctrlKey && evtobj.keyCode == '8'.charCodeAt(0)) {
+    var text = $("#message").val();
+    var text = '<pre class="prettyprint linenums">'+ $("#message").val() +'</pre>';
+    $("#message").val(text);
+    return false;
+  }
   if (evtobj.ctrlKey && evtobj.keyCode == '9'.charCodeAt(0)) {
     var text = $("#message").val();
     var text = '<pre>'+ $("#message").val() +'</pre>';
