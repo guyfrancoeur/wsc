@@ -37,6 +37,8 @@ function initWsc() {
           $("#bShare").show();
           $("#modaleSC").css({"min-width": "37%", "min-height": "42%"});
           $('#nresizeWindow').slider('refresh');
+          var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+          if (fullscreenElement != null) exitFullScreen();
           $("#m_sc").modal('hide');
           // femeture du partage.
           break;
@@ -178,23 +180,23 @@ $("#nrefresh").change(function(){
 
 
 $('#bFull').on('click', function(){
+  // FullScreen event
+  document.documentElement.requestFullscreen()
+  .catch(function(error) {
+    console.log(error.message);
+  });
   $("#modaleSC").addClass("modal-full");
   $("#modaleSC").css({"min-width": "", "min-height": ""});
   $("#modaleSC .modal-body").css('padding','0px');
   $(".close, #sliderReceveur").hide();
   $("#bExitFull").show();
-
-  // FullScreen event
-  document.documentElement.requestFullscreen()
-  .then(function() {
-    // element has entered fullscreen mode successfully
-  })
-  .catch(function(error) {
-    console.log(error.message);
-  });
 });
 
 $('#bExitFull').on('click', function(){
+  exitFullScreen();
+});
+
+function exitFullScreen(){
   $("#modaleSC").removeClass("modal-full");
   $("#modaleSC").css({
     "min-width": parseInt($("#nresizeWindow").value)-13 + "%", 
@@ -203,14 +205,19 @@ $('#bExitFull').on('click', function(){
   $("#modaleSC .modal-body").css('padding','15px');
   $(".close, #sliderReceveur").show();
   $("#bExitFull").hide();
+  // Exit fullScreen
   document.exitFullscreen()
-  .then(function() {
-    // element has entered fullscreen mode successfully
-  })
   .catch(function(error) {
     console.log(error.message);
   });
-});
+}
+
+// Si exit fullScreen déclenché par le navigateur
+document.addEventListener('fullscreenchange', exitHandler, false);
+function exitHandler(){
+  var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+  if (fullscreenElement == null) exitFullScreen();
+}
 
 $(document).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
