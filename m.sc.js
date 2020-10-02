@@ -23,7 +23,10 @@ function initWsc() {
           $("#m_sc").modal();
           $("#image").show();
           $("#bShare").hide();
-          if(master == 0) $("#sliderReceveur").show();
+          if(master == 0){
+            $("#sliderReceveur").show();
+            $("#sliderEmetteur, #divkbytes").hide();
+          }
           //ouvrir la modale pour mettre le partage.
           break;
 
@@ -93,6 +96,8 @@ function stopShare(){
     message: ''
   }));
   master = 0;
+  $("#bShare").show();
+  $("#sliderEmetteur, #divkbytes").hide();
 }
 
 var canvas = document.createElement('canvas');
@@ -122,7 +127,7 @@ $('#bShare').on('click', function(){
       streamVideo.getVideoTracks()[0].addEventListener('ended', () => 
         stopShare()
       );
-      $("#sliderEmetteur, #divkbytes").show();
+      $("#sliderEmetteur, #divkbytes, #image").show();
       $("#bShare").hide();
       master = 1;
       share();
@@ -178,6 +183,15 @@ $('#bFull').on('click', function(){
   $("#modaleSC .modal-body").css('padding','0px');
   $(".close, #sliderReceveur").hide();
   $("#bExitFull").show();
+
+  // FullScreen event
+  document.documentElement.requestFullscreen()
+  .then(function() {
+    // element has entered fullscreen mode successfully
+  })
+  .catch(function(error) {
+    console.log(error.message);
+  });
 });
 
 $('#bExitFull').on('click', function(){
@@ -189,6 +203,13 @@ $('#bExitFull').on('click', function(){
   $("#modaleSC .modal-body").css('padding','15px');
   $(".close, #sliderReceveur").show();
   $("#bExitFull").hide();
+  document.exitFullscreen()
+  .then(function() {
+    // element has entered fullscreen mode successfully
+  })
+  .catch(function(error) {
+    console.log(error.message);
+  });
 });
 
 $(document).ready(function() {
