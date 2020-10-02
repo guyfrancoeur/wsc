@@ -1,0 +1,2 @@
+//Fix pour prettyfy
+.prettyprint ol.linenums > li { list-style-type: decimal; }
