@@ -1,18 +1,23 @@
 # wsc
 
-### Un chat sécuritaire super rapide en temps réel qui utilise les websocket, bootstrap et jquery.
+### Un chat sécuritaire super rapide en temps réel
 
-- Visuellement agréable
-- Responsive
-- Rapide
-- Sécuritaire (wss et https)
-- Audio streaming
-- Video streaming : partage d'écran (application)
+#### Fondation
+ - websocket
+ - bootstrap
+ - jquery
 
-Quelques suggestions possibles
-- émoicons avec <kbd>Windows</kbd>+<kbd>;</kbd>
-- balise html dans les messages
-- support de code formaté avec `<pre>`
+#### Fonctionnalités
+ - Visuellement agréable
+ - Responsive
+ - Rapide
+ - Sécuritaire (wss et https)
+ - Audio streaming
+ - Video streaming : partage d'écran (application)
+ - Formatage du code source avec <kbd>Ctrl</kbd>+<kbd>8</kbd>
+ - Insertion et support des émoicons avec <kbd>Windows</kbd>+<kbd>;</kbd>
+ - Support des balises html dans les messages
+ - Insertion d'image contenu dans le clipboard
 
 ### Requis opérationnel
  - Un serveur (similaire a NodeJS) pour le dialogue entre les utilisateurs.
