@@ -377,16 +377,19 @@ textarea::-webkit-scrollbar-thumb {
   padding:0px 10px;
 }
 #image{
-  width:100%;
-  height:100%;
+  max-width:100%;
+  /*height:100%;*/
+  max-height:50vh;
 }
 #video{
   display:none;
 }
-.normalSize{
+#modaleSC{
   margin:10px auto !important;
-  min-width:37%;
-  min-height:42%;
+  max-width:50%;
+  max-height:50vh;
+  width:50%;
+  height:50vh;
 }
 #divkbytes{
   color:rgb(199, 199, 199);
