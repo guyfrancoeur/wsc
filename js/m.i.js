@@ -25,15 +25,16 @@ function CLIPBOARD_CLASS(elem, autoresize) {
 			var items = e.clipboardData.items;
 			if (!items) return;
 			
-			//access data directly
 			var is_image = false;
 			for (var i = 0; i < items.length; i++) {
 				if (items[i].type.indexOf("image") !== -1) {
 					//image
 					var blob = items[i].getAsFile();
-          img.src = blob;
-					//var URLObj = window.URL || window.webkitURL;
-					//var source = URLObj.createObjectURL(blob);
+          
+          var URLObj = window.URL || window.webkitURL;
+					var url = URLObj.createObjectURL(blob);
+          img.src = url;
+          
           ctx.drawImage(img, 0, 0);
           uri = canvas.toDataURL('image/jpeg', 1.0);
           $(elem).attr('src', uri); // GF
