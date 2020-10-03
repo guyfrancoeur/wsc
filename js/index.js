@@ -243,7 +243,7 @@ $(document).ready(function(){
   });
 
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
-
+/*
   $('#bmSubmit').on('click', function(){
     ws.send(JSON.stringify({
       type: 'img',
@@ -252,7 +252,7 @@ $(document).ready(function(){
     }));
     $("#m_i").modal('hide');
   });
-
+*/
   window.addEventListener('devtoolschange', event => {
     if (event.detail.isOpen) {
       console.log('Devtools');
