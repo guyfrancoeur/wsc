@@ -13,8 +13,6 @@ function initWsc() {
       msg = JSON.parse(evt.data);
       switch(msg.type){
         case 'share': //rafraichir le partage video. dans la modale.
-          //if (msg.zip == 1) v = LZString.decompressFromBase64(msg.message);
-          //else v = msg.message;
           $('#image').attr('src', msg.message);
           break;
 
@@ -67,22 +65,6 @@ function share() {
 function interval(){
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   uri = canvas.toDataURL('image/jpeg', imgQuality);
-  //v = LZString.compressToBase64(uri);
-  //a = v.length; b = uri.length;
-  //c = 0;
-  //s = "";
-  //if (a < b) {
-  //  s = v;
-  //  moy = (moy + a) / 2;
-  //  c = 1;
-  //  cpt++; // Affichage de moy dans la modale 1 fois sur 4
-  //  if(cpt == 3){
-  //    $("#moy").html(moy.toFixed(2));
-  //    cpt = 0;
-  //  }
-  //} else {
-  //  s = uri;
-  //}
   wsc.send(JSON.stringify({
     type: 'master',
     message: uri,
