@@ -343,10 +343,10 @@ textarea::-webkit-scrollbar-thumb {
 #bstart, #bstop, #bFullChat, #bExitFullChat, #bshareScreen{
   margin-right:15px;
 }
-#bshareScreen, #bFullChat, #bExitFullChat{
+#bshareScreen, #bFullChat{
   padding:0px 10px;
 }
-#bFullChat{
+#bFullChat, #bExitFullChat{
   padding:5px 10px;
 }
 #bstart, #bstop{
@@ -461,7 +461,7 @@ textarea::-webkit-scrollbar-thumb {
   border:0px;
   background-color:#a54949;
   color:#e7e7e7;
-  padding:3px 11px;
+  padding:3px 9px;
   border-radius:100%;
   box-shadow:0 2px 5px 0 #0000002e, 0 3px 6px 0 #00000026;
   opacity:70%;
