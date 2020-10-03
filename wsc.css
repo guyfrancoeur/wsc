@@ -479,10 +479,12 @@ textarea::-webkit-scrollbar-thumb {
   left:20px;
   top:20px;
 }
-
 #bExitFull:hover{
   background-color:#6a8399;
   color:#e7e7e7;
+}
+#m_sc{
+  padding:0px !important;
 }
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }

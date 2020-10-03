@@ -59,6 +59,8 @@ function share() {
       message: ''
     }));
     frameShare = setInterval(interval, frameRate);
+    $("#sliderEmetteur, #divkbytes, #image").show();
+    $("#bShare").hide();
   }
 }
 
@@ -88,6 +90,7 @@ function interval(){
   }));
   var kbytes = (uri.length * (1000 / frameRate) / 1000)
   $("#kbytes").html(kbytes.toFixed(2));
+  $('#image').attr('src', uri);
 }
 
 function stopShare(){
@@ -99,7 +102,10 @@ function stopShare(){
   }));
   master = 0;
   $("#bShare").show();
-  $("#sliderEmetteur, #divkbytes").hide();
+  $("#image, #sliderEmetteur, #divkbytes").hide();
+  $('#image').removeAttr("src");
+  $("#modaleSC").css({"min-width": "37%", "min-height": "42%"});
+  $("#m_sc").modal('hide');
 }
 
 var canvas = document.createElement('canvas');
@@ -129,8 +135,6 @@ $('#bShare').on('click', function(){
       streamVideo.getVideoTracks()[0].addEventListener('ended', () => 
         stopShare()
       );
-      $("#sliderEmetteur, #divkbytes, #image").show();
-      $("#bShare").hide();
       master = 1;
       share();
     } catch(err) {
@@ -181,15 +185,16 @@ $("#nrefresh").change(function(){
 
 $('#bFull').on('click', function(){
   // FullScreen event
-  document.documentElement.requestFullscreen()
-  .catch(function(error) {
-    console.log(error.message);
-  });
+  document.documentElement.requestFullscreen().catch(function(error) {console.log(error.message);});
   $("#modaleSC").addClass("modal-full");
   $("#modaleSC").css({"min-width": "", "min-height": ""});
-  $("#modaleSC .modal-body").css('padding','0px');
   $(".close, #sliderReceveur").hide();
   $("#bExitFull").show();
+  var facteur = ($(window).height() - 35) / $("#image").height();
+  $("#image").css({
+    "max-width": facteur * $("#image").width(),
+    "max-height": $(window).height() - 35
+  });
 });
 
 $('#bExitFull').on('click', function(){
@@ -202,22 +207,18 @@ function exitFullScreen(){
     "min-width": parseInt($("#nresizeWindow").value)-13 + "%", 
     "min-height": parseInt($("#nresizeWindow").value)-8 + "%"
   });
-  $("#modaleSC .modal-body").css('padding','15px');
   $(".close, #sliderReceveur").show();
   $("#bExitFull").hide();
+  $('#nresizeWindow').slider('refresh');
   // Exit fullScreen
-  document.exitFullscreen()
-  .catch(function(error) {
-    console.log(error.message);
-  });
+  document.exitFullscreen().catch(function(error) {console.log(error.message);});
 }
 
 // Si exit fullScreen déclenché par le navigateur
-document.addEventListener('fullscreenchange', exitHandler, false);
-function exitHandler(){
+$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(){
   var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
   if (fullscreenElement == null) exitFullScreen();
-}
+});
 
 $(document).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
