@@ -207,6 +207,7 @@ function exitFullScreen(){
     "min-width": parseInt($("#nresizeWindow").value)-13 + "%", 
     "min-height": parseInt($("#nresizeWindow").value)-8 + "%"
   });
+  $("#image").css({"max-width": "", "max-height": ""});
   $(".close, #sliderReceveur").show();
   $("#bExitFull").hide();
   $('#nresizeWindow').slider('refresh');
