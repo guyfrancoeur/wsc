@@ -198,6 +198,7 @@ function copyToClipboard() {
 // ************************************************  DOCUMENT READY   **************************************************
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
+  $('#m_i').load('./m.i.html');
   $('#m_aye').load('./m.aye.html');
   $('#m_sc').load('./m.sc.html');
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
