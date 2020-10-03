@@ -81,7 +81,7 @@ function readURL(input) {
 }
 
 function KeyPress(e) {
-  if(e.keyCode == 123 || e.keyCode == 27 || e.keyCode == 122) return false;
+  if(e.keyCode == 123 || e.keyCode == 27) return false;
   if(e.metaKey && e.altKey && e.keyCode == 74) { return false; }
   if(e.ctrlKey && e.shiftKey && e.keyCode == 73) { return false; }
   if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
@@ -203,7 +203,7 @@ $(document).ready(function(){
   $('#m_sc').load('./m.sc.html');
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();
-  $('#welcome, #divGif').hide();
+  $('#welcome, #divGif, #bExitFullChat').hide();
   $('[data-toggle="popover"]').popover({html: true});
   $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
   $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
@@ -278,6 +278,25 @@ $(document).ready(function(){
   
   $('#bdeconnexion').on('click', function(){
     window.location.reload(true);
+  });
+
+  // Chat en mode fullscreen
+  $('#bFullChat').on('click', function(){
+    document.documentElement.requestFullscreen().catch(function(error){console.log(error.message);});
+    $("#bExitFullChat").show();
+    $("#bFullChat").hide();
+  });
+  $('#bExitFullChat').on('click', function(){
+    document.exitFullscreen().catch(function(error){console.log(error.message);});
+    $("#bExitFullChat").hide();
+    $("#bFullChat").show();
+  });
+  $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(){
+    var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+    if (fullscreenElement == null){
+      $("#bExitFullChat").hide();
+      $("#bFullChat").show();
+    }
   });
   
   console.log('event programming done!');

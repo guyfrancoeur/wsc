@@ -320,14 +320,19 @@ textarea::-webkit-scrollbar-thumb {
   display:flex;
   padding-left:0px;
 }
-#bstart, #bstop, #bmuteRecord, #bmuteAudio, #bshareScreen, #bFull, #bExitFull{
+#bstart, #bstop, #bmuteRecord, #bmuteAudio, #bshareScreen, #bFull, #bExitFull, #bFullChat, #bExitFullChat{
   border:0px;
   background-color:#e7e7e7;
   color:#5c7183;
   border-radius:3px;
   box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
+  transition:.2s all;
+  -webkit-transition:.2s all;
+  -moz-transition:.2s all;
+  -ms-transition:.2s all;
+  -o-transition:.2s all;
 }
-#bstart:hover, #bstop:hover, #bmuteRecord:hover, #bmuteAudio:hover, #bshareScreen:hover, #bFull:hover{
+#bstart:hover, #bstop:hover, #bmuteRecord:hover, #bmuteAudio:hover, #bshareScreen:hover, #bFull:hover, #bFullChat:hover, #bExitFullChat:hover{
   background-color:#5c7183;
   color:#e7e7e7;
 }
@@ -335,8 +340,14 @@ textarea::-webkit-scrollbar-thumb {
   background-color:#c3c3c3;
   color:#5d5d5d;
 }
-#bstart, #bstop{
+#bstart, #bstop, #bFullChat, #bExitFullChat, #bshareScreen{
   margin-right:15px;
+}
+#bshareScreen, #bFullChat, #bExitFullChat{
+  padding:0px 10px;
+}
+#bFullChat{
+  padding:5px 10px;
 }
 #bstart, #bstop{
   border-radius:100px;
@@ -372,9 +383,6 @@ textarea::-webkit-scrollbar-thumb {
   padding:5px;
   margin:0px 20px;
   border-radius:3px;
-}
-#bshareScreen{
-  padding:0px 10px;
 }
 #image{
   max-width:100%;
@@ -453,8 +461,8 @@ textarea::-webkit-scrollbar-thumb {
   border:0px;
   background-color:#a54949;
   color:#e7e7e7;
-  padding:2px 7px;
-  border-radius:100px;
+  padding:3px 11px;
+  border-radius:100%;
   box-shadow:0 2px 5px 0 #0000002e, 0 3px 6px 0 #00000026;
   opacity:70%;
 }
@@ -490,16 +498,18 @@ textarea::-webkit-scrollbar-thumb {
   padding:0px !important;
 }
 @media screen and (max-width:768px) {
-  #bstart, #bstop{ margin-right:0px; }
+  #bstart, #bstop, #bshareScreen{ margin-right:0px; }
+  #bshareScreen{ margin-right:5px; }
   #divAudio{
     margin-right:auto;
     display:inline;
   }
-  #divRoom{
-    margin-left:auto;
-  }
   #name-div > div{
     padding-bottom:10px;
+  }
+  #modaleSC{
+    width:100%;
+    max-width:100%;
   }
 }
 .live{

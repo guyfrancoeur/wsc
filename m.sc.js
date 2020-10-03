@@ -174,7 +174,6 @@ $("#nrefresh").change(function(){
   frameShare = setInterval(interval, frameRate);
 });
 
-
 $('#bFull').on('click', function(){
   // FullScreen event
   document.documentElement.requestFullscreen().catch(function(error) {console.log(error.message);});
@@ -186,10 +185,10 @@ $('#bFull').on('click', function(){
 });
 
 $('#bExitFull').on('click', function(){
-  exitFullScreen();
+  exitFunction();
 });
 
-function exitFullScreen(){
+function exitFunction(){
   $("#modaleSC").removeClass("modal-full");
   $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
   $("#image").css({"max-height": "50vh"});
@@ -203,7 +202,7 @@ function exitFullScreen(){
 // Si exit fullScreen déclenché par le navigateur
 $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(){
   var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
-  if (fullscreenElement == null) exitFullScreen();
+  if (fullscreenElement == null) exitFunction();
 });
 
 $(document).ready(function() {
