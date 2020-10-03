@@ -31,8 +31,7 @@ function fResize() {
   }
   else{
     $('#msgs, #messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
-    if($(window).width() < 625) $('#m_start').css('top','12rem');
-    else $('#m_start').css('top','6rem');
+    $('#m_start').css('top','6rem');
   }
 
   // Scrollbar modale Usagers Connectés (-> si hauteur de la modale dépasse l'écran, ajout de scrollbar)
