@@ -9,8 +9,10 @@ var CLIPBOARD = new CLIPBOARD_CLASS("#preview", true);
 function CLIPBOARD_CLASS(elem, autoresize) {
 	var _self = this;
   //create canvas ici
-  //var canvas = document.createElement('canvas');
-  //var ctx = canvas.getContext('2d');
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext('2d');
+  var img = $(elem)
+  
 	//var canvas = document.getElementById(elem);
 	//var ctx = document.getElementById(elem).getContext("2d");
 
@@ -29,9 +31,12 @@ function CLIPBOARD_CLASS(elem, autoresize) {
 				if (items[i].type.indexOf("image") !== -1) {
 					//image
 					var blob = items[i].getAsFile();
-					var URLObj = window.URL || window.webkitURL;
-					var source = URLObj.createObjectURL(blob);
-          $(elem).attr('src', source); // GF
+          img.src = blob;
+					//var URLObj = window.URL || window.webkitURL;
+					//var source = URLObj.createObjectURL(blob);
+          ctx.drawImage(img, 0, 0);
+          uri = canvas.toDataURL('image/jpeg', 1.0);
+          $(elem).attr('src', uri); // GF
 					//this.paste_createImage(source);
 					is_image = true;
 				}
