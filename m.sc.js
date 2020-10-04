@@ -34,10 +34,10 @@ function initWsc() {
           $('#image').removeAttr("src");
           $("#bShare").show();
           $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
-          $("#image").css({"max-width": "","max-height": "50vh"});
+          $("#image").css({"max-height": "50vh","height": ""});
           $('#nresizeWindow').slider('refresh');
           var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
-          if (fullscreenElement != null) exitFullScreen();
+          if (fullscreenElement != null) exitFunction();
           $("#m_sc").modal('hide');
           // femeture du partage.
           break;
@@ -138,15 +138,15 @@ $("#nresizeWindow").change(function(){
   switch(parseInt(this.value)){
     case 50:
       $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
-      $("#image").css({"max-height": "50vh"});
+      $("#image").css({"max-height": "50vh","height": ""});
       break;
     case 75:
       $("#modaleSC").css({"width": "75%", "height": "75vh", "max-width": "75%", "max-height": "75vh"});
-      $("#image").css({"max-height": "75vh"});
+      $("#image").css({"max-height": "75vh","height": ""});
       break;
     case 100:
       $("#modaleSC").css({"width": "98%", "height": "85vh", "max-width": "98%", "max-height": "85vh"});
-      $("#image").css({"max-height": "85vh"});
+      $("#image").css({"max-height": "85vh","height": ""});
       break;
   }
   $("#divResizeWindow").tooltip('hide');
@@ -178,8 +178,8 @@ $('#bFull').on('click', function(){
   // FullScreen event
   document.documentElement.requestFullscreen().catch(function(error) {console.log(error.message);});
   $("#modaleSC").addClass("modal-full");
-  $("#modaleSC").css({"min-width": "", "min-height": ""});
-  $("#image").css({"max-height": "95vh"});
+  $("#modaleSC").css({"min-width": "", "min-height": "", "margin":"0px"});
+  $("#image").css({"max-height": "95vh","height": "95vh"});
   $(".close, #sliderReceveur").hide();
   $("#bExitFull").show();
 });
@@ -190,8 +190,8 @@ $('#bExitFull').on('click', function(){
 
 function exitFunction(){
   $("#modaleSC").removeClass("modal-full");
-  $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
-  $("#image").css({"max-height": "50vh"});
+  $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh", "margin":"10px auto"});
+  $("#image").css({"max-height": "50vh","height": ""});
   $(".close, #sliderReceveur").show();
   $("#bExitFull").hide();
   $('#nresizeWindow').slider('refresh');
