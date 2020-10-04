@@ -235,7 +235,6 @@ $(document).ready(function(){
   });
 
   $('#bS').on('click', function(){
-    /*
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0) {
       ws.send(JSON.stringify({
@@ -247,10 +246,6 @@ $(document).ready(function(){
       $('#message').val('');
       return false;
     }
-    */
-   $('#users').append("<li>Test</li>");
-   resizeMusagers();
-   return false;
   });
 
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
