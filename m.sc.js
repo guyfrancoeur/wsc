@@ -25,6 +25,7 @@ function initWsc() {
             $("#sliderReceveur").show();
             $("#sliderEmetteur, #divkbytes").hide();
           }
+          $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
           //ouvrir la modale pour mettre le partage.
           break;
 
@@ -33,7 +34,7 @@ function initWsc() {
           $("#image, #sliderReceveur, #sliderEmetteur, #divkbytes").hide();
           $('#image').removeAttr("src");
           $("#bShare").show();
-          $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
+          $("#modaleSC").css({"width": "", "height": "", "max-width": "", "max-height": ""});
           $("#image").css({"max-height": "50vh","height": ""});
           $('#nresizeWindow').slider('refresh');
           var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
@@ -60,6 +61,7 @@ function share() {
     frameShare = setInterval(interval, frameRate);
     $("#sliderEmetteur, #divkbytes, #image").show();
     $("#bShare").hide();
+    $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
   }
 }
 
@@ -88,6 +90,7 @@ function stopShare(){
   $("#image, #sliderEmetteur, #divkbytes").hide();
   $('#image').removeAttr("src");
   $("#m_sc").modal('hide');
+  $("#modaleSC").css({"width": "", "height": "", "max-width": "", "max-height": ""});
 }
 
 var canvas = document.createElement('canvas');
