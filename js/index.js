@@ -33,16 +33,21 @@ function fResize() {
     $('#msgs, #messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
     $('#m_start').css('top','6rem');
   }
+  resizeMusagers();
+}
 
-  // Scrollbar modale Usagers Connectés (-> si hauteur de la modale dépasse l'écran, ajout de scrollbar)
-  if (connecte == 0) h  = $(window).height() - ($('#name-div').height() + $('#input-div').height() + 250);
-  else h  = $(window).height() - ($('#welcome').height() + $('#input-div').height() + 250);
-  if(($("#users > li").length * 18.5) > h){
-    if (h < (18.5 * 2)) $("#users").height(18.5 * 2);
-    else $("#users").height(h);
+function resizeMusagers(){
+  topModaleUsers = $("#users").offset().top;
+  dDessus = (topModaleUsers - $(window).scrollTop());
+  if(($("#users > li").length * 18.18) > ($(window).height() - dDessus - $('#input-div').height() - 142 - 30)){ // 18.18 = hauteur d'un <li> dans liste usagers
+    newSize = $(window).height() - dDessus - 142 - 30; // 142 = hauteur modale vide | 30 = distance entre fin bloc de la liste messages et textarea
+    $("#users").height(newSize);
     $("#users").css("overflow-y","scroll");
   }
-  else $("#users").css("overflow-y","hidden");
+  else{
+    $("#users").css("overflow-y","hidden");
+    $("#m_start").height("");
+  }
 }
 
 $(window).on('resize', function(){
@@ -162,7 +167,7 @@ function init() {
       data = JSON.parse(evt.data);
       //console.log(data);
       switch (data.type) {
-        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#name').text(data.name); $('#welcometext').text('Bonjour ' + $('#name').val()); break;
+        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#name').text(data.name); $('#welcometext').text('Bonjour ' + $('#name').val()); resizeMusagers(); break;
         case 'tlk' :
           if (!document.hasFocus()) { newUpdate(); a2.play(); }
           var text = data.message;
@@ -230,6 +235,7 @@ $(document).ready(function(){
   });
 
   $('#bS').on('click', function(){
+    /*
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0) {
       ws.send(JSON.stringify({
@@ -241,6 +247,10 @@ $(document).ready(function(){
       $('#message').val('');
       return false;
     }
+    */
+   $('#users').append("<li>Test</li>");
+   resizeMusagers();
+   return false;
   });
 
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
