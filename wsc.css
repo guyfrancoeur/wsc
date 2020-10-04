@@ -229,6 +229,8 @@ input:focus{
   padding:5px 20px;
   text-align:center;
   color:#ffffff;
+  max-width:140px;
+  word-wrap:break-word;
 }
 #divRoom > p{
   margin-top:auto;
@@ -319,6 +321,11 @@ textarea::-webkit-scrollbar-thumb {
   margin-left:auto;
   display:flex;
   padding-left:0px;
+  justify-content: center;
+}
+.verticalAlign{
+  align-items:center;
+  display:flex;
 }
 #bstart, #bstop, #bmuteRecord, #bmuteAudio, #bshareScreen, #bFull, #bExitFull, #bFullChat, #bExitFullChat{
   border:0px;
@@ -395,7 +402,7 @@ textarea::-webkit-scrollbar-thumb {
   margin:10px auto;
 }
 #divkbytes{
-  color:rgb(199, 199, 199);
+  color:#c7c7c7;
   position:absolute;
   font-size:11px;
   margin-top:-12px;
