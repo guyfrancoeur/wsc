@@ -69,8 +69,7 @@ function interval(){
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   uri = canvas.toDataURL('image/jpeg', imgQuality);
   wsc.send(JSON.stringify({
-    //type: 'master',
-    type: 'share',
+    type: 'master',
     message: uri,
     zip: 0
   }));
