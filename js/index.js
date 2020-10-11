@@ -296,13 +296,6 @@ $(document).ready(function(){
     $("#bExitFullChat").hide();
     $("#bFullChat").show();
   });
-  $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(){
-    var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
-    if (fullscreenElement == null){
-      $("#bExitFullChat").hide();
-      $("#bFullChat").show();
-    }
-  });
   
   console.log('event programming done!');
   console.log('ready!');

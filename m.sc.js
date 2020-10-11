@@ -69,7 +69,8 @@ function interval(){
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   uri = canvas.toDataURL('image/jpeg', imgQuality);
   wsc.send(JSON.stringify({
-    type: 'master',
+    //type: 'master',
+    type: 'share',
     message: uri,
     zip: 0
   }));
@@ -141,15 +142,15 @@ $("#nresizeWindow").change(function(){
   switch(parseInt(this.value)){
     case 50:
       $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
-      $("#image").css({"max-height": "50vh","height": ""});
+      $("#image").css({"max-height": "50vh","height": "50vh"});
       break;
     case 75:
       $("#modaleSC").css({"width": "75%", "height": "75vh", "max-width": "75%", "max-height": "75vh"});
-      $("#image").css({"max-height": "75vh","height": ""});
+      $("#image").css({"max-height": "75vh","height": "75vh"});
       break;
     case 100:
       $("#modaleSC").css({"width": "98%", "height": "85vh", "max-width": "98%", "max-height": "85vh"});
-      $("#image").css({"max-height": "85vh","height": ""});
+      $("#image").css({"max-height": "85vh","height": "85vh"});
       break;
   }
   $("#divResizeWindow").tooltip('hide');
@@ -196,6 +197,7 @@ function exitFunction(){
   $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh", "margin":"10px auto"});
   $("#image").css({"max-height": "50vh","height": ""});
   $(".close, #sliderReceveur").show();
+  $(".close").show();
   $("#bExitFull").hide();
   $('#nresizeWindow').slider('refresh');
   // Exit fullScreen
@@ -205,7 +207,14 @@ function exitFunction(){
 // Si exit fullScreen déclenché par le navigateur
 $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(){
   var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
-  if (fullscreenElement == null) exitFunction();
+  if (fullscreenElement == null){
+    if ($('#m_sc').hasClass('in')) exitFunction(); // Pour l'event du mode plein écran de la modale de partage (= si la modale est ouverte)
+    else{ // Sinon c'est l'event pour le plein écran du chat entier
+      $("#bExitFullChat").hide();
+      $("#bFullChat").show();
+    }
+  }
+  
 });
 
 $(document).ready(function() {
