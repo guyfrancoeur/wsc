@@ -196,7 +196,6 @@ function exitFunction(){
   $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh", "margin":"10px auto"});
   $("#image").css({"max-height": "50vh","height": ""});
   $(".close, #sliderReceveur").show();
-  $(".close").show();
   $("#bExitFull").hide();
   $('#nresizeWindow').slider('refresh');
   // Exit fullScreen
