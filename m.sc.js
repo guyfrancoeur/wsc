@@ -6,6 +6,14 @@ var scale = .8;
 function initWsc() {
   wsc.onopen = function() {
     console.log("onopen of", wsc.url, "in", (new Date().getTime() - start), "ms");
+    setTimeout(function(){ // A la connection vérifier si un partage d'écran est déjà en cours (=verifier si l'image a un attribut src)
+      if($("#image").attr("src") != undefined){
+        $("#bShare").hide();
+        $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
+        $("#image, #sliderReceveur").show();
+        $("#m_sc").modal();
+      }
+    }, 1000);
   }
   
   wsc.onmessage = function(evt) {
@@ -152,7 +160,7 @@ $("#nresizeWindow").change(function(){
       $("#image").css({"max-height": "85vh","height": "85vh"});
       break;
   }
-  $("#divResizeWindow").tooltip('hide');
+  $("#divResizeWindow > div").tooltip('hide');
 });
 
 //Scale du canvas en fonction de la capture 50% 75% 100% ; default 75%
@@ -217,5 +225,5 @@ $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', fu
 
 $(document).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
-  $("#sliderReceveur, #sliderEmetteur, #divkbytes, #bExitFull").hide();
+  $("#sliderReceveur, #sliderEmetteur, #divkbytes, #bExitFull").hide();  
 });

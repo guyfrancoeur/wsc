@@ -5,11 +5,13 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <div id="divkbytes"><span id="kbytes"></span> Kb</div>
-      <button id="bExitFull" type="button" class="btn"><i class="glyphicon glyphicon-resize-small"></i></button>
+      <button id="bExitFull" type="button" class="btn"><i class="glyphicon glyphicon-resize-small"  data-toggle="tooltip" data-placement="right" title="Réduire"></i></button>
       <div id="sliderReceveur">
-        <div id="divResizeWindow" class="form-group text-center" data-toggle="tooltip" data-placement="bottom" title="Resize window">
-          <button id="bFull" type="button" class="btn"><i class="glyphicon glyphicon-fullscreen"></i></button>
-          <input type="text" id="nresizeWindow" data-provider="slider" data-slider-min="50" data-slider-max="100" data-slider-step="25" data-slider-value="50"/>
+        <div id="divResizeWindow" class="form-group text-center">
+          <button id="bFull" type="button" class="btn" data-toggle="tooltip" data-placement="left" title="Mode plein écran"><i class="glyphicon glyphicon-fullscreen"></i></button>
+          <div data-toggle="tooltip" data-placement="bottom" title="Resize window" style="display:inline;">
+            <input type="text" id="nresizeWindow" data-provider="slider" data-slider-min="50" data-slider-max="100" data-slider-step="25" data-slider-value="50"/>
+          </div>
         </div>
       </div>
       <div id="sliderEmetteur">
