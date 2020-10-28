@@ -159,6 +159,7 @@ function init() {
     }));
     connecte = 1;
     fResize();
+    $("#message").attr("placeholder","Écrire votre message ici (room #" + $('#room').val()+")")
   }
   
   ws.onmessage = function(evt) {
