@@ -5,6 +5,7 @@ var start = new Date().getTime();
 var ws = new WebSocket("wss://echo.websocket.org");
 ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); $('#bName').attr('disabled', false); };
 var elem = document.getElementById('messages'); //pour scroll-auto
+var pseudo;
 
 const ico = document.getElementById('favicon');
 
@@ -159,6 +160,7 @@ function init() {
     }));
     connecte = 1;
     fResize();
+    $("#message").attr("placeholder","Écrire votre message ici (room #" + $('#room').val()+")")
   }
   
   ws.onmessage = function(evt) {
@@ -221,6 +223,7 @@ $(document).ready(function(){
     e.preventDefault();
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#pass').val().length > 0) {
+      pseudo = $('#name').val();
       ws.onopen = null;
       start = new Date().getTime();
       ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");

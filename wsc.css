@@ -191,7 +191,8 @@ textarea {
   border-bottom-left-radius:0px;
 }
 #welcome{
-  padding:7px 0px;
+  padding: 0px 0px;
+  height: 45px;
   color:#323232;
   letter-spacing:.5px;
   display:flex;
@@ -368,6 +369,9 @@ textarea::-webkit-scrollbar-thumb {
 }
 #divReception{
   display:flex;
+  margin-left:15px;
+  padding:8px 13px;
+  background-color:#758999;
 }
 #divReception > p{
   padding:5px 20px;
@@ -377,6 +381,10 @@ textarea::-webkit-scrollbar-thumb {
   margin-bottom:0px;
   animation:dots 1s steps(5,end) infinite;
   box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
+}
+#divEmission{
+  background-color:#758999;
+  padding:7px 13px;
 }
 #bmuteAudio{
   margin-left:15px;
