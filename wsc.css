@@ -512,6 +512,7 @@ textarea::-webkit-scrollbar-thumb {
   #bshareScreen{ margin-right:5px; }
   #name-div > div{ padding-bottom:10px; }
   #divAudio{
+    padding-left:0px !important;
     margin-right:auto;
     display:inline;
   }

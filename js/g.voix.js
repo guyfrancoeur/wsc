@@ -29,7 +29,6 @@ function createAudio(n){
   window[n+"_mediaSource"].addEventListener('sourceopen', function(){
     var sourceBuffer = window[n+"_mediaSource"].addSourceBuffer(mime);
     window[n+"_mediaSource"].sourceBuffers[0].mode = 'sequence';
-    console.log("audio créé pour : " + n);
 
     if(fc.length != 0){ // Ajout firstChunks
       window[n+"_mediaSource"].sourceBuffers[0].appendBuffer(fc);
@@ -93,6 +92,7 @@ async function startRecord() {
 }
 
 $("#bstart").click(function(){
+  $('#bstart').tooltip('hide');
   console.log("button start");
   wsa.send(JSON.stringify({ type: "start", name:pseudo }));
   startRecord();
@@ -101,6 +101,7 @@ $("#bstart").click(function(){
 });
 
 $("#bstop").click(function(){
+  $('#bstop').tooltip('hide');
   console.log("button stop");
   wsa.send(JSON.stringify({ type: "stop", name:pseudo }));
   if (recorder.state == 'recording' || recorder.state == 'paused') recorder.stop();
@@ -122,15 +123,14 @@ $("#bmuteRecord").click(function(){
 
 allMute = false;
 $("#bmuteAudio").click(function(){
+  $('#bmuteAudio').tooltip('hide');
   if(allMute){
-    $('audio').each(function(){
-      this.muted = false;
-    });
+    $('audio').each(function(){ this.muted = false; });
+    $('#bmuteAudio').attr('data-original-title',"Couper le son du (ou des) appel(s)");
     $("#bmuteAudio").html('<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-volume-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.717 3.55A.5.5 0 0 1 9 4v8a.5.5 0 0 1-.812.39L5.825 10.5H3.5A.5.5 0 0 1 3 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM8 5.04L6.312 6.39A.5.5 0 0 1 6 6.5H4v3h2a.5.5 0 0 1 .312.11L8 10.96V5.04z"/><path d="M10.707 11.182A4.486 4.486 0 0 0 12.025 8a4.486 4.486 0 0 0-1.318-3.182L10 5.525A3.489 3.489 0 0 1 11.025 8c0 .966-.392 1.841-1.025 2.475l.707.707z"/></svg>');
   }else{
-    $('audio').each(function(){
-      this.muted = true;
-    });
+    $('audio').each(function(){ this.muted = true; });
+    $('#bmuteAudio').attr('data-original-title',"Rétablir le son du (ou des) appel(s)");
     $("#bmuteAudio").html('<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-volume-mute" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04L4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708l4-4a.5.5 0 0 1 .708 0z"/><path fill-rule="evenodd" d="M9.146 5.646a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0z"/></svg>');
   }
   allMute = !allMute;
@@ -172,7 +172,6 @@ function initWsa() {
               createAudio(c);
             });
           }
-          else console.log("Aucun appel déjà en cours");
           break;
 
         case 'audio': // Réception des données audio
