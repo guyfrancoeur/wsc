@@ -78,7 +78,6 @@ async function startRecord() {
           if (recorder.state == 'recording') recorder.stop();
           console.log("recorder stop");
           setTimeout(function(){
-            //wsa.send(JSON.stringify({ type: "start" , name: pseudo}));
             ws.send(JSON.stringify({ type: "swsa", name:pseudo}));
             startRecord();
             console.log("recorder re-start");

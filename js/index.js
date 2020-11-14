@@ -239,9 +239,8 @@ $(document).ready(function(){
       pseudo = $('#name').val();
       ws.onopen = null;
       start = new Date().getTime();
-      ws = new WebSocket("ws://localhost:1337");
-      //ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
-      //p = parseInt($('#room').val())+10000;
+      ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
+      p = parseInt($('#room').val())+10000;
       init();
     }
   });
