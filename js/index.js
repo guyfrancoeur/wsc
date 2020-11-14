@@ -164,7 +164,6 @@ function init() {
   }
   
   ws.onmessage = function(evt) {
-    //console.log(evt);
     if (evt.data != "") {
       data = JSON.parse(evt.data);
       //console.log(data);
@@ -180,11 +179,12 @@ function init() {
           break;
         //case 'cln' : window.location.reload(true); break;
         case 'swsa':
+          console.log(data);
           if(!wsaReady){
             wsa = new WebSocket("wss://www.salutem.co:"+ (p+10000) +"/");
             initWsa(first);
           }
-          else if(data.name != pseudo) receiveInitWsa(data.name);
+          else if(data.pseudo != pseudo) receiveInitWsa(data.pseudo);
           break;
         case 'swsc':
           if(!wscReady){
