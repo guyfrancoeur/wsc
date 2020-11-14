@@ -75,7 +75,7 @@ async function startRecord() {
           if (recorder.state == 'recording') recorder.stop();
           console.log("recorder stop");
           setTimeout(function(){
-            ws.send(JSON.stringify({ type: "swsa", name:pseudo}));
+            ws.send(JSON.stringify({ type: "swsa", pseudo:pseudo}));
             startRecord();
             console.log("recorder re-start");
           }, 500);
@@ -93,7 +93,7 @@ async function startRecord() {
 
 $("#bstart").click(function(){
   first = 1;
-  ws.send(JSON.stringify({ type: "swsa", name:pseudo}));
+  ws.send(JSON.stringify({ type: "swsa", pseudo:pseudo}));
   if(wsaReady) clickInitWsa();
   $('#bstart').tooltip('hide');
   $("#bstart").attr("disabled",true);
