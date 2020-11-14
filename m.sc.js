@@ -1,19 +1,21 @@
-var master = 0;
+var master = 0; // si master = 1 (-> celui qui partage)
 var frameRate = 500;
 var imgQuality = 0.8;
 var scale = .8;
+var wscReady = 0;
 
 function initWsc() {
   wsc.onopen = function() {
     console.log("onopen of", wsc.url, "in", (new Date().getTime() - start), "ms");
-    setTimeout(function(){ // A la connection vérifier si un partage d'écran est déjà en cours (=verifier si l'image a un attribut src)
-      if($("#image").attr("src") != undefined){
-        $("#bShare").hide();
-        $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
-        $("#image, #sliderReceveur").show();
-        $("#m_sc").modal();
-      }
-    }, 1000);
+    wscReady = 1;
+    if(master) getMedia(constraints);
+    else{
+      console.log("case start");
+      $("#bShare,#sliderEmetteur, #divkbytes").hide();
+      $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
+      $("#image, #sliderReceveur").show();
+      $("#m_sc").modal();
+    }
   }
   
   wsc.onmessage = function(evt) {
@@ -26,15 +28,10 @@ function initWsc() {
 
         case 'start':
           console.log("case start");
-          $("#m_sc").modal();
-          $("#image").show();
-          $("#bShare").hide();
-          if(master == 0){
-            $("#sliderReceveur").show();
-            $("#sliderEmetteur, #divkbytes").hide();
-          }
+          $("#m_sc").modal(); //ouvrir la modale pour mettre le partage.
+          $("#sliderReceveur, #image").show();
+          $("#bShare, #sliderEmetteur, #divkbytes").hide();
           $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
-          //ouvrir la modale pour mettre le partage.
           break;
 
         case 'stop':
@@ -60,17 +57,11 @@ function initWsc() {
 }
 
 function share() {
-   //********  todo
-  if (master == 1) {
-    wsc.send(JSON.stringify({
-      type: 'start',
-      message: ''
-    }));
-    frameShare = setInterval(interval, frameRate);
-    $("#sliderEmetteur, #divkbytes, #image").show();
-    $("#bShare").hide();
-    $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
-  }
+  wsc.send(JSON.stringify({ type: 'start' }));
+  frameShare = setInterval(interval, frameRate);
+  $("#sliderEmetteur, #divkbytes, #image").show();
+  $("#bShare").hide();
+  $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
 }
 
 function interval(){
@@ -78,8 +69,7 @@ function interval(){
   uri = canvas.toDataURL('image/jpeg', imgQuality);
   wsc.send(JSON.stringify({
     type: 'master',
-    message: uri,
-    zip: 0
+    message: uri
   }));
   var kbytes = (uri.length * (1000 / frameRate) / 1000)
   $("#kbytes").html(kbytes.toFixed(2));
@@ -89,10 +79,7 @@ function interval(){
 function stopShare(){
   streamVideo.getTracks().forEach(track => track.stop());
   clearInterval(frameShare);
-  wsc.send(JSON.stringify({
-    type: 'stop',
-    message: ''
-  }));
+  wsc.send(JSON.stringify({ type: 'stop' }));
   master = 0;
   $("#bShare").show();
   $("#image, #sliderEmetteur, #divkbytes").hide();
@@ -104,44 +91,42 @@ function stopShare(){
 var canvas = document.createElement('canvas');
 var context = canvas.getContext('2d');
 var streamVideo;
+const video = document.getElementById('video');
+var constraints = { video: { frameRate: { ideal: 8, max: 12 } } };
 
 $('#bshareScreen').on('click', function(){
   $('#m_sc').modal('show'); return false;
 });
 
 $('#bShare').on('click', function(){
-  const video = document.getElementById('video');
-  var constraints = { video: { frameRate: { ideal: 8, max: 12 } } };
+  master = 1;
+  if(!wscReady) ws.send(JSON.stringify({ type: "swsc"}));
+  else getMedia(constraints);
+});
 
-  getMedia(constraints);
-
-  async function getMedia(constraints){
-    try {
-      streamVideo = await navigator.mediaDevices.getDisplayMedia(constraints);
-      if ("srcObject" in video) video.srcObject = streamVideo
-      else video.src = window.URL.createObjectURL(streamVideo); // Avoid using this in new browsers.
-      video.onloadedmetadata = function(e) {
-        canvas.width = video.videoWidth * scale;
-        canvas.height = video.videoHeight * scale;
-        video.play();
-      };
-      streamVideo.getVideoTracks()[0].addEventListener('ended', () => 
-        stopShare()
-      );
-      master = 1;
-      share();
-    } catch(err) {
-      console.log(err.name + ": " + err.message);
-      $("#msgErrMedia").show();
-    }
-
-    //Resize de la fenêtre en train d'être partagée -> resize du canvas
-    $(video).on('resize', function(){
+async function getMedia(constraints){
+  try {
+    streamVideo = await navigator.mediaDevices.getDisplayMedia(constraints);
+    if ("srcObject" in video) video.srcObject = streamVideo
+    else video.src = window.URL.createObjectURL(streamVideo); // Avoid using this in new browsers.
+    video.onloadedmetadata = function() {
       canvas.width = video.videoWidth * scale;
       canvas.height = video.videoHeight * scale;
-    });
+      video.play();
+    };
+    streamVideo.getVideoTracks()[0].addEventListener('ended', () => stopShare());
+    share();
+  } catch(err) {
+    console.log(err.name + ": " + err.message);
+    $("#msgErrMedia").show();
   }
-});
+
+  //Resize de la fenêtre en train d'être partagée -> resize du canvas
+  $(video).on('resize', function(){
+    canvas.width = video.videoWidth * scale;
+    canvas.height = video.videoHeight * scale;
+  });
+}
 
 // Resize window
 $("#nresizeWindow").slider({formatter: function(value) {return value + "%";}});
@@ -206,8 +191,7 @@ function exitFunction(){
   $(".close, #sliderReceveur").show();
   $("#bExitFull").hide();
   $('#nresizeWindow').slider('refresh');
-  // Exit fullScreen
-  document.exitFullscreen().catch(function(error) {console.log(error.message);});
+  document.exitFullscreen().catch(function(error) {console.log(error.message);}); // Exit fullScreen
 }
 
 // Si exit fullScreen déclenché par le navigateur
@@ -220,7 +204,6 @@ $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', fu
       $("#bFullChat").show();
     }
   }
-  
 });
 
 $(document).ready(function() {

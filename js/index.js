@@ -179,6 +179,19 @@ function init() {
           if (text.indexOf('pre class="prettyprint') != -1) PR.prettyPrint();
           break;
         //case 'cln' : window.location.reload(true); break;
+        case 'swsa':
+          if(!wsaReady){
+            wsa = new WebSocket("wss://www.salutem.co:"+ (p+10000) +"/");
+            initWsa(first);
+          }
+          else if(data.name != pseudo) receiveInitWsa(data.name);
+          break;
+        case 'swsc':
+          if(!wscReady){
+            wsc = new WebSocket("wss://www.salutem.co:"+ p +"/");
+            initWsc();
+          }
+          break;
       }
     }
   }
@@ -226,14 +239,10 @@ $(document).ready(function(){
       pseudo = $('#name').val();
       ws.onopen = null;
       start = new Date().getTime();
-      ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
-      p = parseInt($('#room').val())+10000;
-      wsc = new WebSocket("wss://www.salutem.co:"+ p +"/");
-      p+=10000;
-      wsa = new WebSocket("wss://www.salutem.co:"+ p +"/");
+      ws = new WebSocket("ws://localhost:1337");
+      //ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
+      //p = parseInt($('#room').val())+10000;
       init();
-      initWsc();
-      initWsa();
     }
   });
 
@@ -252,16 +261,7 @@ $(document).ready(function(){
   });
 
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
-/*
-  $('#bmSubmit').on('click', function(){
-    ws.send(JSON.stringify({
-      type: 'img',
-      name: $('#name').val(),
-      message: $('#preview').attr('src')
-    }));
-    $("#m_i").modal('hide');
-  });
-*/
+
   window.addEventListener('devtoolschange', event => {
     if (event.detail.isOpen) {
       console.log('Devtools');
