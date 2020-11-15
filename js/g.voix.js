@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $("#divReception").hide();
+  $("#bmuteAudio").hide();
 });
 
 wsaReady = 0, first = 0, timeslice = 20;
@@ -20,7 +20,7 @@ function createAudio(n){
   window[n+"_audio"].autoplay = true;
 
   window[n+"_audio"].addEventListener('playing', function(){
-    $("#divReception").show();
+    $("#bmuteAudio").show();
   });
 
   window[n+"_audio"].src = URL.createObjectURL(window[n+"_mediaSource"]);
@@ -54,7 +54,7 @@ async function startRecord() {
     var cpt = 0;
 
     recorder.ondataavailable = async event => {
-      if (event.data.size > 0) {
+      if (event.data.size > 0 && wsa.readyState == 1) {
         var reader = new FileReader();
         reader.addEventListener("loadend", function (){
           var res = [...new Uint8Array(reader.result)];
@@ -110,6 +110,7 @@ $("#bstop").click(function(){
     $("#bstart").attr("disabled",false);
     $("#bstop, #bmuteRecord").attr("disabled",true);
     $("#bmuteRecord").html('Mute');
+    if(nbCall == 0) wsa.close();
   }
 });
 
@@ -143,27 +144,30 @@ function clickInitWsa() {
   startRecord();
 }
 
-function receiveInitWsa(n){
-  console.log("case start");
+function receiveCallWsa(n){
+  console.log("case start wsa");
   nbCall ++;
   createAudio(n);
 }
 
 function initWsa(f) {
   wsa.onopen = function() {
-    console.log("onopen of", wsa.url, "in", (new Date().getTime() - start), "ms");
+    console.log("onopen of", wsa.url, "in", (new Date().getTime() - startWsa), "ms");
     wsaReady = 1;
     if(f) clickInitWsa();
   }
-  
+
   wsa.onmessage = function(evt) {
     if (evt.data != "") {
       msg = JSON.parse(evt.data);
       switch(msg.type){
         case 'stop':
-          console.log("case stop");
+          console.log("case stop wsa");
           nbCall --;
-          if(!nbCall) $("#divReception").hide();
+          if(!nbCall){
+            $("#bmuteAudio").hide();
+            wsa.close();
+          }
           var n = msg.name;
           window[n+"_audioReady"] = 0;
           delete window[n+"_audioReady"];
@@ -176,9 +180,8 @@ function initWsa(f) {
           fc = Uint8Array.from(msg.data);
           var l = msg.calls.length;
           if(l != 0){
-            nbCall += l;
             msg.calls.forEach(function(c) {
-              createAudio(c);
+              if(c != pseudo) receiveCallWsa(c);
             });
           }
           break;
@@ -195,6 +198,11 @@ function initWsa(f) {
           break;
       }
     }
+  }
+
+
+  wsa.close = function() {
+    console.log("wsa closed");
   }
 
   wsa.onerror = function() {

@@ -141,7 +141,7 @@ $("[data-toggle='popover']").on('shown.bs.popover', function(){
 
 function init() {
   ws.onopen = function() {
-    console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms");
+    console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     ws.send(JSON.stringify({
       type: 'link',
       name: '',
@@ -149,7 +149,6 @@ function init() {
     }));
     $('#name-div').hide();
     $('#welcome').show();
-    //$('#welcometext').text('Bonjour ' + $('#name').val());
     $('#croom').text($('#room').val());
     ws.send(JSON.stringify({
       type: 'name',
@@ -166,7 +165,6 @@ function init() {
   ws.onmessage = function(evt) {
     if (evt.data != "") {
       data = JSON.parse(evt.data);
-      //console.log(data);
       switch (data.type) {
         case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#name').text(data.name); $('#welcometext').text('Bonjour ' + $('#name').val()); resizeMusagers(); break;
         case 'tlk' :
@@ -177,20 +175,20 @@ function init() {
           elem.scrollTop = elem.scrollHeight;
           if (text.indexOf('pre class="prettyprint') != -1) PR.prettyPrint();
           break;
-        //case 'cln' : window.location.reload(true); break;
         case 'swsa':
-          console.log(data);
           if(!wsaReady){
+            startWsa = new Date().getTime();
             wsa = new WebSocket("wss://www.salutem.co:"+ (p+10000) +"/");
             initWsa(first);
           }
-          else if(data.pseudo != pseudo) receiveInitWsa(data.pseudo);
+          else {
+            if(data.pseudo != pseudo) receiveCallWsa(data.pseudo);
+          }
           break;
         case 'swsc':
-          if(!wscReady){
-            wsc = new WebSocket("wss://www.salutem.co:"+ p +"/");
-            initWsc();
-          }
+          startWsc = new Date().getTime();
+          wsc = new WebSocket("wss://www.salutem.co:"+ p +"/");
+          initWsc();
           break;
       }
     }
@@ -238,7 +236,7 @@ $(document).ready(function(){
     if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#pass').val().length > 0) {
       pseudo = $('#name').val();
       ws.onopen = null;
-      start = new Date().getTime();
+      startWs = new Date().getTime();
       ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
       p = parseInt($('#room').val())+10000;
       init();

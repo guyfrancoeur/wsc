@@ -2,15 +2,13 @@ var master = 0; // si master = 1 (-> celui qui partage)
 var frameRate = 500;
 var imgQuality = 0.8;
 var scale = .8;
-var wscReady = 0;
 
 function initWsc() {
   wsc.onopen = function() {
-    console.log("onopen of", wsc.url, "in", (new Date().getTime() - start), "ms");
-    wscReady = 1;
+    console.log("onopen of", wsc.url, "in", (new Date().getTime() - startWsc), "ms");
     if(master) getMedia(constraints);
     else{
-      console.log("case start");
+      console.log("case start wsc");
       $("#bShare,#sliderEmetteur, #divkbytes").hide();
       $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
       $("#image, #sliderReceveur").show();
@@ -27,7 +25,7 @@ function initWsc() {
           break;
 
         case 'start':
-          console.log("case start");
+          console.log("case start wsc");
           $("#m_sc").modal(); //ouvrir la modale pour mettre le partage.
           $("#sliderReceveur, #image").show();
           $("#bShare, #sliderEmetteur, #divkbytes").hide();
@@ -35,7 +33,7 @@ function initWsc() {
           break;
 
         case 'stop':
-          console.log("case stop");
+          console.log("case stop wsc");
           $("#image, #sliderReceveur, #sliderEmetteur, #divkbytes").hide();
           $('#image').removeAttr("src");
           $("#bShare").show();
@@ -44,11 +42,15 @@ function initWsc() {
           $('#nresizeWindow').slider('refresh');
           var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
           if (fullscreenElement != null) exitFunction();
-          $("#m_sc").modal('hide');
-          // femeture du partage.
+          $("#m_sc").modal('hide'); // femeture du partage.
+          wsc.close();
           break;
       }
     }
+  }
+
+  wsc.onclose = function() {
+    console.log("wsc closed");
   }
 
   wsc.onerror = function() {
@@ -57,7 +59,6 @@ function initWsc() {
 }
 
 function share() {
-  wsc.send(JSON.stringify({ type: 'start' }));
   frameShare = setInterval(interval, frameRate);
   $("#sliderEmetteur, #divkbytes, #image").show();
   $("#bShare").hide();
@@ -86,6 +87,7 @@ function stopShare(){
   $('#image').removeAttr("src");
   $("#m_sc").modal('hide');
   $("#modaleSC").css({"width": "", "height": "", "max-width": "", "max-height": ""});
+  wsc.close();
 }
 
 var canvas = document.createElement('canvas');
@@ -100,8 +102,7 @@ $('#bshareScreen').on('click', function(){
 
 $('#bShare').on('click', function(){
   master = 1;
-  if(!wscReady) ws.send(JSON.stringify({ type: "swsc"}));
-  else getMedia(constraints);
+  ws.send(JSON.stringify({ type: "swsc"}));
 });
 
 async function getMedia(constraints){

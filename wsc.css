@@ -367,31 +367,17 @@ textarea::-webkit-scrollbar-thumb {
   align-items:center;
   padding-right:0px;
 }
-#divReception{
-  display:flex;
-  margin-left:15px;
-  padding:8px 13px;
-  background-color:#758999;
-}
-#divReception > p{
-  padding:5px 20px;
-  font-size:13px;
-  background-color:#e7e7e7;
-  border-radius:0px;
-  margin-bottom:0px;
-  animation:dots 1s steps(5,end) infinite;
-  box-shadow:0 5px 11px 0 #0000002e, 0 4px 15px 0 #00000026;
-}
 #divEmission{
   background-color:#758999;
   padding:7px 13px;
 }
 #bmuteAudio{
   margin-left:15px;
-  padding:0px 4px;
+  padding:1px 6px;
   border-radius:100px;
-  display:flex;
-  align-items:center;
+}
+#bmuteAudio > svg{
+  margin-top:3px;
 }
 #listeIcons{
   border:1px solid #e7e7e7;
