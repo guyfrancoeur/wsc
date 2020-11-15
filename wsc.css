@@ -367,10 +367,6 @@ textarea::-webkit-scrollbar-thumb {
   align-items:center;
   padding-right:0px;
 }
-#divEmission{
-  background-color:#758999;
-  padding:7px 13px;
-}
 #bmuteAudio{
   margin-left:15px;
   padding:1px 6px;
@@ -492,6 +488,15 @@ textarea::-webkit-scrollbar-thumb {
 }
 #m_sc{
   padding:0px !important;
+}
+.onair{
+  display:inline-block;
+  color:#ffffff;
+  padding:2px 4px;
+  font-weight:700;
+  font-size:9px;
+  border-radius:3px;
+  background-color:#7b96bd;
 }
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }

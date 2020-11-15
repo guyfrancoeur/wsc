@@ -93,6 +93,7 @@ async function startRecord() {
 
 $("#bstart").click(function(){
   first = 1;
+  fIcon(9);
   ws.send(JSON.stringify({ type: "swsa", pseudo:pseudo}));
   if(wsaReady) clickInitWsa();
   $('#bstart').tooltip('hide');
@@ -102,6 +103,7 @@ $("#bstart").click(function(){
 
 $("#bstop").click(function(){
   first = 0;
+  fIcon(9);
   if(wsaReady){
     $('#bstop').tooltip('hide');
     console.log("button stop");
@@ -163,7 +165,7 @@ function initWsa(f) {
       switch(msg.type){
         case 'stop':
           console.log("case stop wsa");
-          nbCall --;
+          nbCall--;
           if(!nbCall){
             $("#bmuteAudio").hide();
             wsa.close();
