@@ -14,7 +14,6 @@ function eventOnUpdate(i) {
 }
 
 function createAudio(n){
-  console.log("create audio for : " + n);
   window[n+"_mediaSource"] = new MediaSource();
   window[n+"_audioReady"] = 0;
   window[n+"_audio"] = document.createElement('audio');
@@ -44,7 +43,6 @@ function createAudio(n){
         createAudio(n);
       });
     }
-    else console.log("nope");
   });
 }
 
