@@ -179,16 +179,24 @@ function init() {
           if(!wsaReady){
             startWsa = new Date().getTime();
             wsa = new WebSocket("wss://www.salutem.co:"+ (p+10000) +"/");
-            initWsa(first);
+            console.log(data.calls);
+            initWsa(data.pseudo, data.calls);
           }
           else {
-            if(data.pseudo != pseudo) receiveCallWsa(data.pseudo);
+            if(data.pseudo != pseudo) receiveCall(data.pseudo);
           }
+          break;
+        case 'stop_audio':
+          console.log(data.pseudo);
+          if(data.pseudo != pseudo) stopAudio(data.pseudo);
           break;
         case 'swsc':
           startWsc = new Date().getTime();
           wsc = new WebSocket("wss://www.salutem.co:"+ p +"/");
           initWsc();
+          break;
+        case 'stop_sharing':
+          stopShare();
           break;
       }
     }
@@ -282,6 +290,7 @@ $(document).ready(function(){
   });
   
   $('#bdeconnexion').on('click', function(){
+    ws.close();
     window.location.reload(true);
   });
 

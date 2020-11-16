@@ -2,7 +2,7 @@ $(document).ready(function() {
   $("#bmuteAudio").hide();
 });
 
-wsaReady = 0, first = 0, timeslice = 20;
+wsaReady = 0, micro_opened = 0, timeslice = 20;
 var stream, recorder;
 const mime = "audio/webm;codecs=opus";
 fc = []; // Sauvegarde des firstChunks reçus
@@ -14,6 +14,7 @@ function eventOnUpdate(i) {
 }
 
 function createAudio(n){
+  console.log("create audio for : " + n);
   window[n+"_mediaSource"] = new MediaSource();
   window[n+"_audioReady"] = 0;
   window[n+"_audio"] = document.createElement('audio');
@@ -27,20 +28,23 @@ function createAudio(n){
 
   document.body.appendChild(window[n+"_audio"]);
   window[n+"_mediaSource"].addEventListener('sourceopen', function(){
-    var sourceBuffer = window[n+"_mediaSource"].addSourceBuffer(mime);
-    window[n+"_mediaSource"].sourceBuffers[0].mode = 'sequence';
-
-    if(fc.length != 0){ // Ajout firstChunks
-      window[n+"_mediaSource"].sourceBuffers[0].appendBuffer(fc);
-      window[n+"_handler"] = eventOnUpdate.bind(null, n);
-      window[n+"_mediaSource"].sourceBuffers[0].addEventListener('updateend',window[n+"_handler"]);
+    if(wsaReady){ // Si la connexion n'a pas été fermée avant que l'audio ait fini de se créer
+      var sourceBuffer = window[n+"_mediaSource"].addSourceBuffer(mime);
+      window[n+"_mediaSource"].sourceBuffers[0].mode = 'sequence';
+  
+      if(fc.length != 0){ // Ajout firstChunks
+        window[n+"_mediaSource"].sourceBuffers[0].appendBuffer(fc);
+        window[n+"_handler"] = eventOnUpdate.bind(null, n);
+        window[n+"_mediaSource"].sourceBuffers[0].addEventListener('updateend',window[n+"_handler"]);
+      }
+  
+      window[n+"_mediaSource"].sourceBuffers[0].addEventListener('error', function(e){
+        console.warn('SourceBuffer : ' + e.type + " => Reset audio");
+        window[n+"_audioReady"] = 0;
+        createAudio(n);
+      });
     }
-
-    window[n+"_mediaSource"].sourceBuffers[0].addEventListener('error', function(e){
-      console.warn('SourceBuffer : ' + e.type + " => Reset audio");
-      window[n+"_audioReady"] = 0;
-      createAudio(n);
-    });
+    else console.log("nope");
   });
 }
 
@@ -71,7 +75,7 @@ async function startRecord() {
         // Si (event.data.size == 1), ça bloque le sourceBuffer de la personne qui reçoit les données. Alors on ne l'envoie pas et on redémarre l'enregistrement.
         if(event.data.size == 1 && cpt > 2){ // (cpt == 2) => pour laisser passer les deux premiers paquets de données (le premier paquet de l'enregistrement a une taille de 1 lui aussi)
           console.warn("Data size : " + event.data.size + " => restart record");
-          wsa.send(JSON.stringify({ type: "stop", name:pseudo}));
+          ws.send(JSON.stringify({ type: "stop_audio", pseudo:pseudo}));
           if (recorder.state == 'recording') recorder.stop();
           console.log("recorder stop");
           setTimeout(function(){
@@ -92,22 +96,22 @@ async function startRecord() {
 }
 
 $("#bstart").click(function(){
-  first = 1;
+  micro_opened = 1;
   fIcon(9);
   ws.send(JSON.stringify({ type: "swsa", pseudo:pseudo}));
-  if(wsaReady) clickInitWsa();
+  if(wsaReady) startCall();
   $('#bstart').tooltip('hide');
   $("#bstart").attr("disabled",true);
   $("#bstop, #bmuteRecord").attr("disabled",false);
 });
 
 $("#bstop").click(function(){
-  first = 0;
+  micro_opened = 0;
   fIcon(9);
   if(wsaReady){
     $('#bstop').tooltip('hide');
     console.log("button stop");
-    wsa.send(JSON.stringify({ type: "stop", name:pseudo }));
+    ws.send(JSON.stringify({ type: "stop_audio", pseudo:pseudo }));
     if (recorder.state == 'recording' || recorder.state == 'paused') recorder.stop();
     $("#bstart").attr("disabled",false);
     $("#bstop, #bmuteRecord").attr("disabled",true);
@@ -141,51 +145,50 @@ $("#bmuteAudio").click(function(){
   allMute = !allMute;
 });
 
-function clickInitWsa() {
+function startCall() {
   console.log("button start");
   startRecord();
 }
 
-function receiveCallWsa(n){
+function receiveCall(n){
   console.log("case start wsa");
-  nbCall ++;
+  nbCall++;
   createAudio(n);
 }
 
-function initWsa(f) {
+function stopAudio(n){
+  console.log("case stop wsa");
+  nbCall--;
+  window[n+"_audioReady"] = 0;
+  delete window[n+"_audioReady"];
+  delete window[n+"_mediaSource"];
+  window[n+"_audio"].remove();
+  delete window[n+"_audio"];
+  if(!nbCall){
+    $("#bmuteAudio").hide();
+    if(!micro_opened) wsa.close();
+  }
+}
+
+function initWsa(n, c) {
   wsa.onopen = function() {
     console.log("onopen of", wsa.url, "in", (new Date().getTime() - startWsa), "ms");
     wsaReady = 1;
-    if(f) clickInitWsa();
+    if(c.length != 0){ // Appels déjà en cours
+      c.forEach(function(n) {
+        if(n != pseudo) receiveCall(n);
+      });
+    }
+    else if(n == pseudo) startCall(); // Start pour nous
+    else receiveCall(n); // Start d'un appel reçu
   }
 
   wsa.onmessage = function(evt) {
     if (evt.data != "") {
       msg = JSON.parse(evt.data);
       switch(msg.type){
-        case 'stop':
-          console.log("case stop wsa");
-          nbCall--;
-          if(!nbCall){
-            $("#bmuteAudio").hide();
-            wsa.close();
-          }
-          var n = msg.name;
-          window[n+"_audioReady"] = 0;
-          delete window[n+"_audioReady"];
-          delete window[n+"_mediaSource"];
-          window[n+"_audio"].remove();
-          delete window[n+"_audio"];
-          break;
-
         case 'firstchunks':
           fc = Uint8Array.from(msg.data);
-          var l = msg.calls.length;
-          if(l != 0){
-            msg.calls.forEach(function(c) {
-              if(c != pseudo) receiveCallWsa(c);
-            });
-          }
           break;
 
         case 'audio': // Réception des données audio
@@ -201,7 +204,6 @@ function initWsa(f) {
       }
     }
   }
-
 
   wsa.close = function() {
     console.log("wsa closed");
