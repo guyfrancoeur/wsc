@@ -179,7 +179,6 @@ function init() {
           if(!wsaReady){
             startWsa = new Date().getTime();
             wsa = new WebSocket("wss://www.salutem.co:"+ (p+10000) +"/");
-            console.log(data.calls);
             initWsa(data.pseudo, data.calls);
           }
           else {
@@ -187,7 +186,6 @@ function init() {
           }
           break;
         case 'stop_audio':
-          console.log(data.pseudo);
           if(data.pseudo != pseudo) stopAudio(data.pseudo);
           break;
         case 'swsc':
@@ -221,8 +219,34 @@ function copyToClipboard() {
   document.body.removeChild(aux);
 }
 
+// Horloge Québec
+function showDateQuebec() {
+  var date = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Montreal"}));
+  var h = ('0' + date.getHours()).slice(-2);
+  var m = ('0' + date.getMinutes()).slice(-2);
+  $("#heureQuebec").html(h + ':' + m);
+  refreshQuebec();
+}
+function refreshQuebec(){
+  setTimeout('showDateQuebec()', 1000);
+}
+
+// Horloge France
+function showDateFrance() {
+  var date = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Paris"}));
+  var h = ('0' + date.getHours()).slice(-2);
+  var m = ('0' + date.getMinutes()).slice(-2);
+  $("#heureFrance").html(h + ':' + m);
+  refreshFrance();
+}
+function refreshFrance(){
+  setTimeout('showDateFrance()', 1000);
+}
+
 // ************************************************  DOCUMENT READY   **************************************************
 $(document).ready(function(){
+  showDateFrance();
+  showDateQuebec();
   $('[data-toggle="tooltip"]').tooltip();
   $('#m_i').load('./m.i.html');
   $('#m_aye').load('./m.aye.html');
