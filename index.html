@@ -9,7 +9,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
   <link rel="manifest" href="./site.webmanifest">
-  <!-- <link rel="stylesheet" type="text/css" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.5.2/css/bootstrap.min.css"> -->
   <link rel="stylesheet" type="text/css" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.min.css">
   <link rel="stylesheet" type="text/css" href="./wsc.css">
@@ -19,8 +18,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.0/umd/popper.min.js"></script>
   <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js" integrity="sha256-oj52qvIP5c7N6lZZoh9z3OYacAIOjsROAcZBHUaJMyw=" crossorigin="anonymous"></script>
-  <!-- <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.5.2/bootstrap.min.js"></script> -->
   <script>
+    var browser;
+    var agent = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    if (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/Trident.*rv[ :]*11\./i)) browser = "msie";
+    else browser = agent[1].toLowerCase();
+    if (!(browser.length > 0 && (browser == "opera" || browser == "chrome" || browser == "edge"))) window.location = "./err.html";
+
     $.getScript('./js/e.md.js', console.log('e.md.js loaded'));
     $.getScript('./js/g.voix.js', console.log('voix.js loaded'));
     $.getScript('./js/g.icon.js', console.log('icon.js loaded'));
@@ -171,7 +175,6 @@
 <div id="m_i" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id="m_aye" class="modal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id="m_sc" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-<div id="m_check" class="modal text-center" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
 </body>
 </html>

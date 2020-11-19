@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <title>wsc v2.9b2</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" id="favicon">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" type="text/css" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./err.css">
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
+</head>
+
+<body class="text-center">
+  <div style="margin:0 auto"  class="col-md-6">
+    <div id="check_fureteur">
+      <div>
+        <br/><br/>
+        <svg width="6em" height="6em" viewBox="0 0 16 16" class="bi bi-emoji-frown-fill" fill="currentcolor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM10 8c.552 0 1-.672 1-1.5S10.552 5 10 5s-1 .672-1 1.5S9.448 8 10 8z"/>
+        </svg>
+        <br/><br/>
+        <p id="p1">Votre fureteur n'est pas compatible avec WSC</p>
+        <p id="p2">Vous devez utiliser 
+          <a href="https://www.google.fr/chrome/" title="Cliquez ici pour télécharger Chrome" target="_blank">Chrome</a>, 
+          <a href="https://www.microsoft.com/fr-fr/edge" title="Cliquez ici pour télécharger Edge" target="_blank">Edge</a>, ou 
+          <a href="https://www.opera.com/" title="Cliquez ici pour télécharger Opera" target="_blank">Opera</a></p>
+      </div>
+      <p id="p3">Vous utilisez actuellement <span id="cfureteur" class="text-capitalize"></span>. Nous vous conseillons de changer de fureteur pour pouvoir utiliser WSC.</p>
+    </div>
+  </div>
+
+  <script>
+    var browser;
+    var agent = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    if (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/Trident.*rv[ :]*11\./i)) browser = "Internet Explorer";
+    else browser = agent[1].toLowerCase();
+    $("#cfureteur").html(browser);
+  </script>
+</body>
+</html>

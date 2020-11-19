@@ -1,0 +1,42 @@
+body{
+  display:flex;
+  align-items:center;
+  min-height:100%;
+  min-height:100vh;
+  background-color:#f9f9f9;
+}
+#check_fureteur{
+  border-radius:1px;
+  margin:auto auto;
+}
+#check_fureteur{
+  padding:40px 20px;
+  background-color:#ffffff;
+  box-shadow:0 14px 18px 0 #0000001a, 0 20px 30px 0 #0000001a;
+}
+#p1{
+  font-size:18px;
+  color:#5580a3;
+}
+#p2{
+  color:#787878;
+}
+#p3{
+  font-size:13px;
+  color:#bfbfbf;
+  border:1px solid #eaeaea;
+  padding:10px 20px;
+  margin:0px 20px;
+  margin-top:50px;
+  border-radius:5px;
+}
+svg{
+  color:#e2eaef;
+}
+a, a:hover, a:visited, a:link{
+  text-decoration:none;
+  color:#ab6767;
+}
+a:link{
+  text-decoration:underline;
+}
