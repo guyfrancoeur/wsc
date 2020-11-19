@@ -2,11 +2,11 @@ $(document).ready(function() {
   $("#bmuteAudio").hide();
 });
 
-wsaReady = 0, micro_opened = 0, timeslice = 20;
+var wsaReady = 0, micro_opened = 0, timeslice = 20;
 var stream, recorder;
 const options = { mimeType: audio/webm;codecs=opus };
-fc = []; // Sauvegarde des firstChunks reçus
-nbCall = 0;
+var fc = []; // Sauvegarde des firstChunks reçus
+var nbCall = 0;
 
 function eventOnUpdate(i) {
   window[i+"_audioReady"] = 1; 
@@ -127,7 +127,7 @@ $("#bmuteRecord").click(function(){
  }
 });
 
-allMute = false;
+var allMute = false;
 $("#bmuteAudio").click(function(){
   if(allMute){
     $('#bmuteAudio').attr('data-original-title',"Couper le son du (ou des) appel(s)");
