@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 wsaReady = 0, micro_opened = 0, timeslice = 20;
 var stream, recorder;
-const mime = "audio/webm;codecs=opus";
+const options = { mimeType: audio/webm;codecs=opus };
 fc = []; // Sauvegarde des firstChunks reçus
 nbCall = 0;
 
@@ -49,10 +49,8 @@ function createAudio(n){
 async function startRecord() {
   try {
     if (!stream) stream = await navigator.mediaDevices.getUserMedia({ audio: { sampleRate: 8000, sampleSize: 8, channelCount: 1, echoCancellation: true,} });
-    if (!recorder) recorder = new MediaRecorder(stream, { mimeType: mime });
-
+    if (!recorder) recorder = new MediaRecorder(stream, options);
     recorder.start(timeslice); // Timeslice de  20ms
-
     var cpt = 0;
 
     recorder.ondataavailable = async event => {
