@@ -243,14 +243,28 @@ function refreshFrance(){
   setTimeout('showDateFrance()', 1000);
 }
 
+function checkBrowser(){
+  var browser;
+  var agent = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+  if (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/Trident.*rv[ :]*11\./i)) browser = "msie";
+  else browser = agent[1].toLowerCase();
+  return (browser.length > 0 && (browser == "opera" || browser == "chrome" || browser == "edge"));
+}
+
 // ************************************************  DOCUMENT READY   **************************************************
 $(document).ready(function(){
-  showDateFrance();
-  showDateQuebec();
   $('[data-toggle="tooltip"]').tooltip();
   $('#m_i').load('./m.i.html');
   $('#m_aye').load('./m.aye.html');
   $('#m_sc').load('./m.sc.html');
+  $('#m_check').load('./m.check.html');
+  $('#listeIcons').hide();
+
+  showDateFrance();// Horloges
+  showDateQuebec();
+
+  if(!checkBrowser()) $('#m_check').modal({backdrop: 'static', keyboard: false}); // Check Browser
+  
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();
   $('#welcome, #divGif, #bExitFullChat').hide();
@@ -266,6 +280,7 @@ $(document).ready(function(){
     e.preventDefault();
     $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#pass').val().length > 0) {
+      $('#listeIcons').show();
       pseudo = $('#name').val();
       ws.onopen = null;
       startWs = new Date().getTime();

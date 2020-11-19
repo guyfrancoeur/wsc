@@ -376,11 +376,20 @@ textarea::-webkit-scrollbar-thumb {
   margin-top:3px;
 }
 #listeIcons{
+  margin-bottom:-10px;
   border:1px solid #e7e7e7;
-  padding:5px;
-  margin:0px 20px;
+  padding:5px 0px;
+  margin:10px 15px;
   border-radius:3px;
 }
+#listeIcons > span{
+  border-radius:6px;
+  padding:5px 2px;
+}
+#listeIcons > span:hover{
+  background-color:#ececec;
+}
+#listeIcons > span .tooltip-arrow,#listeIcons > span + .tooltip > .tooltip-inner {background-color: #5c7183;}
 #image{
   max-width:100%;
   max-height:50vh;
@@ -521,6 +530,37 @@ textarea::-webkit-scrollbar-thumb {
   text-transform:uppercase;
   font-size:10px;
   font-weight:700;
+}
+#m_check > .modal-dialog {
+  display:inline-block;
+  text-align:left;
+  vertical-align:middle;
+}
+#m_check p:nth-child(1){
+  font-size:18px;
+  color:#863434;
+}
+#m_check p:nth-child(2){ color:#626262; }
+#m_check .modal-body > div:nth-child(1){
+  border-top-left-radius:7px;
+  border-top-right-radius:7px;
+  background-color:#e2c3c3;
+  padding:20px;
+}
+#m_check .modal-body > div:nth-child(2){
+  padding:40px;
+  background-color:#f9f9f9;
+  border-bottom-left-radius:7px;
+  border-bottom-right-radius:7px;
+}
+
+@media screen and (min-width: 768px) { 
+  #m_check.modal:before {
+    display:inline-block;
+    vertical-align:middle;
+    content:" ";
+    height: 100%;
+  }
 }
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }
