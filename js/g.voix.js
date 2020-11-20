@@ -28,7 +28,7 @@ function createAudio(n){
   document.body.appendChild(window[n+"_audio"]);
   window[n+"_mediaSource"].addEventListener('sourceopen', function(){
     if(wsaReady){ // Si la connexion n'a pas été fermée avant que l'audio ait fini de se créer
-      var sourceBuffer = window[n+"_mediaSource"].addSourceBuffer(mime);
+      var sourceBuffer = window[n+"_mediaSource"].addSourceBuffer(options);
       window[n+"_mediaSource"].sourceBuffers[0].mode = 'sequence';
   
       if(fc.length != 0){ // Ajout firstChunks
