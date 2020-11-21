@@ -4,7 +4,8 @@ $(document).ready(function() {
 
 var wsaReady = 0, micro_opened = 0, timeslice = 20;
 var stream, recorder;
-const options = { mimeType: "audio/webm;codecs=opus" };
+const mine = 'audio/webm;codecs=opus';
+const options = { mimeType: mime };
 var fc = []; // Sauvegarde des firstChunks reçus
 var nbCall = 0;
 
@@ -28,7 +29,7 @@ function createAudio(n){
   document.body.appendChild(window[n+"_audio"]);
   window[n+"_mediaSource"].addEventListener('sourceopen', function(){
     if(wsaReady){ // Si la connexion n'a pas été fermée avant que l'audio ait fini de se créer
-      var sourceBuffer = window[n+"_mediaSource"].addSourceBuffer(options);
+      var sourceBuffer = window[n+"_mediaSource"].addSourceBuffer(mime);
       window[n+"_mediaSource"].sourceBuffers[0].mode = 'sequence';
   
       if(fc.length != 0){ // Ajout firstChunks
