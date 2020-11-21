@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 var wsaReady = 0, micro_opened = 0, timeslice = 20;
 var stream, recorder;
-const mine = 'audio/webm; codecs="opus"';
+const mime = 'audio/webm; codecs="opus"';
 const options = { mimeType: mime };
 var fc = []; // Sauvegarde des firstChunks reçus
 var nbCall = 0;
