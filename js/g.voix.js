@@ -48,7 +48,7 @@ function createAudio(n){
 
 async function startRecord() {
   try {
-    if (!stream) stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: { sampleRate: 8000, sampleSize: 8, channelCount: 1, echoCancellation: true, noiseSuppression: true} });
+    if (!stream) stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: { sampleRate: 8000, sampleSize: 8, channelCount: 1, echoCancellation: true } });
     if (!recorder) recorder = new MediaRecorder(stream, options);
     recorder.start(timeslice); // Timeslice de  20ms
     var cpt = 0;
