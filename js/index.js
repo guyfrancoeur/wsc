@@ -197,7 +197,7 @@ function init() {
           stopShare();
           break;
         case 'close_audio':
-          if (wsa.readyState == wsa.OPEN) { wsa.close(); }
+          if (wsa.readyState == wsa.OPEN) { wsa.close(); console.log('wsa.close() from index.js');}
           break;
       }
     }
