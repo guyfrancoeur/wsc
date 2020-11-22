@@ -203,6 +203,7 @@ function initWsa(n, c) {
   }
 
   wsa.close = function() {
+    wsaReady = 0;
     console.log("wsa closed");
   }
 
