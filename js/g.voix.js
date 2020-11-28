@@ -2,7 +2,7 @@ $(document).ready(function() {
   $("#bmuteAudio").hide();
 });
 
-var wsaReady = 0, micro_opened = 0, timeslice = 20;
+var wsaReady = 0, micro_opened = 0, timeslice = 40;
 var stream, recorder;
 const mime = 'audio/webm; codecs=opus';
 const options = { mimeType: mime };
@@ -49,9 +49,9 @@ function createAudio(n){
 
 async function startRecord() {
   try {
-    if (!stream) stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: { sampleRate: 8000, sampleSize: 8, channelCount: 1, echoCancellation: true } });
+    if (!stream) stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: { sampleRate: 8000, sampleSize: 8, channelCount: 1, echoCancellation: false } });
     if (!recorder) recorder = new MediaRecorder(stream, options);
-    recorder.start(timeslice); // Timeslice de  20ms
+    recorder.start(timeslice);
     var cpt = 0;
 
     recorder.ondataavailable = async event => {
