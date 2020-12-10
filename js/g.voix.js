@@ -17,7 +17,7 @@ function eventOnUpdate(i) {
 function createAudio(n){
   window[n+"_mediaSource"] = new MediaSource();
   window[n+"_audioReady"] = 0;
-  window[n+"_audio"] = document.createElement('audio');
+  window[n+"_audio"] = new Audio(); //GF document.createElement('audio');
   window[n+"_audio"].autoplay = true;
 
   window[n+"_audio"].addEventListener('playing', function(){
@@ -75,6 +75,7 @@ async function startRecord() {
           ws.send(JSON.stringify({ type: "stop_audio", pseudo:pseudo}));
           if (recorder.state == 'recording') recorder.stop();
           console.log("recorder stop");
+          //GF  il faut capturer l'erreur autrement.
           setTimeout(function(){
             ws.send(JSON.stringify({ type: "swsa", pseudo:pseudo}));
             startRecord();
