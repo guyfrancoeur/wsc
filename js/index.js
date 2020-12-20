@@ -5,7 +5,7 @@ var start = new Date().getTime();
 var ws = new WebSocket("wss://echo.websocket.org");
 ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); $('#bName').attr('disabled', false); };
 var elem = document.getElementById('messages'); //pour scroll-auto
-var pseudo;
+var pseudo; // TODO (a faire disparaitre)
 
 const ico = document.getElementById('favicon');
 
@@ -34,10 +34,11 @@ function fResize() {
     $('#msgs, #messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
     $('#m_start').css('top','6rem');
   }
-  resizeMusagers();
+  resizeModaleUsagers();
 }
 
-function resizeMusagers(){
+//revoir ce code pour le ctrl-+ (gerer plus de cas de resize)
+function resizeModaleUsagers(){
   topModaleUsers = $("#users").offset().top;
   dDessus = (topModaleUsers - $(window).scrollTop());
   if(($("#users > li").length * 18.18) > ($(window).height() - dDessus - $('#input-div').height() - 142 - 30)){ // 18.18 = hauteur d'un <li> dans liste usagers
@@ -228,10 +229,6 @@ function showDateQuebec() {
   var h = ('0' + date.getHours()).slice(-2);
   var m = ('0' + date.getMinutes()).slice(-2);
   $("#heureQuebec").html(h + ':' + m);
-  refreshQuebec();
-}
-function refreshQuebec(){
-  setTimeout('showDateQuebec()', 1000);
 }
 
 // Horloge France
@@ -240,10 +237,6 @@ function showDateFrance() {
   var h = ('0' + date.getHours()).slice(-2);
   var m = ('0' + date.getMinutes()).slice(-2);
   $("#heureFrance").html(h + ':' + m);
-  refreshFrance();
-}
-function refreshFrance(){
-  setTimeout('showDateFrance()', 1000);
 }
 
 // ************************************************  DOCUMENT READY   **************************************************
@@ -254,8 +247,8 @@ $(document).ready(function(){
   $('#m_sc').load('./m.sc.html');
   $('#listeIcons').hide();
 
-  showDateFrance();// Horloges
-  showDateQuebec();
+  setTimeout('showDateQuebec()', 1000);// Horloges
+  setTimeout('showDateFrance()', 1000);
   
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();
