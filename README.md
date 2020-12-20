@@ -30,13 +30,13 @@
  - [ ] b) pureté image (compression jpg) 20% @ 100% step 10% :default 80%
  - [ ] c) refresh rate en ms, 100ms @ 2000ms step 100ms : default 500ms
 + [ ] Afficheur de code source en live (avec le formatage couleurs).
-+ OSE
++ OSE (fonctionnalité)
   - [ ] Audio
-  - [ ] Video (
+  - [ ] Video
 + [ ] Afficheur de typing.
-+ [ ] Son (bruit) pour la main levé.
-+ [ ] Autoriser le son, video (defaut oui avec un checkbox).
-+ [ ] Dès que quelqu'un a le micro ouvert la cam est activé.
++ [ ] Son (bruit) lorsque la main est levé.
++ [ ] Autoriser le son, video (defaut oui avec des checkbox dans la barre).
++ [ ] Dès que quelqu'un ouvre le micro, sa cam est activé.
 
 ### Expérimentale
  + WebRTC
