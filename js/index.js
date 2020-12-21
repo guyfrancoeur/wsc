@@ -247,8 +247,8 @@ $(document).ready(function(){
   $('#m_sc').load('./m.sc.html');
   $('#listeIcons').hide();
 
-  setTimeout('showDateQuebec()', 1000);// Horloges
-  setTimeout('showDateFrance()', 1000);
+  setInterval('showDateQuebec()', 60000);// Horloges
+  setInterval('showDateFrance()', 60000);
   
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   $('#name').focus();
