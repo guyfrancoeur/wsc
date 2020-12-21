@@ -26,9 +26,9 @@
 ### TODO
 
 + 3 x slider visuels dans la modale de partage (sharing).
- - [ ] a) scale du canvas en fonction de la capture 20% @ 100%  step de 10% ; default 70%
- - [ ] b) pureté image (compression jpg) 20% @ 100% step 10% :default 80%
- - [ ] c) refresh rate en ms, 100ms @ 2000ms step 100ms : default 500ms
+ - [x] a) scale du canvas en fonction de la capture 20% @ 100%  step de 10% ; default 70%
+ - [x] b) pureté image (compression jpg) 20% @ 100% step 10% :default 70%
+ - [x] c) refresh rate en ms, 100ms @ 2000ms step 100ms : default 500ms
 + OSE (fonctionnalité)
   - [ ] Audio
   - [ ] Video
