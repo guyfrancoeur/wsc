@@ -40,6 +40,8 @@
 + Mode modérateur
   + [ ] Désactivation micro
   + [ ] Afficheur de code source en live (avec le formatage couleurs).
++ [ ] enlever le pseudo de l'écran.
++ [ ] afficher le temps en ms de la latence.
 
 
 ### Expérimentale
