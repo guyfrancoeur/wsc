@@ -3,7 +3,7 @@ var a2 = new Audio('./harp.mp3');
 var connecte = 0;
 var start = new Date().getTime();
 var ws = new WebSocket("wss://echo.websocket.org");
-ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); $('#bName').attr('disabled', false); };
+ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); /*$('#bName').attr('disabled', false);*/ };
 var elem = document.getElementById('messages'); //pour scroll-auto
 var pseudo; // TODO (a faire disparaitre)
 
@@ -107,7 +107,7 @@ function KeyPress(e) {
   if (evtobj.ctrlKey && evtobj.keyCode == '1'.charCodeAt(0)) {
     ws.send(JSON.stringify({
       type: 'clean',
-      name: $('#name').val(),
+    //  name: $('#name').val(),
       message: $('#message').val()
     }));
     $('#message').val('');
@@ -145,7 +145,7 @@ function init() {
     console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     ws.send(JSON.stringify({
       type: 'link',
-      name: '',
+ //     name: '',
       message: navigator.tell
     }));
     $('#name-div').hide();
@@ -154,7 +154,7 @@ function init() {
     ws.send(JSON.stringify({
       type: 'name',
       icon: '',
-      name: $('#name').val(),
+ //     name: $('#name').val(),
       pass: $('#pass').val(),
       message: navigator.tell
     }));
@@ -167,7 +167,7 @@ function init() {
     if (evt.data != "") {
       data = JSON.parse(evt.data);
       switch (data.type) {
-        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#name').text(data.name); $('#welcometext').text('Bonjour ' + $('#name').val()); resizeModaleUsagers(); break;
+        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); /*$('#name').text(data.name);*/ $('#welcometext').text('Bonjour ' + $('#name').val()); resizeModaleUsagers(); break;
         case 'tlk' :
           if (!document.hasFocus()) { newUpdate(); a2.play(); }
           var text = data.message;
@@ -251,7 +251,7 @@ $(document).ready(function(){
   setInterval('showDateFrance()', 60000);
   
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
-  $('#name').focus();
+  $('#room').focus();
   $('#welcome, #divGif, #bExitFullChat').hide();
   $('[data-toggle="popover"]').popover({html: true});
   $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
@@ -263,10 +263,10 @@ $(document).ready(function(){
   
   $('#bName').on('click', function(e){
     e.preventDefault();
-    $('#name').val($.trim($('#name').val()));
+   // $('#name').val($.trim($('#name').val()));
     if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#pass').val().length > 0) {
       $('#listeIcons').show();
-      pseudo = $('#name').val();
+   //   pseudo = $('#name').val();
       ws.onopen = null;
       startWs = new Date().getTime();
       ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
@@ -276,11 +276,11 @@ $(document).ready(function(){
   });
 
   $('#bS').on('click', function(){
-    $('#name').val($.trim($('#name').val()));
-    if ($('#name').val().length > 0) {
+ //   $('#name').val($.trim($('#name').val()));
+    if ($('#room').val().length > 0) {  //todo vers id
       ws.send(JSON.stringify({
         type: 'talk',
-        name: $('#name').val(),
+    //    name: $('#name').val(),
         message: $('#message').val()
       }));
       $('#message').focus();
