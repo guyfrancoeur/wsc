@@ -3,7 +3,7 @@ var a2 = new Audio('./harp.mp3');
 var connecte = 0;
 var start = new Date().getTime();
 var ws = new WebSocket("wss://echo.websocket.org");
-ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); /*$('#bName').attr('disabled', false);*/ };
+ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); $('#bName').attr('disabled', false); };
 var elem = document.getElementById('messages'); //pour scroll-auto
 var pseudo; // TODO (a faire disparaitre)
 
