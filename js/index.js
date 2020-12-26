@@ -264,7 +264,7 @@ $(document).ready(function(){
   $('#bName').on('click', function(e){
     e.preventDefault();
    // $('#name').val($.trim($('#name').val()));
-    if ($('#name').val().length > 0 && $('#room').val().length > 0 && $('#pass').val().length > 0) {
+    if ($('#room').val().length > 0 && $('#pass').val().length > 0) {
       $('#listeIcons').show();
    //   pseudo = $('#name').val();
       ws.onopen = null;
