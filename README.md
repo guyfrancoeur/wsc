@@ -12,7 +12,7 @@
  - Responsive
  - Rapide
  - Sécuritaire (wss et https)
- - Audio streaming
+ - Audio streaming (expérimentale)
  - Video streaming : partage d'écran (application)
  - Formatage du code source avec <kbd>Ctrl</kbd>+<kbd>8</kbd>
  - Insertion et support des émoicons avec <kbd>Windows</kbd>+<kbd>;</kbd>
@@ -30,18 +30,22 @@
  - [x] b) pureté image (compression jpg) 20% @ 100% step 10% :default 70%
  - [x] c) refresh rate en ms, 100ms @ 2000ms step 100ms : default 500ms
 + [ ] Afficher qui est en mode écriture d'un message.
-+ [ ] Son (bruit) ou qqc lorsque la main est levée.
-+ [ ] Autoriser le son, video (defaut non, checkbox dans la barre).
-+ [ ] Dès que quelqu'un ouvre le micro, sa cam est activé.
-+ [x] Enlever le pseudo de l'écran.
-+ [ ] Afficher la latence en ms.
+
++ Barre v4
+  + [ ] Autoriser le son, video (defaut non, checkbox dans la barre).
+  + [ ] Dès que quelqu'un ouvre le micro, sa cam est activé.
+  + [x] Enlever le pseudo de l'écran.
+  + [ ] Afficher la latence en ms.
 + Mode modérateur
   + [ ] Désactivation micro.
   + [ ] Afficheur de code source en live (avec le formatage couleurs).
   + [ ] Message privé.
+  + [ ] Notifier le moderateur lorsque la main est levée (bruit).
 + OSE (fonctionnalité)
   - [ ] Audio
   - [ ] Video
++ [ ] Modale login
++ [ ] Migration vers bootstap 4
 
 
 ### Expérimentale
