@@ -148,7 +148,6 @@ function init() {
  //     name: '',
       message: navigator.tell
     }));
-    //$('#name-div').hide();
     $('#welcome').show();
     $('#croom').text($('#room').val());
     ws.send(JSON.stringify({

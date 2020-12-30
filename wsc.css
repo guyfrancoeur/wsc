@@ -16,7 +16,7 @@ input {
   width:100%;
   margin-right:.5%;
 }
-#name-div, #welcome {
+#welcome {
   background-color:#5580a3b3;
   padding:10px 0px;
   width:100%;
@@ -200,9 +200,6 @@ textarea {
 }
 #divWelcome > span:nth-child(1){
   filter: drop-shadow(3px 3px 2px #0000004d);
-}
-#name-div{
-  margin:0px;
 }
 
 /* Désactiver les flèches dans les input number */
@@ -583,7 +580,6 @@ input:focus{
 @media screen and (max-width:768px) {
   #bstart, #bstop{ margin-right:0px; }
   #bshareScreen{ margin-right:5px; }
-  #name-div > div{ padding-bottom:10px; }
   #divAudio{
     padding-left:10px !important;
     margin-right:auto;
