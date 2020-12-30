@@ -148,7 +148,7 @@ function init() {
  //     name: '',
       message: navigator.tell
     }));
-    $('#name-div').hide();
+    //$('#name-div').hide();
     $('#welcome').show();
     $('#croom').text($('#room').val());
     ws.send(JSON.stringify({
@@ -239,13 +239,28 @@ function showDateFrance() {
   $("#heureFrance").html(h + ':' + m);
 }
 
+function login(){
+  //$('#name').val($.trim($('#name').val()));
+  if ($('#room').val().length > 0 && $('#pass').val().length > 0) {
+    $('#content').show();
+    $('#m_login').modal('hide');
+    $('body').removeClass("grey");
+//   pseudo = $('#name').val();
+    ws.onopen = null;
+    startWs = new Date().getTime();
+    ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
+    p = parseInt($('#room').val())+10000;
+    init();
+  }
+}
+
 // ************************************************  DOCUMENT READY   **************************************************
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
   $('#m_i').load('./m.i.html');
   $('#m_aye').load('./m.aye.html');
   $('#m_sc').load('./m.sc.html');
-  $('#listeIcons').hide();
+  $('#m_login').load('./m.login.html');
 
   setInterval('showDateQuebec()', 60000);// Horloges
   setInterval('showDateFrance()', 60000);
@@ -261,19 +276,7 @@ $(document).ready(function(){
   console.log('event programming started!');
   $('#message').on('mouseup', fResize);
   
-  $('#bName').on('click', function(e){
-    e.preventDefault();
-   // $('#name').val($.trim($('#name').val()));
-    if ($('#room').val().length > 0 && $('#pass').val().length > 0) {
-      $('#listeIcons').show();
-   //   pseudo = $('#name').val();
-      ws.onopen = null;
-      startWs = new Date().getTime();
-      ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
-      p = parseInt($('#room').val())+10000;
-      init();
-    }
-  });
+
 
   $('#bS').on('click', function(){
  //   $('#name').val($.trim($('#name').val()));
@@ -329,7 +332,11 @@ $(document).ready(function(){
     $("#bExitFullChat").hide();
     $("#bFullChat").show();
   });
-  
+
+  // Modale de connexion
+  $('#m_login').modal({backdrop: false, keyboard: false})
+  $('#content').hide();
+
   console.log('event programming done!');
   console.log('ready!');
 });

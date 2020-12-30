@@ -1,0 +1,30 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-body text-center">
+      <div class="row">
+        <img src="android-chrome-192x192.png">
+        <h3>WSC</h3>
+      </div>
+      <br/><br/>
+      <form>
+          <div class="input-group col-xs-12">
+            <input type="number" class="input-sm" name="room" id="room" placeholder="Room" pattern="[0-9]{4}" required />
+          </div>
+          <br/><br/>
+          <div class="input-group col-xs-12">
+            <input type="password" class="input-sm" name="pass" id="pass" placeholder="Mot secret" autocomplete="current-password" required />
+          </div>
+          <br/><br/>
+          <div class="text-center col-xs-12">
+            <button class="btn btn-sm m-auto" id="bName">Connexion <i class="glyphicon glyphicon-log-in"></i></button>
+            <br/><br/>
+          </div>
+      </form>
+      <br/><br/>
+    </div>
+  </div>
+</div>
+
+<script>
+    $('#bName').on('click', function(e){ login(); e.preventDefault();});
+</script>
