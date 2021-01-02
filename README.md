@@ -88,3 +88,5 @@ Content-Encoding: gzip
 + https://blog.logrocket.com/webrtc-over-websocket-in-node-js/
 + https://github.com/node-webrtc/node-webrtc
 + https://github.com/phaux/node-ffmpeg-stream
++ https://developer.mozilla.org/en-US/docs/Web/API/Screen_Capture_API/Using_Screen_Capture
++ https://davidwalsh.name/javascript-pip
