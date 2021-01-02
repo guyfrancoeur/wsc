@@ -553,6 +553,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 #m_login input{
   background-color: #f8f8f8;
+  text-align:center;
 }
 #bName{
   background-color:#5580a37c;
