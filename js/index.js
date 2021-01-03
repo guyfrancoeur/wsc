@@ -32,14 +32,14 @@ function fResize() {
 function resizeModaleUsagers(){
   topModaleUsers = $("#users").offset().top;
   dDessus = (topModaleUsers - $(window).scrollTop());
-  if(($("#users > li").length * 18.18) > ($(window).height() - dDessus - $('#input-div').height() - 142 - 30)){ // 18.18 = hauteur d'un <li> dans liste usagers
-    newSize = $(window).height() - dDessus - 142; // 142 = hauteur modale vide
+  if($("#users > li").length > 1 && ($("#users > li").length * 18.18) > ($(window).height() - dDessus - $('#input-div').height() - 142 - 30)){ // 18.18 = hauteur d'un <li> dans liste usagers
+    newSize = $(window).height() - dDessus - 142 - 30; // 142 = hauteur modale vide
     $("#users").height(newSize);
     $("#users").css("overflow-y","scroll");
   }
   else{
     $("#users").css("overflow-y","hidden");
-    $("#m_start").height("");
+    $("#users").height("");
   }
 }
 
@@ -154,7 +154,7 @@ function init() {
     if (evt.data != "") {
       data = JSON.parse(evt.data);
       switch (data.type) {
-        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
+        case 'lnk' : $('#count').text(data.count); /*$('#users').empty();*/ $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
         case 'tlk' :
           if (!document.hasFocus()) { newUpdate(); a2.play(); }
           var text = data.message;
