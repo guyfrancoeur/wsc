@@ -63,7 +63,7 @@ $('#bmSubmit').on('click', function(){
 $('#m_i_mc').resizable({minHeight: 380, minWidth: 350}); //ceci resize modal-content
 $('#m_i_md').draggable(); //modal-dialog
 
-//ceci est-ce necessaire ?
-//$('#m_i').on('show.bs.modal', function() {
-//  $(this).find('.modal-body').css({'max-height': '100%'});
-//});
+//afin de ne pas avoir un modal qui va trop bas
+$('#m_i').on('show.bs.modal', function() {
+  $(this).find('.modal-body').css({'max-height': '100%'});
+});
