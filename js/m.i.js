@@ -61,13 +61,13 @@ $('#bmSubmit').on('click', function(){
 });
 
 //ceci resize modal-content
-$('#m_i_mc').resizable({ 
+$('#m_i').resizable({ 
   alsoResize: ".modal-dialog",
   minHeight: 200,
   minWidth: 300,
   maxWidth: 450
 });
-$('#m_i_md').draggable(); //modal-dialog
+$('#m_i').draggable(); //modal-dialog
 
 //ceci est-ce necessaire ?
 //$('#m_i').on('show.bs.modal', function() {
