@@ -107,7 +107,6 @@ function KeyPress(e) {
   if (evtobj.ctrlKey && evtobj.keyCode == '1'.charCodeAt(0)) {
     ws.send(JSON.stringify({
       type: 'clean',
-    //  name: $('#name').val(),
       message: $('#message').val()
     }));
     $('#message').val('');
@@ -145,7 +144,6 @@ function init() {
     console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     ws.send(JSON.stringify({
       type: 'link',
- //     name: '',
       message: navigator.tell
     }));
     $('#welcome').show();
@@ -153,7 +151,6 @@ function init() {
     ws.send(JSON.stringify({
       type: 'name',
       icon: '',
- //     name: $('#name').val(),
       pass: $('#pass').val(),
       message: navigator.tell
     }));
@@ -166,7 +163,7 @@ function init() {
     if (evt.data != "") {
       data = JSON.parse(evt.data);
       switch (data.type) {
-        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); /*$('#name').text(data.name);*/ $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
+        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
         case 'tlk' :
           if (!document.hasFocus()) { newUpdate(); a2.play(); }
           var text = data.message;
@@ -239,7 +236,6 @@ function showDateFrance() {
 }
 
 function login(){
-  //$('#name').val($.trim($('#name').val()));
   if ($('#room').val().length > 0 && $('#pass').val().length > 0) {
     $('#content').show();
     $('#m_login').modal('hide');
@@ -281,6 +277,13 @@ $(document).ready(function(){
       ws.send(JSON.stringify({
         type: 'chat',
         message: $('#message').val()
+      }));
+      ws.send(JSON.stringify({
+        type: 'typing',
+        action: 0,
+        icon: '',
+        pass: $('#pass').val(),
+        message: navigator.tell
       }));
       $('#message').focus();
       $('#message').val('');
@@ -346,4 +349,3 @@ $(document).ready(function(){
   console.log('event programming done!');
   console.log('ready!');
 });
-// DOCUMENT READY ---------------------------------
