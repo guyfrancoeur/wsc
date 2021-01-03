@@ -29,7 +29,7 @@
  - [x] a) scale du canvas en fonction de la capture 20% @ 100%  step de 10% ; default 70%
  - [x] b) pureté image (compression jpg) 20% @ 100% step 10% :default 70%
  - [x] c) refresh rate en ms, 100ms @ 2000ms step 100ms : default 500ms
-+ [ ] Afficher qui est en mode écriture d'un message.
++ [x] Afficher qui est en mode écriture d'un message.
 
 + Barre v4
   + [ ] Autoriser le son, video (defaut non, checkbox dans la barre).
@@ -44,7 +44,7 @@
 + OSE (fonctionnalité)
   - [ ] Audio
   - [ ] Video
-+ [ ] Modale login
++ [x] Modale login
 + [ ] Migration vers bootstap 4
 
 
