@@ -156,18 +156,6 @@ textarea {
   top:35px;
   position:absolute;
 }
-#bmodaleusers{
-  color:#f1eee5;
-  cursor:pointer;
-  background-color:#c3ad64;
-  padding:4px 6px;
-  border-radius:4px;
-  box-shadow: 0 2px 4px 0 #00000033, 0 3px 10px 0 #00000033;
-}
-#bmodaleusers:hover{
-  background-color:#c8ba84;
-  color:#faf4e0;
-} 
 #bName{
   color:#5a5a5a;
 }
@@ -180,10 +168,6 @@ textarea {
 }
 #input-div > div > span{
   color:#6e6e6e;
-  border:0px;
-}
-#bH{
-  color:#5a5a5a;
   border:0px;
 }
 #name{
@@ -573,6 +557,56 @@ input:focus{
   box-shadow:none;
 }
 
+.b1{
+  border-radius:0px;
+  background-color:transparent;
+  color:#7c96b6 !important;
+}
+.b1:hover{
+  color:#c4965e !important;
+  background-color:#ececec !important;
+}
+#bS{
+  background-color: #7c96b6;
+  color: white;
+  border-top-right-radius:30px !important;
+  border-bottom-right-radius:30px !important;
+}
+#bS:hover{
+  background-color: #c4965e;
+}
+.div1{
+  border-radius:30px !important;
+  background-color:transparent;
+}
+#message{
+  border-top-left-radius:30px !important;
+  border-bottom-left-radius:30px !important;
+  padding-left:30px !important;
+}
+#m_code {
+  z-index:10;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  min-width:500px;
+}
+#m_code .modal-content{
+  border: 0px;
+  box-shadow:none;
+  box-shadow:0 5px 15px #b9b9b980 !important;
+  background-color: #fcfcfc;
+}
+#m_code textarea{
+  resize:none;
+  border:1px solid #e8e8e8 !important;
+}
+#message, #message:hover, #message:active, #message:focus, #m_code:focus{
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+}
 @media screen and (min-width: 768px){
   #m_login .modal-dialog{
     width: 450px;
@@ -596,6 +630,9 @@ input:focus{
   #m_login img{
     height:110px;
     top:-25px;
+  }
+  #input-div {
+    padding:7px 5px;
   }
 }
 @media screen and (max-width:325px) {

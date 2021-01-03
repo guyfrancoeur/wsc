@@ -1,6 +1,5 @@
 var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./harp.mp3');
-var connecte = 0;
 var start = new Date().getTime();
 var ws = new WebSocket("wss://echo.websocket.org");
 ws.onopen = function() { console.log("onopen of", ws.url, "in", (new Date().getTime() - start), "ms"); ws.close(); $('#bName').attr('disabled', false); };
@@ -18,22 +17,14 @@ $(window).on("blur focus", function(e) {
 });
 
 //Fermeture en cliquant sur la croix
-$('#closeToast').click(function() {
-  $('#m_start').hide();
-});
+$('#closeToast').click(function() { $('#m_start').hide();});
 
 function fResize() {
-  $('#bS, #bF, #bH').height($('#message').height());
+  //$('#bS, #bF, #bH').height($('#message').height());
+  $('#bS').height($('#message').height());
   $('#message').css('width','100%');
-  if (connecte == 0){
-    $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
-    if($(window).width() < 768) $('#m_start').css('top','17rem');
-    else $('#m_start').css('top','6rem');
-  }
-  else{
-    $('#msgs, #messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
-    $('#m_start').css('top','6rem');
-  }
+  $('#msgs, #messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
+  $('#m_start').css('top','6rem');
   resizeModaleUsagers();
 }
 
@@ -42,7 +33,7 @@ function resizeModaleUsagers(){
   topModaleUsers = $("#users").offset().top;
   dDessus = (topModaleUsers - $(window).scrollTop());
   if(($("#users > li").length * 18.18) > ($(window).height() - dDessus - $('#input-div').height() - 142 - 30)){ // 18.18 = hauteur d'un <li> dans liste usagers
-    newSize = $(window).height() - dDessus - 142 - 30; // 142 = hauteur modale vide | 30 = distance entre fin bloc de la liste messages et textarea
+    newSize = $(window).height() - dDessus - 142; // 142 = hauteur modale vide
     $("#users").height(newSize);
     $("#users").css("overflow-y","scroll");
   }
@@ -51,6 +42,8 @@ function resizeModaleUsagers(){
     $("#m_start").height("");
   }
 }
+
+window.onresize = resizeModaleUsagers;
 
 $(window).on('resize', function(){
   var win = $(this); //this = window
@@ -107,7 +100,6 @@ function KeyPress(e) {
   if (evtobj.ctrlKey && evtobj.keyCode == '1'.charCodeAt(0)) {
     ws.send(JSON.stringify({
       type: 'clean',
-    //  name: $('#name').val(),
       message: $('#message').val()
     }));
     $('#message').val('');
@@ -133,11 +125,9 @@ function KeyPress(e) {
   }
 }
 
-// Ouverture modal start
-$("[data-toggle='popover']").on('shown.bs.popover', function(){
-  $('#bmodaleusers').click(function() {
-    $("#m_start").show();
-  });
+$('#bmodaleusers').click(function() {
+  $("#m_start").show();
+  $('#bmodaleusers').tooltip('hide');
 });
 
 function init() {
@@ -145,7 +135,6 @@ function init() {
     console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     ws.send(JSON.stringify({
       type: 'link',
- //     name: '',
       message: navigator.tell
     }));
     $('#welcome').show();
@@ -153,11 +142,9 @@ function init() {
     ws.send(JSON.stringify({
       type: 'name',
       icon: '',
- //     name: $('#name').val(),
       pass: $('#pass').val(),
       message: navigator.tell
     }));
-    connecte = 1;
     fResize();
     $("#message").attr("placeholder","Écrire votre message ici (room #" + $('#room').val()+")")
   }
@@ -166,7 +153,7 @@ function init() {
     if (evt.data != "") {
       data = JSON.parse(evt.data);
       switch (data.type) {
-        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); /*$('#name').text(data.name);*/ $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
+        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
         case 'tlk' :
           if (!document.hasFocus()) { newUpdate(); a2.play(); }
           var text = data.message;
@@ -239,7 +226,6 @@ function showDateFrance() {
 }
 
 function login(){
-  //$('#name').val($.trim($('#name').val()));
   if ($('#room').val().length > 0 && $('#pass').val().length > 0) {
     $('#content').show();
     $('#m_login').modal('hide');
@@ -260,6 +246,14 @@ $(document).ready(function(){
   $('#m_aye').load('./m.aye.html');
   $('#m_sc').load('./m.sc.html');
   $('#m_login').load('./m.login.html');
+  $('#m_code').load('./m.code.html');
+
+  $('#m_code').hide();
+  $('#m_login').modal({backdrop: false, keyboard: false})
+  $('#content').hide();
+
+  showDateQuebec();
+  showDateFrance();  
 
   setInterval('showDateQuebec()', 60000);// Horloges
   setInterval('showDateFrance()', 60000);
@@ -272,18 +266,22 @@ $(document).ready(function(){
   $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
   fResize();
 
-  console.log('event programming started!');
+  console.log('*** event programming started! ***');
+
   $('#message').on('mouseup', fResize);
   
-
-
   $('#bS').on('click', function(){
- //   $('#name').val($.trim($('#name').val()));
-    if ($('#room').val().length > 0) {  //todo vers id
+    if ($('#room').val().length > 0) {
       ws.send(JSON.stringify({
-        type: 'talk',
-    //    name: $('#name').val(),
+        type: 'chat',
         message: $('#message').val()
+      }));
+      ws.send(JSON.stringify({
+        type: 'typing',
+        action: 0,
+        icon: '',
+        pass: $('#pass').val(),
+        message: navigator.tell
       }));
       $('#message').focus();
       $('#message').val('');
@@ -292,7 +290,35 @@ $(document).ready(function(){
   });
 
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
+  
+  $('#message').on('keypress', function(){
+    var action = 0;
+    if ($('#message').length == 0) action = 0; else action = 1;
+    ws.send(JSON.stringify({
+      type: 'typing',
+      action: action,
+      icon: '',
+      pass: $('#pass').val(),
+      message: navigator.tell
+    }));
+  });
+  
+  var timer = null;
+  $('#message').on('keydown', function(){
+    clearTimeout(timer); 
+    timer = setTimeout(doStuff, 2000);
+  });
 
+  function doStuff() {
+    ws.send(JSON.stringify({
+      type: 'typing',
+      action: 0,
+      icon: '',
+      pass: $('#pass').val(),
+      message: navigator.tell
+    }));
+  }
+  
   window.addEventListener('devtoolschange', event => {
     if (event.detail.isOpen) {
       console.log('Devtools');
@@ -332,11 +358,8 @@ $(document).ready(function(){
     $("#bFullChat").show();
   });
 
-  // Modale de connexion
-  $('#m_login').modal({backdrop: false, keyboard: false})
-  $('#content').hide();
-
+  $('#bCode').on('click', function(){ $('#m_code').show(100); });
+  
   console.log('event programming done!');
   console.log('ready!');
 });
-// DOCUMENT READY ---------------------------------

@@ -22,6 +22,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.0/umd/popper.min.js"></script>
   <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js" integrity="sha256-oj52qvIP5c7N6lZZoh9z3OYacAIOjsROAcZBHUaJMyw=" crossorigin="anonymous"></script>
+
+  
   <script>
     var browser;
     var agent = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
@@ -98,24 +100,37 @@
       </ul>
     </div>
     <div id="input-div">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-        <textarea id="message" name="message" class="form-control" autocomplete="off" placeholder="Ecrire votre message ici" rows="3"></textarea>
-        <div class="input-group-btn">
-          <button id="bS" class="btn btn-primary"><i class="glyphicon glyphicon-share"></i></button> &nbsp;
-          <button id="bF" class="btn btn-success"><i class="glyphicon glyphicon-file"></i></button>
-          <a tabIndex="0" id="bH" class="btn btn-default" role="button" data-container="body" data-trigger="focus" data-original-title="<strong>Hint</strong>" 
-            data-content="<ul style='padding-left:10px;'>
-              <li>Utilisez <kbd>Shift</kbd> + <kbd>Enter</kbd> pour envoyer votre message</li>
-              <li>Cliquez &#160;<div id='bmodaleusers' class='glyphicon glyphicon-user'></div>, pour voir les usagers connectés</li>
-              <li>Pour maintenir le formatage de votre msg, vous pouvez utiliser la balise html <code>&#60; pre > ... &#60; /pre ></code></li>
-              <li>Utilisez <kbd>Ctrl</kbd> + <kbd>0</kbd> pour remplacer les <code>&#60;</code> par <code>& #60;</code></li>
-              <li>Utilisez <kbd>Ctrl</kbd> + <kbd>9</kbd> pour inclure le msg dans une balise <code>&#60; pre &#62;</code></li>
-              <li>Utilisez <span class='racc'><kbd>Ctrl</kbd> + <kbd>8</kbd></span> pour formater le msg (code C, Java..) dans une balise <code>&#60; pre &#62;</code></li>
-              <li>Utilisez les touches <span class='racc'><kbd>Windows</kbd> + <kbd>;</kbd></span> pour les émoicons</li>
-              </ul>" data-toggle="popover" data-placement="top">
-            <span class="glyphicon glyphicon-info-sign"></span>
-          </a>
+      <div class="div1" style="display: flex;">
+        <!--<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>-->
+        <div style="flex: 2;">
+          <textarea id="message" name="message" class="form-control" autocomplete="off" placeholder="Ecrire votre message ici" rows="3"></textarea>
+        </div>
+        <div style="display: flex; justify-content: center; flex-direction: column;border-radius:30px !important;">
+          <div class="" style=" display: flex;flex-direction: row;">
+            <button id="bF" class="btn  b1"><i class="glyphicon glyphicon-file" data-toggle="tooltip" data-placement="top" title="Envoyer une image"></i></button>
+            <button onclick="return false;" tabIndex="0" id="bH" class="btn b1" role="button" data-container="body" data-trigger="focus" data-original-title="<strong>Hint</strong>" 
+              data-content="<ul style='padding-left:10px;'>
+                <li>Utilisez <kbd>Shift</kbd> + <kbd>Enter</kbd> pour envoyer votre message</li>
+                <li>Pour maintenir le formatage de votre msg, vous pouvez utiliser la balise html <code>&#60; pre > ... &#60; /pre ></code></li>
+                <li>Utilisez <kbd>Ctrl</kbd> + <kbd>0</kbd> pour remplacer les <code>&#60;</code> par <code>& #60;</code></li>
+                <li>Utilisez <kbd>Ctrl</kbd> + <kbd>9</kbd> pour inclure le msg dans une balise <code>&#60; pre &#62;</code></li>
+                <li>Utilisez <span class='racc'><kbd>Ctrl</kbd> + <kbd>8</kbd></span> pour formater le msg (code C, Java..) dans une balise <code>&#60; pre &#62;</code></li>
+                <li>Utilisez les touches <span class='racc'><kbd>Windows</kbd> + <kbd>;</kbd></span> pour les émoicons</li>
+                </ul>" data-toggle="popover" data-placement="top">
+              <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="Hint"></i>
+              </button>
+          </div>
+          <div class="" style="display: flex;flex-direction: row;">
+            <button onclick="return false;" id="bmodaleusers" class="btn b1" data-toggle="tooltip" data-placement="top" title="Voir les usagers connectés"><i class="glyphicon glyphicon-user"></i></button>
+            <button id="bCode" onclick="return false;" class="btn b1">
+              <svg data-toggle="tooltip" data-placement="top" title="Partage de code" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div>
+          <button id="bS" class="btn" data-toggle="tooltip" data-placement="top" title="Envoyer le message"><i class="glyphicon glyphicon-share"></i></button>
         </div>
       </div>
     </div>
@@ -156,6 +171,7 @@
 <div id="m_aye" class="modal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id="m_sc" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id="m_login" class="modal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div id="m_code" class="" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
 </body>
 </html>
