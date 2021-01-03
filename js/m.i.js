@@ -59,3 +59,16 @@ $('#bmSubmit').on('click', function(){
   }));
   $("#m_i").modal('hide');
 });
+
+//ceci resize modal-content
+$('#m_i_mc').resizable({ 
+  //alsoResize: ".modal-dialog",
+  minHeight: 200,
+  minWidth: 300
+});
+$('#m_i_md').draggable(); //modal-dialog
+
+//ceci est-ce necessaire ?
+$('#m_i').on('show.bs.modal', function() {
+  $(this).find('.modal-body').css({'max-height': '100%'});
+});
