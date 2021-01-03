@@ -272,17 +272,14 @@ $(document).ready(function(){
   $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
   fResize();
 
-  console.log('event programming started!');
+  console.log('*** event programming started! ***');
+
   $('#message').on('mouseup', fResize);
   
-
-
   $('#bS').on('click', function(){
- //   $('#name').val($.trim($('#name').val()));
-    if ($('#room').val().length > 0) {  //todo vers id
+    if ($('#room').val().length > 0) {
       ws.send(JSON.stringify({
-        type: 'talk',
-    //    name: $('#name').val(),
+        type: 'chat',
         message: $('#message').val()
       }));
       $('#message').focus();
@@ -293,6 +290,16 @@ $(document).ready(function(){
 
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
 
+  $('#message').on('keypress', function(){ 
+    //doit etre optimiser
+    ws.send(JSON.stringify({
+      type: 'typing',
+      action: 1,
+      icon: '',
+      pass: $('#pass').val(),
+      message: navigator.tell
+    }));
+  
   window.addEventListener('devtoolschange', event => {
     if (event.detail.isOpen) {
       console.log('Devtools');
