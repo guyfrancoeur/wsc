@@ -44,6 +44,7 @@ function resizeModaleUsagers(){
 }
 
 window.onresize = resizeModaleUsagers;
+$('#message').on('focus blur', function(){ resizeModaleUsagers(); }); // Pour permettre le resize modale usager quand clavier du mobile est déployé
 
 $(window).on('resize', function(){
   var win = $(this); //this = window
