@@ -61,14 +61,14 @@ $('#bmSubmit').on('click', function(){
 });
 
 //ceci resize modal-content
-$('#m_i_mc').resizable({ 
+//$('#m_i_mc').resizable({ 
   //alsoResize: ".modal-dialog",
-  minHeight: 200,
-  minWidth: 300
-});
+//  minHeight: 200,
+//  minWidth: 300
+//});
 $('#m_i_md').draggable(); //modal-dialog
 
 //ceci est-ce necessaire ?
-$('#m_i').on('show.bs.modal', function() {
-  $(this).find('.modal-body').css({'max-height': '100%'});
-});
+//$('#m_i').on('show.bs.modal', function() {
+//  $(this).find('.modal-body').css({'max-height': '100%'});
+//});
