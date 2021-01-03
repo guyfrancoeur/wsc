@@ -57,7 +57,7 @@ function stopShare(){
   $("#modaleSC").css({"width": "", "height": "", "max-width": "", "max-height": ""});
   //$("#image").css({"max-height": "50vh","height": ""});
   $("#video").css({"max-height": "50vh","height": ""});
-  $('#nresizeWindow').slider('refresh');
+  $('#nresizeWindow').bootstrapSlider('refresh');
   var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
   if (fullscreenElement != null) exitFunction();
   $("#m_sc").modal('hide'); // femeture du partage.
@@ -134,7 +134,7 @@ async function getMedia(constraints){
 }
 
 // Resize window
-$("#nresizeWindow").slider({formatter: function(value) {return value + "%";}});
+$("#nresizeWindow").bootstrapSlider({formatter: function(value) {return value + "%";}});
 $("#nresizeWindow").change(function(){
   switch(parseInt(this.value)){
     case 50:
@@ -157,7 +157,7 @@ $("#nresizeWindow").change(function(){
 });
 
 //Scale du canvas en fonction de la capture 50% 75% 100% ; default 75%
-$("#nresizeCanvas").slider({formatter: function(value) {return value + "%";}});
+$("#nresizeCanvas").bootstrapSlider({formatter: function(value) {return value + "%";}});
 $("#nresizeCanvas").change(function(){
   scale = parseInt(this.value) / 100;
   canvas.width = video.videoWidth * scale;
@@ -165,13 +165,13 @@ $("#nresizeCanvas").change(function(){
 });
 
 //pureté image (cmpression jpg) 20% @ 100% step 20% :default 80%
-$("#npurete").slider({formatter: function(value) {return value + "%";}});
+$("#npurete").bootstrapSlider({formatter: function(value) {return value + "%";}});
 $("#npurete").change(function(){
   imgQuality = parseInt(this.value) / 100;
 });
 
 //refresh rate en ms, 200ms @ 2000ms step 50ms : default 500ms
-$("#nrefresh").slider({formatter: function(value) {return value + "ms";}});
+$("#nrefresh").bootstrapSlider({formatter: function(value) {return value + "ms";}});
 $("#nrefresh").change(function(){
   frameRate = parseInt(this.value);
   clearInterval(frameShare);
@@ -200,7 +200,7 @@ function exitFunction(){
   $("#video").css({"max-height": "50vh","height": ""});
   $(".close, #sliderReceveur").show();
   $("#bExitFull").hide();
-  $('#nresizeWindow').slider('refresh');
+  $('#nresizeWindow').bootstrapSlider('refresh');
   document.exitFullscreen().catch(function(error) {console.log(error.message);}); // Exit fullScreen
 }
 
