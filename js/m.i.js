@@ -54,7 +54,6 @@ function CLIPBOARD_CLASS(elem, autoresize) {
 $('#bmSubmit').on('click', function(){
   ws.send(JSON.stringify({
     type: 'img',
-    name: $('#name').val(),
     message: $('#preview').attr('src')
   }));
   $("#m_i").modal('hide');
@@ -65,5 +64,5 @@ $('#m_i_md').draggable(); //modal-dialog
 
 //afin de ne pas avoir un modal qui va trop bas
 $('#m_i').on('show.bs.modal', function() {
-  $(this).find('.modal-body').css({'max-height': '100%'});
+  $(this).find('.modal-body').css({'max-height': '80%'});
 });
