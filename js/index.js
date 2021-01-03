@@ -302,7 +302,8 @@ $(document).ready(function(){
       pass: $('#pass').val(),
       message: navigator.tell
     }));
-  
+  });
+                   
   window.addEventListener('devtoolschange', event => {
     if (event.detail.isOpen) {
       console.log('Devtools');
