@@ -306,9 +306,9 @@ $(document).ready(function(){
   });
   
   var timer = null;
-  $('#message').keydown(function(){
+  $('#message').on('keydown', function(){
     clearTimeout(timer); 
-    timer = setTimeout(doStuff, 2000)
+    timer = setTimeout(doStuff, 2000);
   });
 
   function doStuff() {
