@@ -290,7 +290,7 @@ $(document).ready(function(){
     }
   });
 
-  $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
+  $('#bF').on('click', function(){ $('#m_i').show(200); });
   
   $('#message').on('keypress', function(){
     var action = 0;
