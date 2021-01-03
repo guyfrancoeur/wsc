@@ -154,7 +154,7 @@ function init() {
     if (evt.data != "") {
       data = JSON.parse(evt.data);
       switch (data.type) {
-        case 'lnk' : $('#count').text(data.count); /*$('#users').empty();*/ $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
+        case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
         case 'tlk' :
           if (!document.hasFocus()) { newUpdate(); a2.play(); }
           var text = data.message;
