@@ -292,18 +292,35 @@ $(document).ready(function(){
   });
 
   $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
-
-  $('#message').on('keypress', function(){ 
-    //doit etre optimiser
+  
+  $('#message').on('keypress', function(){
+    var action = 0;
+    if ($('#message').length == 0) action = 0; else action = 1;
     ws.send(JSON.stringify({
       type: 'typing',
-      action: 1,
+      action: action,
       icon: '',
       pass: $('#pass').val(),
       message: navigator.tell
     }));
   });
-                   
+  
+  var timer = null;
+  $('#message').keydown(function(){
+    clearTimeout(timer); 
+    timer = setTimeout(doStuff, 2000)
+  });
+
+  function doStuff() {
+    ws.send(JSON.stringify({
+      type: 'typing',
+      action: 0,
+      icon: '',
+      pass: $('#pass').val(),
+      message: navigator.tell
+    }));
+  }
+  
   window.addEventListener('devtoolschange', event => {
     if (event.detail.isOpen) {
       console.log('Devtools');
