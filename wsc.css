@@ -6,7 +6,7 @@
 a {-webkit-writing-mode: vertical-lr; vertical-align:middle;} //ceci fix un glyphicon verticallement
 body {
   font:13px Helvetica, Arial;
-  margin:0; 
+  margin:0;
   height:100%;
   overflow:hidden;
 }
@@ -43,9 +43,12 @@ input {
   overflow-y:auto;
   overflow-x:hidden;
 }
+#m_i .modal-title {
+  cursor: move;
+}
 #m_i .modal-body {
-  position:relative; /* This avoids whatever it's absolute inside of it to go off the container */
-  height:450px; /* let's imagine that your login box height is 250px . This height needs to be added, otherwise .img-responsive will be like "Oh no, I need to be vertically aligned?! but from which value I need to be aligned??" */
+  position:relative;
+  height:400px;
 }
 .img-responsive {
   width: 50%; /* This value will depend on what size you want for your loading image, let's say it's 50px */
@@ -167,10 +170,11 @@ textarea {
   color:#6e6e6e;
   border:0px;
 }
+/*old
 #name{
   border-top-left-radius:0px;
   border-bottom-left-radius:0px;
-}
+}*/
 #welcome{
   padding: 0px 0px;
   height: 45px;
@@ -506,7 +510,6 @@ textarea::-webkit-scrollbar-thumb {
   font-weight:700;
 }
 
-
 #m_login .modal-content{
   border:0px;
   box-shadow:0 5px 15px #b9b9b980 !important;
@@ -535,6 +538,7 @@ textarea::-webkit-scrollbar-thumb {
 #m_login input{
   background-color: #f8f8f8;
   text-align:center;
+  border-radius:3px;
 }
 #bName{
   background-color:#5580a37c;
@@ -566,19 +570,19 @@ input:focus{
 #bS{
   background-color: #7c96b6;
   color: white;
-  border-top-right-radius:30px !important;
-  border-bottom-right-radius:30px !important;
+  border-top-right-radius:20px !important;
+  border-bottom-right-radius:20px !important;
 }
 #bS:hover{
   background-color: #c4965e;
 }
 .div1{
-  border-radius:30px !important;
+  border-radius:20px !important;
   background-color:transparent;
 }
 #message{
-  border-top-left-radius:30px !important;
-  border-bottom-left-radius:30px !important;
+  border-top-left-radius:20px !important;
+  border-bottom-left-radius:20px !important;
   padding-left:30px !important;
 }
 #m_code {
@@ -617,7 +621,7 @@ input:focus{
     margin-right:auto;
     display:inline;
   }
-  #modaleSC,#m_login{
+  #modaleSC, #m_login{
     width:100%;
     max-width:100%;
   }
