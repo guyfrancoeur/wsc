@@ -146,8 +146,20 @@ function init() {
       pass: $('#pass').val(),
       message: navigator.tell
     }));
+    // nouveau
+    $("#message").attr("placeholder","Écrire votre message ici (room #" + $('#room').val()+")");
+    $('#m_i').load('./m.i.html');
+    $('#m_aye').load('./m.aye.html');
+    $('#m_sc').load('./m.sc.html');
+    $('#m_code').load('./m.code.html');
+    $('#welcome, #divGif, #bExitFullChat').hide();  //necessaire ?
+    $('[data-toggle="popover"]').popover({html: true});
+    $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
+    $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
+    $('#content').show();
+    $('#m_login').modal('hide');
+    $('body').removeClass("grey");
     fResize();
-    $("#message").attr("placeholder","Écrire votre message ici (room #" + $('#room').val()+")")
   }
   
   ws.onmessage = function(evt) {
@@ -228,10 +240,6 @@ function showDateFrance() {
 
 function login(){
   if ($('#room').val().length > 0 && $('#pass').val().length > 0) {
-    $('#content').show();
-    $('#m_login').modal('hide');
-    $('body').removeClass("grey");
-//   pseudo = $('#name').val();
     ws.onopen = null;
     startWs = new Date().getTime();
     ws = new WebSocket("wss://www.salutem.co:"+ $('#room').val() +"/");
@@ -243,16 +251,11 @@ function login(){
 // ************************************************  DOCUMENT READY   **************************************************
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
-  $('#m_i').load('./m.i.html');
-  $('#m_aye').load('./m.aye.html');
-  $('#m_sc').load('./m.sc.html');
-  $('#m_login').load('./m.login.html');
-  $('#m_code').load('./m.code.html');
-
-  $('#m_code').hide();
-  $('#m_login').modal({backdrop: false, keyboard: false})
+  
   $('#content').hide();
-
+  $('#m_login').load('./m.login.html');
+  $('#m_login').modal({backdrop: false, keyboard: false});
+  
   showDateQuebec();
   showDateFrance();  
 
@@ -260,12 +263,6 @@ $(document).ready(function(){
   setInterval('showDateFrance()', 60000);
   
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
-  $('#welcome, #divGif, #bExitFullChat').hide();
-  $('[data-toggle="popover"]').popover({html: true});
-  $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
-  $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
-  fResize();
-
   console.log('*** event programming started! ***');
 
   $('#message').on('mouseup', fResize);
