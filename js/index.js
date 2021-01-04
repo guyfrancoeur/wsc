@@ -138,7 +138,6 @@ function init() {
       type: 'link',
       message: navigator.tell
     }));
-    $('#welcome').show();
     $('#croom').text($('#room').val());
     ws.send(JSON.stringify({
       type: 'name',
@@ -152,7 +151,7 @@ function init() {
     $('#m_aye').load('./m.aye.html');
     $('#m_sc').load('./m.sc.html');
     $('#m_code').load('./m.code.html');
-    $('#welcome, #divGif, #bExitFullChat').hide();  //necessaire ?
+    $('#bExitFullChat, #m_code').hide();  //necessaire ?
     $('[data-toggle="popover"]').popover({html: true});
     $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
     $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
