@@ -22,14 +22,21 @@
 ### Requis opérationnel
  - Un serveur (similaire a NodeJS) pour le dialogue entre les utilisateurs.
 
+### Réalisations
+#### v3.1
++ [x] 3 x slider visuels dans la modale de partage (sharing).
+  - [x] a) scale du canvas en fonction de la capture 20% @ 100%  step de 10% ; default 70%;
+  - [x] b) pureté image (compression jpg) 20% @ 100% step 10% :default 70%;
+  - [x] c) refresh rate en ms, 100ms @ 2000ms step 100ms : default 500ms;
++ [x] Afficher la personne qui est en mode écriture d'un message.
++ [x] Modale login.
++ [x] Changement visuel dans la section base (icons, boite message).
++ [x] Modale qui bouge ou redimensionable.
 
-### TODO
+v4.0
 
-+ 3 x slider visuels dans la modale de partage (sharing).
- - [x] a) scale du canvas en fonction de la capture 20% @ 100%  step de 10% ; default 70%
- - [x] b) pureté image (compression jpg) 20% @ 100% step 10% :default 70%
- - [x] c) refresh rate en ms, 100ms @ 2000ms step 100ms : default 500ms
-+ [x] Afficher qui est en mode écriture d'un message.
+
+### Backlog
 
 + Barre v4
   + [ ] Autoriser le son, video (defaut non, checkbox dans la barre).
@@ -41,10 +48,12 @@
   + [ ] Afficheur de code source en live (avec le formatage couleurs).
   + [ ] Message privé.
   + [ ] Notifier le moderateur lorsque la main est levée (bruit).
-+ OSE (fonctionnalité)
++ Gestion des interventions et partage d'écran
   - [ ] Audio
-  - [ ] Video
-+ [x] Modale login
+  - [ ] Vidéo
+  - [ ] picture in picture
+
+### Future
 + [ ] Migration vers bootstap 4
 
 
