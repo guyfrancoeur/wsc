@@ -146,7 +146,7 @@ function init() {
       message: navigator.tell
     }));
     // nouveau
-    $("#message").attr("placeholder","Écrire votre message ici (room #" + $('#room').val()+")");
+    $("#message").attr("placeholder","Écrire votre message ici  (room #" + $('#room').val()+") \t[Shift + Enter pour envoyer le message]");
     $('#m_i').load('./m.i.html');
     $('#m_aye').load('./m.aye.html');
     $('#m_sc').load('./m.sc.html');
