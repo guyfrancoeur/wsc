@@ -260,7 +260,6 @@ $(document).ready(function(){
   setInterval('showDateFrance()', 60000);
   
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
-  $('#room').focus();
   $('#welcome, #divGif, #bExitFullChat').hide();
   $('[data-toggle="popover"]').popover({html: true});
   $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
@@ -361,6 +360,7 @@ $(document).ready(function(){
 
   $('#bCode').on('click', function(){ $('#m_code').show(100); });
   
+  $('#room').focus();
   console.log('event programming done!');
   console.log('ready!');
 });
