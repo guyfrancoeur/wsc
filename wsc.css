@@ -504,10 +504,10 @@ code{
   border-radius:3px;
 }
 .grey{
-  background-color:#fafafa;
+  background-color:#ebebeb;
 }
 #m_login h3{
-  color:#5580a3b3;
+  color:#6a8ba5;
   letter-spacing:2px;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -525,12 +525,13 @@ code{
   border-radius:5px;
 }
 #bName{
-  background-color:#5580a37c;
-  color:#ffffff;
+  background-color:#d2d5e2;
+  color:#4f5874;
   padding:10px 30px;
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight:600;
 }
 #bName:hover{
   background-color:#4066859c;
