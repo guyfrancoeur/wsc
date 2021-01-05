@@ -262,23 +262,18 @@ code{
 }
 
 /* Scrollbar */
-*::-webkit-scrollbar { width:5px; }
+*::-webkit-scrollbar { width:10px;}
 *::-webkit-scrollbar-track {
   background-color:#ffffff;
-  border-radius:0px;
+  border-radius:10px;
 }
 *::-webkit-scrollbar-thumb {
-  background-color:#b2c0cc;
-  border-radius:0px;
+  background-color:#b1b9c3;
+  border-radius:10px;
 }
-#content::-webkit-scrollbar { width:13px; }
-#content::-webkit-scrollbar-track, #content::-webkit-scrollbar-thumb { border-radius:5px; }
 #users{ margin:0px 7px; }
-#users::-webkit-scrollbar-track { border-radius:50px; }
-#users::-webkit-scrollbar-thumb {
-  background-color:#ebebeb;
-  border-radius:50px;
-}
+#users::-webkit-scrollbar-track, #users::-webkit-scrollbar-thumb { border-radius:50px; }
+#users::-webkit-scrollbar-thumb { background-color:#ebebeb; }
 
 #divPrev{
   margin-left:auto;
