@@ -221,20 +221,18 @@ function copyToClipboard() {
   document.body.removeChild(aux);
 }
 
-// Horloge Québec
-function showDateQuebec() {
-  var date = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Montreal"}));
-  var h = ('0' + date.getHours()).slice(-2);
-  var m = ('0' + date.getMinutes()).slice(-2);
-  $("#heureQuebec").html(h + ':' + m);
-}
+function horloges() {
+  // Heure Québec
+  var dateQC = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Montreal"}));
+  var hQC = ('0' + dateQC.getHours()).slice(-2);
+  var mQC = ('0' + dateQC.getMinutes()).slice(-2);
+  $("#heureQuebec").html(hQC + ':' + mQC);
 
-// Horloge France
-function showDateFrance() {
-  var date = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Paris"}));
-  var h = ('0' + date.getHours()).slice(-2);
-  var m = ('0' + date.getMinutes()).slice(-2);
-  $("#heureFrance").html(h + ':' + m);
+  // Heure France
+  var dateFR = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Paris"}));
+  var hFR = ('0' + dateFR.getHours()).slice(-2);
+  var mFR = ('0' + dateFR.getMinutes()).slice(-2);
+  $("#heureFrance").html(hFR + ':' + mFR);
 }
 
 function login(){
@@ -255,11 +253,8 @@ $(document).ready(function(){
   $('#m_login').load('./m.login.html');
   $('#m_login').modal({backdrop: false, keyboard: false});
   
-  showDateQuebec();
-  showDateFrance();  
-
-  setInterval('showDateQuebec()', 60000);// Horloges
-  setInterval('showDateFrance()', 60000);
+  horloges();
+  setInterval('horloges()', 60000);
   
   //if (devtools.isOpen) $('#m_aye').modal({backdrop: 'static', keyboard: false});
   console.log('*** event programming started! ***');
