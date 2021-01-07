@@ -141,6 +141,7 @@ function init() {
     $('#croom').text($('#room').val());
     ws.send(JSON.stringify({
       type: 'name',
+      room: $('#room').val(),
       icon: '',
       pass: $('#pass').val(),
       message: navigator.tell
@@ -270,6 +271,7 @@ $(document).ready(function(){
       ws.send(JSON.stringify({
         type: 'typing',
         action: 0,
+        room: $('#room').val(),
         icon: '',
         pass: $('#pass').val(),
         message: navigator.tell
@@ -288,6 +290,7 @@ $(document).ready(function(){
     ws.send(JSON.stringify({
       type: 'typing',
       action: action,
+      room: $('#room').val(),
       icon: '',
       pass: $('#pass').val(),
       message: navigator.tell
@@ -304,6 +307,7 @@ $(document).ready(function(){
     ws.send(JSON.stringify({
       type: 'typing',
       action: 0,
+      room: $('#room').val(),
       icon: '',
       pass: $('#pass').val(),
       message: navigator.tell
