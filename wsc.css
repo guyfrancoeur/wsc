@@ -600,6 +600,23 @@ input:focus{
   -webkit-appearance:none;
   box-shadow: none !important;
 }
+.kbd {
+  background-color: #646464;
+  border-radius: 3px;
+  border: 1px solid #5a5959;
+  box-shadow: 0 1px 1px #918f8fcc, 0 2px 0 0 #878787b3 inset;
+  color: #ebebeb;
+  font-size: .85em;
+  display: inline-block;
+  font-size: .85em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+.ulHint{
+  padding-left:20px;
+}
 @media screen and (min-width: 768px){
   #m_login .modal-dialog{
     width: 450px;
