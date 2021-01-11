@@ -42,7 +42,7 @@ v4.0
   + [ ] Autoriser le son, video (defaut non, checkbox dans la barre).
   + [ ] Dès que quelqu'un ouvre le micro, sa cam est activé.
   + [x] Enlever le pseudo de l'écran.
-  + [ ] Afficher la latence en ms.
+  + [x] Afficher la latence en ms.
 + Mode modérateur
   + [ ] Désactivation micro.
   + [ ] Afficheur de code source en live (avec le formatage couleurs).
