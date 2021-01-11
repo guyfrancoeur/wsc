@@ -2,7 +2,7 @@ var a1 = new Audio('./consequence.mp3');
 var a2 = new Audio('./harp.mp3');
 var start = new Date().getTime();
 var ws = new WebSocket("wss://echo.websocket.org");
-ws.onopen = function() { $('#cLatence1').text("echo "+ (new Date().getTime() - start) +"ms"); ws.close(); $('#bName').attr('disabled', false); };
+ws.onopen = function() { $('#cLatence1').text( (new Date().getTime() - start) +"ms"); ws.close(); $('#bName').attr('disabled', false); };
 var elem = document.getElementById('messages'); //pour scroll-auto
 var pseudo; // TODO (a faire disparaitre)
 
