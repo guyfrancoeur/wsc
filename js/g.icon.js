@@ -61,7 +61,7 @@ function fIcon(i) {
   ws.send(JSON.stringify({
     type: 'name',
     icon: v,
-    name: $('#name').val(),
+    room: $('#room').val(),
     pass: $('#pass').val(),
     message: navigator.tell
   }));
