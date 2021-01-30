@@ -131,7 +131,18 @@ $('#bmodaleusers').click(function() {
   $('#bmodaleusers').tooltip('hide');
 });
 
+const heartbeat = (ws, delay) => {
+    clearTimeout(ws.pingTimeout);
+
+    ws.pingTimeout = setTimeout(() => {
+        ws.terminate();
+    }, delay);
+}
+
+const ping = () => { heartbeat(ws, delay) }
+
 function init() {
+  ws.on('ping', ping);
   ws.onopen = function() {
     console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     $('#cLatence2').text( (new Date().getTime() - startWs) +"ms" );
