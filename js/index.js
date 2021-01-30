@@ -144,6 +144,7 @@ const ping = () => { heartbeat(ws, delay) }
 function init() {
   ws.on('ping', ping);
   ws.onopen = function() {
+    ping();
     console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     $('#cLatence2').text( (new Date().getTime() - startWs) +"ms" );
     ws.send(JSON.stringify({
