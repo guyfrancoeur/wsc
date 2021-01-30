@@ -130,7 +130,7 @@ $('#bmodaleusers').click(function() {
   $("#m_start").show();
   $('#bmodaleusers').tooltip('hide');
 });
-
+/*
 const heartbeat = (ws, delay) => {
     clearTimeout(ws.pingTimeout);
 
@@ -140,11 +140,11 @@ const heartbeat = (ws, delay) => {
 }
 
 const ping = () => { heartbeat(ws, delay) }
-
+*/
 function init() {
-  ws.on('ping', ping);
+  //ws.on('ping', ping);
   ws.onopen = function() {
-    ping();
+    //ping();
     console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     $('#cLatence2').text( (new Date().getTime() - startWs) +"ms" );
     ws.send(JSON.stringify({
