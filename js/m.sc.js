@@ -3,6 +3,16 @@ var frameRate = 500;
 var imgQuality = 0.8;
 var scale = .8;
 
+$('#m_sc .modal-content').resizable({minHeight: 157, minWidth: 498});
+$('#m_sc .modal-dialog').draggable({handle: $('#div-move')});
+
+$("#m_sc .modal-content").on('click', function () {
+  if($("#m_sc").css("z-index") == 200){
+    $("#m_sc").css("z-index","201");
+    $("#m_code").css("z-index","200");
+  }
+});
+
 function initWsc() {
   wsc.onopen = function() {
     console.log("onopen of", wsc.url, "in", (new Date().getTime() - startWsc), "ms");
@@ -12,7 +22,7 @@ function initWsc() {
       $("#bShare,#sliderEmetteur, #divkbytes").hide();
       $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
       $("#video, #sliderReceveur").show();
-      $("#m_sc").modal();
+      $("#m_sc").modal({backdrop: false, keyboard: false});
     }
   }
   
@@ -26,7 +36,7 @@ function initWsc() {
 
         case 'start':
           console.log("case start wsc");
-          $("#m_sc").modal(); //ouvrir la modale pour mettre le partage.
+          $("#m_sc").modal({backdrop: false, keyboard: false}); //ouvrir la modale pour mettre le partage.
           $("#sliderReceveur, #video").show();
           $("#bShare, #sliderEmetteur, #divkbytes").hide();
           $("#video").css({"max-height": "50vh","height": "50vh"});
@@ -94,7 +104,7 @@ const video = document.getElementById('video');
 var constraints = { video: { frameRate: { ideal: 8, max: 12 } } };
 
 $('#bshareScreen').on('click', function(){
-  $('#m_sc').modal('show'); return false;
+  $('#m_sc').modal({backdrop: false, keyboard: false}); return false;
 });
 
 $('#bShare').on('click', function(){
@@ -171,7 +181,7 @@ $("#nrefresh").change(function(){
 $('#bFull').on('click', function(){
   // FullScreen event
   document.documentElement.requestFullscreen().catch(function(error) {console.log(error.message);});
-  $("#modaleSC").addClass("modal-full");
+  $("#m_sc").addClass("modal-full");
   $("#modaleSC").css({"min-width": "", "min-height": "", "margin":"0px"});
   $("#video").css({"max-height": "95vh","height": "95vh"});
   $(".close, #sliderReceveur").hide();
@@ -183,7 +193,7 @@ $('#bExitFull').on('click', function(){
 });
 
 function exitFunction(){
-  $("#modaleSC").removeClass("modal-full");
+  $("#m_sc").removeClass("modal-full");
   $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh", "margin":"10px auto"});
   $("#video").css({"max-height": "50vh","height": ""});
   $(".close, #sliderReceveur").show();

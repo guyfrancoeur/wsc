@@ -59,8 +59,8 @@ $('#bmSubmit').on('click', function(){
   $("#m_i").modal('hide');
 });
 
-$('#m_i_mc').resizable({minHeight: 380, minWidth: 400}); //ceci resize modal-content
-$('#m_i_md').draggable(); //modal-dialog
+$('#m_i_mc').resizable({minHeight: 380, minWidth: 483}); //ceci resize modal-content
+$('#m_i_md').draggable({handle: $('.modal-header')}); //modal-dialog
 
 //afin de ne pas avoir un modal qui va trop bas
 $('#m_i').on('show.bs.modal', function() {

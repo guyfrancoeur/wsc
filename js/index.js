@@ -16,15 +16,13 @@ $(window).on("blur focus", function(e) {
   ico.href = './favicon.ico';
 });
 
-//Fermeture en cliquant sur la croix
-$('#closeToast').click(function() { $('#m_start').hide();});
 
 function fResize() {
   //$('#bS, #bF, #bH').height($('#message').height());
   $('#bS').height($('#message').height());
   $('#message').css('width','100%');
   $('#msgs, #messages').height($(window).height() - $('#welcome').height() - $('#input-div').height() - 40);
-  $('#m_start').css('top','6rem');
+  $('#m_user').css('top','4rem');
   resizeModaleUsagers();
 }
 
@@ -127,7 +125,7 @@ function KeyPress(e) {
 }
 
 $('#bmodaleusers').click(function() {
-  $("#m_start").show();
+  $("#m_user").show({backdrop: false, keyboard: true});
   $('#bmodaleusers').tooltip('hide');
 });
 
@@ -135,6 +133,7 @@ $('#bmodaleusers').click(function() {
 
 function init() {
   ws.onopen = function() {
+    $('#m_user').modal({backdrop: false, keyboard: true});
     //ping();
     console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     $('#cLatence2').text( (new Date().getTime() - startWs) +"ms" );
@@ -253,8 +252,15 @@ function login(){
 // ************************************************  DOCUMENT READY   **************************************************
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
-  
   $('#content').hide();
+  
+  // Laisser modale apparente et rendre background utilisable
+  $(".enable-back").on('shown.bs.modal', function () {
+    $("body").removeClass("modal-open");			
+    $(this).removeClass("modal");
+    $(document).off('focusin.modal');
+  });
+
   $('#m_login').load('./m.login.html');
   $('#m_login').modal({backdrop: false, keyboard: false});
   
@@ -286,8 +292,8 @@ $(document).ready(function(){
     }
   });
 
-  $('#bF').on('click', function(){ $('#m_i').modal('show'); return false; });
-  
+  $('#bF').on('click', function(){ $('#m_i').modal({backdrop: true}); return false; });  
+
   $('#message').on('keypress', function(){
     var action = 0;
     if ($('#message').length == 0) action = 0; else action = 1;
@@ -330,15 +336,7 @@ $(document).ready(function(){
   $(window).keyup(function(e) {
     if(e.keyCode == 44) copyToClipboard();
   });
-  
-  // Superposer plusieurs modales
-  $(document).on('show.bs.modal', '.modal', function() {
-    var zIndex = 1040 + (10 * $('.modal:visible').length);
-    $(this).css('z-index', zIndex);
-    setTimeout(function() {
-      $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-    }, 0);
-  });
+m_i
   
   $('#bdeconnexion').on('click', function(){
     ws.close();
@@ -357,7 +355,7 @@ $(document).ready(function(){
     $("#bFullChat").show();
   });
 
-  $('#bCode').on('click', function(){ $('#m_code').show(100); });
+  $('#bCode').on('click', function(){ $('#m_code').modal({backdrop: false, keyboard: true})});  
   
   $('#room').focus();
   console.log('event programming done!');

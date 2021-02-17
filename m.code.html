@@ -1,19 +1,25 @@
-<div class="md">
+<div class="modal-dialog" role="document ">
   <div class="modal-content">
-    <div id="divHeader" class="modal-header" style="height:50px;">
-      <button id="closeCode" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title" id="myModalLabel">
-        <span style="position:absolute;top:5px;left:7px;color:#f0f0f0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
-            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
-          </svg>
-        </span>
-        <span>Partage de code</span>
-      </h4>
+    <div id="divHeader" class="modal-header" style="height:50px;cursor:move;">
+      <span style="position:absolute;top:5px;left:7px;color:#f0f0f0" class="col">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+          <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+        </svg>
+      </span>
+      <h4 class="modal-title m-auto" id="myModalLabel" style="line-height:1;">Partage de code</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute;right:15px;">&times;</button>
     </div>
     <div class="modal-body" style="flex-grow:1;">
       <form style="height:100%;">
-        <textarea class="form-control" id="message-text" style="height:100%;"></textarea>
+        <pre id="code-shared" class="linenums prettyprint">#include &#60stdio.h>
+#include &#60stdlib.h>
+#include "liste.h"
+            
+void init_liste (struct liste* L){
+  L->tete = NIL;
+  L->nbelem = 0;
+}
+          </pre>
       </form>
     </div>
   </div>
