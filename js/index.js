@@ -255,7 +255,7 @@ $(document).ready(function(){
   $('#content').hide();
   
   // Laisser modale apparente et rendre background utilisable
-  $(".enable-back").on('shown.bs.modal', function () {
+  $(".enable-back, #m_user").on('shown.bs.modal', function () {
     $("body").removeClass("modal-open");			
     $(this).removeClass("modal");
     $(document).off('focusin.modal');

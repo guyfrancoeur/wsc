@@ -623,6 +623,8 @@ input:focus{
 #m_code, #m_sc{
   z-index:200;
   pointer-events:none;
+}
+#m_code, #m_sc, #m_user{
   outline: 0;
 }
 #m_code .modal-content{
