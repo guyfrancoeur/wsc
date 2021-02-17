@@ -125,7 +125,7 @@ function KeyPress(e) {
 }
 
 $('#bmodaleusers').click(function() {
-  $("#m_user").show({backdrop: false, keyboard: true});
+  $("#m_user").modal({backdrop: false, keyboard: true});
   $('#bmodaleusers').tooltip('hide');
 });
 

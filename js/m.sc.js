@@ -70,7 +70,7 @@ function stopShare(){
 }
 
 function share() {
-  frameShare = setInterval(interval, frameRate);
+  frameShare = setInterval(interval, 1000);
   $("#sliderEmetteur, #divkbytes, #video").show();
   $("#video").css({"max-height": "50vh","height": "50vh"});
   $("#bShare").hide();
