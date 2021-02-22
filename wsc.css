@@ -667,8 +667,6 @@ input:focus{
 }
 .enable-back{
   position: fixed;
-}
-#m_sc{
   top: 20%;
   left: 50%;
   transform: translate(-50%, -20%);
