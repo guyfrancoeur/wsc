@@ -54,7 +54,7 @@ v4.0
   - [ ] picture in picture
 
 ### Future
-+ [ ] Migration vers bootstap 4
++ [x] Migration vers bootstap 4
 
 
 ### Expérimentale
