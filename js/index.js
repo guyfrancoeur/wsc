@@ -10,6 +10,7 @@ const ico = document.getElementById('favicon');
 
 function newUpdate() {
   ico.href = './ico/favicon.ico';
+  a2.play();
 }
 
 $(window).on("blur focus", function(e) {
@@ -171,7 +172,7 @@ function init() {
       switch (data.type) {
         case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
         case 'tlk' :
-          if (!document.hasFocus()) { newUpdate(); a2.play(); }
+          if (!document.hasFocus()) newUpdate();
           var text = data.message;
           text = text.replace(/\r?\n/g, '<br />');
           $('#messages').append($('<li>').html(text));

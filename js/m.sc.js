@@ -3,15 +3,12 @@ var frameRate = 500;
 var imgQuality = 0.8;
 var scale = .8;
 
-$('#m_sc .modal-content').resizable({minHeight: 157, minWidth: 498});
-$('#m_sc .modal-dialog').draggable({handle: $('#div-move')});
-
-$("#m_sc .modal-content").on('click', function () {
-  if($("#m_sc").css("z-index") == 200){
-    $("#m_sc").css("z-index","201");
-    $("#m_code").css("z-index","200");
-  }
+$('#m_sc .modal-content').resizable({
+  minHeight: 265,
+  minWidth: 157,
+  resize: resizeVideo
 });
+$('#m_sc .modal-dialog').draggable({ handle: $('#m_sc .head') });
 
 function initWsc() {
   wsc.onopen = function() {
@@ -20,9 +17,9 @@ function initWsc() {
     else{
       console.log("case start wsc");
       $("#bShare,#sliderEmetteur, #divkbytes").hide();
-      $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
-      $("#video, #sliderReceveur").show();
+      $("#video, #bFull").show();
       $("#m_sc").modal({backdrop: false, keyboard: false});
+      if (!document.hasFocus()) newUpdate();
     }
   }
   
@@ -37,44 +34,36 @@ function initWsc() {
         case 'start':
           console.log("case start wsc");
           $("#m_sc").modal({backdrop: false, keyboard: false}); //ouvrir la modale pour mettre le partage.
-          $("#sliderReceveur, #video").show();
+          $("#bFull, #video").show();
           $("#bShare, #sliderEmetteur, #divkbytes").hide();
-          $("#video").css({"max-height": "50vh","height": "50vh"});
-          $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
           break;
       }
     }
   }
 
-  wsc.onclose = function() {
-    console.log("wsc closed");
-  }
+  wsc.onclose = function() { console.log("wsc closed"); }
 
-  wsc.onerror = function() {
-    console.log("error wsc");
-  }
+  wsc.onerror = function() { console.log("error wsc"); }
 }
 
 function stopShare(){
   console.log("case stop wsc");
-  $("#video, #sliderReceveur, #sliderEmetteur, #divkbytes").hide();
+  $("#video, #bFull, #sliderEmetteur, #divkbytes").hide();
   $('#vdieo').removeAttr("poster");
   $("#bShare").show();
-  $("#modaleSC").css({"width": "", "height": "", "max-width": "", "max-height": ""});
-  $("#video").css({"max-height": "50vh","height": ""});
   $('#nresizeWindow').bootstrapSlider('refresh');
   var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
   if (fullscreenElement != null) exitFunction();
   $("#m_sc").modal('hide'); // femeture du partage.
   wsc.close();
+  $("#modaleSC > .modal-content").css({"width": "", "height": ""});
+  $("#video").css({"maxWidth": "100%", "maxHeight": "50vh"});
 }
 
 function share() {
   frameShare = setInterval(interval, 1000);
   $("#sliderEmetteur, #divkbytes, #video").show();
-  $("#video").css({"max-height": "50vh","height": "50vh"});
   $("#bShare").hide();
-  $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
 }
 
 function interval(){
@@ -126,7 +115,8 @@ async function getMedia(constraints){
     share();
   } catch(err) {
     console.log(err.name + ": " + err.message);
-    $("#msgErrMedia").show();
+    ws.send(JSON.stringify({ type: 'stop_sharing' }));
+    master = 0;
   }
 
   //Resize de la fenêtre en train d'être partagée -> resize du canvas
@@ -136,24 +126,23 @@ async function getMedia(constraints){
   });
 }
 
-// Resize window
-$("#nresizeWindow").bootstrapSlider({formatter: function(value) {return value + "%";}});
-$("#nresizeWindow").change(function(){
-  switch(parseInt(this.value)){
-    case 50:
-      $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh"});
-      $("#video").css({"max-height": "50vh","height": "50vh"});
-      break;
-    case 75:
-      $("#modaleSC").css({"width": "75%", "height": "75vh", "max-width": "75%", "max-height": "75vh"});
-      $("#video").css({"max-height": "75vh","height": "75vh"});
-      break;
-    case 100:
-      $("#modaleSC").css({"width": "98%", "height": "85vh", "max-width": "98%", "max-height": "85vh"});
-      $("#video").css({"max-height": "85vh","height": "85vh"});
-      break;
+function resizeVideo(){
+  if($("#video").css("width") != 0 && $("#video").css("height") != 0){
+    w2 = $("#modaleSC > .modal-content").width() - 60;
+    h2 = $("#modaleSC > .modal-content").height() - $("#modaleSC > .modal-content > .modal-header").height() - 60;
+    if($("#video").css("width") > $("#video").css("height")){
+      $("#video").css({"width" : w2 + "px", "maxHeight" : h2 + "px", "maxWidth" : "none", "height": "auto"});
+    }
+    else $("#video").css({"height" : h2 + "px", "maxWidth" : w2  + "px", "maxHeight" : "none", "width": "auto"});
   }
-  $("#divResizeWindow > div").tooltip('hide');
+}
+
+// Modale au premier plan au clic (par rapport à la modale m_code)
+$("#m_sc .modal-content").on('click', function () {
+  if($("#m_sc").css("z-index") == 200){
+    $("#m_sc").css("z-index","201");
+    $("#m_code").css("z-index","200");
+  }
 });
 
 //Scale du canvas en fonction de la capture 50% 75% 100% ; default 75%
@@ -182,21 +171,19 @@ $('#bFull').on('click', function(){
   // FullScreen event
   document.documentElement.requestFullscreen().catch(function(error) {console.log(error.message);});
   $("#m_sc").addClass("modal-full");
-  $("#modaleSC").css({"min-width": "", "min-height": "", "margin":"0px"});
-  $("#video").css({"max-height": "95vh","height": "95vh"});
-  $(".close, #sliderReceveur").hide();
+  $("#m_sc, #modaleSC").css({"top": "", "left": ""});
+  $(".close, #bFull").hide();
   $("#bExitFull").show();
+  resizeVideo();
 });
 
-$('#bExitFull').on('click', function(){
-  exitFunction();
-});
+$('#bExitFull').on('click', function(){ exitFunction(); });
 
 function exitFunction(){
   $("#m_sc").removeClass("modal-full");
-  $("#modaleSC").css({"width": "50%", "height": "50vh", "max-width": "50%", "max-height": "50vh", "margin":"10px auto"});
-  $("#video").css({"max-height": "50vh","height": ""});
-  $(".close, #sliderReceveur").show();
+  $("#modaleSC > .modal-content").css({"width": "", "height": "400px"});
+  resizeVideo();
+  $(".close, #bFull").show();
   $("#bExitFull").hide();
   $('#nresizeWindow').bootstrapSlider('refresh');
   document.exitFullscreen().catch(function(error) {console.log(error.message);}); // Exit fullScreen
@@ -216,5 +203,5 @@ $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', fu
 
 $(document).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
-  $("#sliderReceveur, #sliderEmetteur, #divkbytes, #bExitFull").hide();  
+  $("#bFull, #sliderEmetteur, #divkbytes, #bExitFull").hide();  
 });
