@@ -123,6 +123,12 @@ function KeyPress(e) {
     $("#message").val(text);
     return false;
   }
+  if (evtobj.ctrlKey && evtobj.keyCode == 77) {
+    if($("#share_code").css("display") == "none") $("#share_code, #bHideCode").show();
+    else $("#share_code, #bHideCode").hide();
+    resizeDivCode();
+    return false;
+  }
 }
 
 $('#bmodaleusers').click(function() {
@@ -156,7 +162,6 @@ function init() {
     $('#m_aye').load('./m.aye.html');
     $('#m_sc').load('./m.sc.html');
     $('#m_code').load('./m.code.html');
-    $('#bExitFullChat, #m_code').hide();  //necessaire ?
     $('[data-toggle="popover"]').popover({html: true});
     $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
     $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
@@ -203,6 +208,10 @@ function init() {
         case 'close_audio':
           if (wsa.readyState == wsa.OPEN) { wsa.close(); console.log('wsa.close() from index.js');}
           break;
+        case 'code':
+          $("#code-shared").html((data.message).replace(/\</g, '&#60;'));
+          $("#code-shared").removeClass("prettyprinted");
+          PR.prettyPrint();
       }
     }
   }
@@ -337,7 +346,7 @@ $(document).ready(function(){
   $(window).keyup(function(e) {
     if(e.keyCode == 44) copyToClipboard();
   });
-m_i
+
   
   $('#bdeconnexion').on('click', function(){
     ws.close();

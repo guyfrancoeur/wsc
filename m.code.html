@@ -1,7 +1,7 @@
 <div class="modal-dialog" role="document ">
   <div class="modal-content">
-    <div id="divHeader" class="modal-header" style="height:50px;cursor:move;">
-      <span style="position:absolute;top:5px;left:7px;color:#f0f0f0" class="col">
+    <div id="divHeader" class="modal-header">
+      <span id="iconCode" class="col">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
           <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
         </svg>
@@ -10,8 +10,8 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute;right:15px;">&times;</button>
     </div>
     <div class="modal-body" style="flex-grow:1;">
-      <form style="height:100%;">
-        <pre id="code-shared" class="linenums prettyprint">#include &#60stdio.h>
+      <form style="height:100%;" class="d-flex flex-column">
+        <pre id="code-shared" class="linenums prettyprint flex-grow-1 overflow-auto mb-0">#include &#60stdio.h>
 #include &#60stdlib.h>
 #include "liste.h"
             
@@ -19,7 +19,20 @@ void init_liste (struct liste* L){
   L->tete = NIL;
   L->nbelem = 0;
 }
+
+
+
+
+
+
+
+
+
           </pre>
+          <button id="bHideCode" class="btn my-2 mx-auto" type="button">
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-double-up" class="svg-inline--fa fa-angle-double-up fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M177 255.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 351.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 425.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1zm-34-192L7 199.7c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l96.4-96.4 96.4 96.4c9.4 9.4 24.6 9.4 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6 0-33.9l-136-136c-9.2-9.4-24.4-9.4-33.8 0z"></path></svg>
+          </button>
+          <textarea id="share_code" name="share_code" class="form-control form-control-sm align-self-end" autocomplete="off" placeholder="Écrire ici ..."></textarea>
       </form>
     </div>
   </div>

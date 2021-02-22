@@ -35,7 +35,7 @@ input {
   padding:0;
 }
 #messages li {
-  padding:5px 10px;
+  padding:3px 10px;
 }
 #messages li:nth-child(odd) {
   background:#f5f5f5;
@@ -313,6 +313,7 @@ code{
 #bFullChat, #bExitFullChat{
   padding:4px 10px;
 }
+#bExitFullChat{display: none;}
 #bstart, #bstop{
   border-radius:100px;
   padding:6px 10px;
@@ -348,7 +349,7 @@ code{
 }
 .tooltip-inner{
   color:white;
-  box-shadow: 3px 3px 7px rgba(0,0,0,.3);
+  box-shadow: 3px 3px 7px #0000004d;
   background-color:#4d545a;
   padding:5px 20px;
   border-radius:10px;
@@ -632,7 +633,6 @@ input:focus{
   flex-flow:column;
   min-height:380px;
   min-width:400px;
-  height:380px;
   width:400px;
   max-height:80%;
 }
@@ -683,11 +683,22 @@ li.L1, li.L3, li.L5, li.L7, li.L9 {
 pre{
   padding:10px 5px 10px 17px !important;
   background-color:#ffffff;
-  height:100%;
+  border-radius:5px;
+  border: 1px dashed #e8e8e8 !important;
+}
+pre::before {
+  z-index:0;
+  content: " ";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px ;
   border:1px solid #e8e8e8 !important;
   border-radius:5px;
-  outline:1px dashed #e4e4e4;
-  outline-offset:-7px;
+}
+#share_code{
+  z-index: 1;
 }
 #bmSubmit, #bloc-im{
   height:35px !important;
@@ -702,6 +713,10 @@ pre{
 }
 #bF,#bH,#bCode,#bmodaleusers{
   width:50%;
+}
+#divHeader{
+  height:50px;
+  cursor:move;
 }
 
 /* Désactiver sélection texte */
@@ -720,6 +735,34 @@ pre{
   max-width: 100% !important;
   max-height:none !important;
   min-width:100%;
+}
+#iconCode{
+  position:absolute;
+  top:5px;
+  color:#f0f0f0;
+  left: -5px;
+}
+#m_code .modal-body{
+  height:318px;
+}
+#bHideCode{
+  color: #88a6be;
+  background-color: #f3f3f3;
+  width: 43px;
+  border-radius: 50px;
+  z-index:1;
+}
+#bHideCode:hover{
+  background-color: #f3f3f3;
+  color: #7997af;
+  box-shadow: 0 .125rem .25rem #00000013!important;
+}
+#bHideCode > svg{
+  height: 23px;
+  margin-bottom: 3px;
+}
+#share_code, #bHideCode{
+  display: none;
 }
 
 @media screen and (min-width: 768px){
