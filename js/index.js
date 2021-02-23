@@ -124,8 +124,7 @@ function KeyPress(e) {
     return false;
   }
   if (evtobj.ctrlKey && evtobj.keyCode == 77) {
-    if($("#share_code").css("display") == "none") $("#share_code, #bHideCode").show();
-    else $("#share_code, #bHideCode").hide();
+    displayDivCode();
     resizeDivCode();
     return false;
   }

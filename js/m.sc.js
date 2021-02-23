@@ -6,7 +6,8 @@ var scale = .8;
 $('#m_sc .modal-content').resizable({
   minHeight: 265,
   minWidth: 157,
-  resize: resizeVideo
+  resize: resizeVideo,
+  ghost: true
 });
 $('#m_sc .modal-dialog').draggable({ handle: $('#m_sc .head') });
 
