@@ -165,6 +165,7 @@ function init() {
     $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
     $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
     $('#content').show();
+    PR.prettyPrint();
     $('#m_login').modal('hide');
     $('body').removeClass("grey");
     fResize();
@@ -366,6 +367,20 @@ $(document).ready(function(){
 
   $('#bCode').on('click', function(){ $('#m_code').modal({backdrop: false, keyboard: true})});  
   
+  // Tab dans le textarea
+  $("textarea").keydown(function(e) {
+    var keyCode = e.keyCode || e.which;
+    if(keyCode === 9) {
+      var start = this.selectionStart;
+      var end = this.selectionEnd;
+      var $this = $(this);
+      var value = $this.val();
+      $this.val(value.substring(0, start) + "\t" + value.substring(end));
+      this.selectionStart = this.selectionEnd = start + 1;
+      e.preventDefault();
+    }
+  });
+
   $('#room').focus();
   console.log('event programming done!');
   console.log('ready!');

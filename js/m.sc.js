@@ -206,3 +206,10 @@ $(document).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
   $("#bFull, #sliderEmetteur, #divkbytes, #bExitFull").hide();  
 });
+
+$("#m_sc").on('shown.bs.modal', function () {
+  if($("#m_sc").css("z-index") == 200){
+    $("#m_sc").css("z-index","201");
+    $("#m_code").css("z-index","200");
+  }
+});
