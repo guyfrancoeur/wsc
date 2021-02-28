@@ -5,8 +5,7 @@ $('#closeCode').on('click', function(){
 $('#m_code .modal-content').resizable({
   minHeight: 380,
   minWidth: 400,
-  resize: resizeDivCode,
-  ghost: true
+  resize: resizeDivCode
 });
 $('#m_code .modal-dialog').draggable({handle: $('#divHeader')});
 
