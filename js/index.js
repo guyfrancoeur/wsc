@@ -123,7 +123,7 @@ function KeyPress(e) {
     $("#message").val(text);
     return false;
   }
-  if (evtobj.ctrlKey && evtobj.keyCode == 77) {
+  if (evtobj.ctrlKey && evtobj.keyCode == 67 && evtobj.altKey) {
     displayDivCode();
     resizeDivCode();
     return false;
