@@ -1,6 +1,6 @@
 # wsc
 
-### Un chat sécuritaire super rapide en temps réel
+### Un chat (avec video/sharing) sécuritaire super rapide en temps réel
 
 #### Fondation
  - websocket
