@@ -382,6 +382,15 @@ $(document).ready(function(){
   });
 
   $('#room').focus();
+  
+  $(window).bind('beforeunload', function(){
+    return "Voulez-vous vraiment quitter l'application?";
+  });
+  //$(window).on('beforeunload', function(){
+  //  var c=confirm();
+  //  if(c){ return true; }
+  //  else return false;
+  //});
   console.log('event programming done!');
   console.log('ready!');
 });
