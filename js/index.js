@@ -147,7 +147,7 @@ function init() {
     }));
     $('#croom').text($('#room').val());
     ws.send(JSON.stringify({
-      type: 'name',
+      type: 'login',
       room: $('#room').val(),
       icon: '',
       pass: $('#pass').val(),
@@ -177,6 +177,13 @@ function init() {
           $(window).bind('beforeunload', function(){
             return "Voulez-vous vraiment quitter l'application?";
           });
+    ws.send(JSON.stringify({
+      type: 'name',
+      room: $('#room').val(),
+      icon: '',
+      pass: $('#pass').val(),
+      message: navigator.tell
+    }));
           break;
         case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
         case 'tlk' :
