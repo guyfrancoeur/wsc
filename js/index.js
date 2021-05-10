@@ -140,7 +140,6 @@ $('#bmodaleusers').click(function() {
 function init() {
   ws.onopen = function() {
     $('#m_user').modal({backdrop: false, keyboard: true});
-    //ping();
     console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     $('#cLatence2').text( (new Date().getTime() - startWs) +"ms" );
     ws.send(JSON.stringify({
@@ -169,6 +168,9 @@ function init() {
     $('#m_login').modal('hide');
     $('body').removeClass("grey");
     fResize();
+    $(window).bind('beforeunload', function(){
+      return "Voulez-vous vraiment quitter l'application?";
+    });
   }
   
   ws.onmessage = function(evt) {
@@ -382,15 +384,7 @@ $(document).ready(function(){
   });
 
   $('#room').focus();
-  
-  $(window).bind('beforeunload', function(){
-    return "Voulez-vous vraiment quitter l'application?";
-  });
-  //$(window).on('beforeunload', function(){
-  //  var c=confirm();
-  //  if(c){ return true; }
-  //  else return false;
-  //});
+
   console.log('event programming done!');
   console.log('ready!');
 });
