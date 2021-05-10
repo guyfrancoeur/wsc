@@ -20,7 +20,7 @@
  - Insertion d'image contenu dans le clipboard
 
 ### Requis opérationnel
- - Un serveur (similaire a NodeJS) pour le dialogue entre les utilisateurs.
+ - Un serveur (similaire à NodeJS) pour le dialogue entre les utilisateurs.
 
 ### Réalisations
 #### v3.1
@@ -33,7 +33,12 @@
 + [x] Changement visuel dans la section base (icons, boite message).
 + [x] Modale qui bouge ou redimensionable.
 
-v4.0
+#### v3.2
++ [x] Amélioration de la fluidité au login
++ [x] Ajout d'un message de sortie de l'application (anti-oups)
+
+#### v4.0
++ [ ] multi channel video dynamique (idée)
 
 
 ### Backlog
