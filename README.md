@@ -36,6 +36,9 @@
 #### v3.2
 + [x] Amélioration de la fluidité au login
 + [x] Ajout d'un message de sortie de l'application (anti-oups)
++ [ ] ajout de la latence en ms
++ [ ] ajout temps login en ms
++ [ ] heure rétractable (colapseable)
 
 #### v4.0
 + [ ] multi channel video dynamique (idée)
