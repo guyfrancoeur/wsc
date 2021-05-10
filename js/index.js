@@ -139,7 +139,6 @@ $('#bmodaleusers').click(function() {
 
 function init() {
   ws.onopen = function() {
-    $('#m_user').modal({backdrop: false, keyboard: true});
     console.log("onopen of", ws.url, "in", (new Date().getTime() - startWs), "ms");
     $('#cLatence2').text( (new Date().getTime() - startWs) +"ms" );
     ws.send(JSON.stringify({
@@ -161,17 +160,18 @@ function init() {
       data = JSON.parse(evt.data);
       switch (data.type) {
         case 'gr8' :
-          $("#message").attr("placeholder","Écrire votre message ici  (room #" + $('#room').val()+") \t[Shift + Enter pour envoyer le message]");
           $('#m_i').load('./m.i.html');
           $('#m_aye').load('./m.aye.html');
           $('#m_sc').load('./m.sc.html');
           $('#m_code').load('./m.code.html');
+          $("#message").attr("placeholder","Écrire votre message ici  (room #" + $('#room').val()+") \t[Shift + Enter pour envoyer le message]");
           $('[data-toggle="popover"]').popover({html: true});
           $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
           $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
           $('#content').show();
           PR.prettyPrint();
           $('#m_login').modal('hide');
+          $('#m_user').modal({backdrop: false, keyboard: true});
           $('body').removeClass("grey");
           fResize();
           $(window).bind('beforeunload', function(){
