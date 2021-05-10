@@ -154,6 +154,13 @@ function init() {
       pass: $('#pass').val(),
       message: navigator.tell
     }));
+  }
+  
+  ws.onmessage = function(evt) {
+    if (evt.data != "") {
+      data = JSON.parse(evt.data);
+      switch (data.type) {
+        case 'gr8' :
           $("#message").attr("placeholder","Écrire votre message ici  (room #" + $('#room').val()+") \t[Shift + Enter pour envoyer le message]");
           $('#m_i').load('./m.i.html');
           $('#m_aye').load('./m.aye.html');
@@ -167,13 +174,6 @@ function init() {
           $('#m_login').modal('hide');
           $('body').removeClass("grey");
           fResize();
-  }
-  
-  ws.onmessage = function(evt) {
-    if (evt.data != "") {
-      data = JSON.parse(evt.data);
-      switch (data.type) {
-        case 'gr8' :
           $(window).bind('beforeunload', function(){
             return "Voulez-vous vraiment quitter l'application?";
           });
