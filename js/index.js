@@ -168,9 +168,9 @@ function init() {
     $('#m_login').modal('hide');
     $('body').removeClass("grey");
     fResize();
-    $(window).bind('beforeunload', function(){
-      return "Voulez-vous vraiment quitter l'application?";
-    });
+    //$(window).bind('beforeunload', function(){
+    //  return "Voulez-vous vraiment quitter l'application?";
+    //});
   }
   
   ws.onmessage = function(evt) {
