@@ -154,29 +154,32 @@ function init() {
       pass: $('#pass').val(),
       message: navigator.tell
     }));
-    // nouveau
-    $("#message").attr("placeholder","Écrire votre message ici  (room #" + $('#room').val()+") \t[Shift + Enter pour envoyer le message]");
-    $('#m_i').load('./m.i.html');
-    $('#m_aye').load('./m.aye.html');
-    $('#m_sc').load('./m.sc.html');
-    $('#m_code').load('./m.code.html');
-    $('[data-toggle="popover"]').popover({html: true});
-    $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
-    $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
-    $('#content').show();
-    PR.prettyPrint();
-    $('#m_login').modal('hide');
-    $('body').removeClass("grey");
-    fResize();
-    //$(window).bind('beforeunload', function(){
-    //  return "Voulez-vous vraiment quitter l'application?";
-    //});
+
   }
   
   ws.onmessage = function(evt) {
     if (evt.data != "") {
       data = JSON.parse(evt.data);
       switch (data.type) {
+        case 'gr8' :
+          // nouveau
+          $("#message").attr("placeholder","Écrire votre message ici  (room #" + $('#room').val()+") \t[Shift + Enter pour envoyer le message]");
+          $('#m_i').load('./m.i.html');
+          $('#m_aye').load('./m.aye.html');
+          $('#m_sc').load('./m.sc.html');
+          $('#m_code').load('./m.code.html');
+          $('[data-toggle="popover"]').popover({html: true});
+          $('#msgs, #messages').height($(window).height() - $('#name-div').height() - $('#input-div').height() - 40);
+          $('#message').width($('#input-div').width() - $('#bMsg').width() - 100);
+          $('#content').show();
+          PR.prettyPrint();
+          $('#m_login').modal('hide');
+          $('body').removeClass("grey");
+          fResize();
+          $(window).bind('beforeunload', function(){
+            return "Voulez-vous vraiment quitter l'application?";
+          });
+          break;
         case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
         case 'tlk' :
           if (!document.hasFocus()) newUpdate();
