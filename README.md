@@ -36,7 +36,7 @@
 #### v3.2
 + [x] Amélioration de la fluidité au login
 + [x] Ajout d'un message de sortie de l'application (anti-oups)
-+ [ ] ajout de la latence en ms
++ [x] ajout de la latence en ms
 + [ ] ajout temps login en ms
 + [ ] heure rétractable (collapsable)
 + [ ] sliders rétractables (collapsable) dans la modale sharing
