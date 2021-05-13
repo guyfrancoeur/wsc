@@ -39,9 +39,7 @@
 + [x] ajout de la latence en ms
 + [ ] ajout temps login en ms
 + [ ] heure rétractable (collapsable)
-+ [ ] sliders rétractables (collapsable) dans la modale sharing
-+ [ ] sharing dans les deux sens (plusieurs sharing en même temps)
-+ [ ] partage de code : division de la zone d'affichage avec la zone d'écriture gauche/droite au lieu de haut/bas
++ [x] Migration vers bootstap 4
 
 #### v4.0
 + [ ] multi channel video dynamique (idée)
@@ -63,9 +61,13 @@
   - [ ] Audio
   - [ ] Vidéo
   - [ ] picture in picture
++ [ ] sliders rétractables (collapsable) dans la modale sharing
++ [ ] sharing dans les deux sens (plusieurs sharing en même temps)
++ [ ] partage de code : division de la zone d'affichage avec la zone d'écriture gauche/droite au lieu de haut/bas
+
 
 ### Future
-+ [x] Migration vers bootstap 4
+
 
 
 ### Expérimentale
