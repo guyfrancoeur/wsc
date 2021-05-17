@@ -174,10 +174,12 @@ function init() {
           $('#m_user').modal({backdrop: false, keyboard: true});
           $('body').removeClass("grey");
           fResize();
-          window.onhashchange = function() {
-            console.log('hash changed');
-            return false;
-          }
+window.addEventListener('beforeunload', function (e) {
+  // Cancel the event
+  e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+  // Chrome requires returnValue to be set
+  e.returnValue = "Voulez-vous vraiment quitter l'application?";
+});
           //$(window).bind('beforeunload', function(){
           //  return "Voulez-vous vraiment quitter l'application?";
           //});
@@ -235,9 +237,10 @@ function init() {
   }
   
   ws.onclose = function () {
-    //window.onbeforeunload = function() {
-    //  return null;
-    //};
+    window.addEventListener('beforeunload', function (e) {
+      // the absence of a returnValue property on the event will guarantee the browser unload happens
+      delete e['returnValue'];
+    });
     window.location.reload(true);
   };
 }
