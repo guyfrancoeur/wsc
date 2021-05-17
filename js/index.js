@@ -231,6 +231,7 @@ function init() {
   }
   
   ws.onclose = function () {
+    window.onbeforeunload = null;
     window.location.reload(true);
   };
 }
