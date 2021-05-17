@@ -37,13 +37,7 @@
 + [x] Amélioration de la fluidité au login
 + [x] Ajout d'un message de sortie de l'application (anti-oups)
 + [x] ajout de la latence en ms
-+ [ ] ajout temps login en ms
-+ [ ] heure rétractable (collapsable)
 + [x] Migration vers bootstap 4
-
-#### v4.0
-+ [ ] multi channel video dynamique (idée)
-
 
 ### Backlog
 
@@ -63,11 +57,9 @@
 + [ ] sliders rétractables (collapsable) dans la modale sharing
 + [ ] sharing dans les deux sens (plusieurs sharing en même temps)
 + [ ] partage de code : division de la zone d'affichage avec la zone d'écriture gauche/droite au lieu de haut/bas
-
-
-### Future
-
-
++ [ ] ajout temps login en ms
++ [ ] heure rétractable (collapsable)
++ [ ] un service qui donne le port de facon dynamique
 
 ### Expérimentale
  + WebRTC
