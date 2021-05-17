@@ -174,6 +174,7 @@ function init() {
           $('#m_user').modal({backdrop: false, keyboard: true});
           $('body').removeClass("grey");
           fResize();
+          
           $(window).bind('beforeunload', function(){
             return "Voulez-vous vraiment quitter l'application?";
           });
@@ -231,7 +232,9 @@ function init() {
   }
   
   ws.onclose = function () {
-    window.onbeforeunload = null;
+    window.onbeforeunload = function() {
+      return null;
+    };
     window.location.reload(true);
   };
 }
