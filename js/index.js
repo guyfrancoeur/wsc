@@ -174,27 +174,23 @@ function init() {
           $('#m_user').modal({backdrop: false, keyboard: true});
           $('body').removeClass("grey");
           fResize();
-window.addEventListener('beforeunload', function (e) {
-  if (ws.readyState == ws.OPEN) {
-    // Cancel the event
-    e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-    // Chrome requires returnValue to be set
-    e.returnValue = "Voulez-vous vraiment quitter l'application?";
-    return e.returnValue;
-  } else {
-    return;
-  }
-});
-          //$(window).bind('beforeunload', function(){
-          //  return "Voulez-vous vraiment quitter l'application?";
-          //});
-    ws.send(JSON.stringify({
-      type: 'name',
-      room: $('#room').val(),
-      icon: '',
-      pass: $('#pass').val(),
-      message: navigator.tell
-    }));
+          window.addEventListener('beforeunload', function (e) {
+            if (ws.readyState == ws.OPEN) {
+              e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+              // Chromium requires returnValue to be set
+              e.returnValue = "Voulez-vous vraiment quitter l'application?";
+              return e.returnValue;
+            } else {
+              return;
+            }
+          });
+          ws.send(JSON.stringify({
+            type: 'name',
+            room: $('#room').val(),
+            icon: '',
+            pass: $('#pass').val(),
+            message: navigator.tell
+          }));
           break;
         case 'lnk' : $('#count').text(data.count); $('#users').empty(); $('#users').append(data.message); $('#welcometext').text('Bonjour'); resizeModaleUsagers(); break;
         case 'tlk' :
