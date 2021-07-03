@@ -14,8 +14,10 @@
         </button>
       </div>
       
-      <button class="btn btn-dafault" type="button" data-toggle="collapse" data-target="#sliderEmetteur" aria-expanded="false" aria-controls="sliderEmetteur">+-</button>
-      <div id="sliderEmetteur" class="mx-auto pt-2 mt-4 row text-center collapse">
+      <p><button class="btn btn-dafault" type="button" data-toggle="collapse" data-target="#divCollapse" aria-expanded="false" aria-controls="divCollapse">+-</button></p>
+    <div class="collapse" id="divCollapse">
+     <div class="card card-body">
+      <div id="sliderEmetteur" class="mx-auto pt-2 mt-4 row text-center">
         <div id="divResizeCanvas" class="form-group d-flex mb-1">
           <label id="lresizeCanvas" for="nresizeCanvas">Resize canvas</label>
           <input type="text" id="nresizeCanvas" data-provider="slider" data-slider-min="20" data-slider-max="100" data-slider-step="10" data-slider-value="50"/>
@@ -28,7 +30,10 @@
           <label id="lrefresh" for="nrefresh">Refresh rate</label>
           <input type="text" id="nrefresh" data-provider="slider" data-slider-min="100" data-slider-max="2000" data-slider-step="50" data-slider-value="100"/>
         </div>
-     </div>  
+      </div>
+     </div>
+    </div>
+    
     </div>
     <div class="modal-body text-center d-flex align-items-center justify-content-center">
       <button id="bShare" type="button" class="btn">Partager mon écran</button>
