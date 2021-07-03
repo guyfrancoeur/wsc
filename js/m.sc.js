@@ -1,7 +1,7 @@
 var master = 0; // si master = 1 (-> celui qui partage)
-var frameRate = 500;
-var imgQuality = 0.8;
-var scale = .8;
+var frameRate = 100;
+var imgQuality = 0.5;
+var scale = 0.5;
 
 $('#m_sc .modal-content').resizable({
   minHeight: 265,
