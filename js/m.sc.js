@@ -1,5 +1,4 @@
 var master = 0; // si master = 1 (-> celui qui partage)
-var frameRate = 100;
 var imgQuality = 0.5;
 var scale = 0.5;
 
@@ -61,7 +60,7 @@ function stopShare(){
 }
 
 function share() {
-  frameShare = setInterval(interval, 1000);
+  frameShare = setInterval(interval, $('#nrefresh').Val());
   $("#sliderEmetteur, #divkbytes, #video").show();
   $("#bShare").hide();
 }
@@ -73,7 +72,7 @@ function interval(){
     type: 'master',
     message: uri
   }));
-  var kbytes = (uri.length * (1000 / frameRate) / 1000)
+  var kbytes = (uri.length * (1000 / $('#nrefresh').val()) / 1000)
   $("#kbytes").html(kbytes.toFixed(2));
   $('#video').attr('poster', uri);
   
@@ -162,9 +161,9 @@ $("#npurete").change(function(){
 //refresh rate en ms, 200ms @ 2000ms step 50ms : default 500ms
 $("#nrefresh").bootstrapSlider({formatter: function(value) {return value + "ms";}});
 $("#nrefresh").change(function(){
-  frameRate = parseInt(this.value);
+  //frameRate = parseInt(this.value);
   clearInterval(frameShare);
-  frameShare = setInterval(interval, frameRate);
+  frameShare = setInterval(interval, parseInt(this.value));
 });
 
 $('#bFull').on('click', function(){
