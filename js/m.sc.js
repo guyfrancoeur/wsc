@@ -1,6 +1,6 @@
 var master = 0; // si master = 1 (-> celui qui partage)
-var imgQuality = $("#npurete").Val() / 100;
-var scale = $('#nresizeCanvas').Val() / 100;
+var imgQuality = $("#npurete").val() / 100;
+var scale = $('#nresizeCanvas').val() / 100;
 
 $('#m_sc .modal-content').resizable({
   minHeight: 265,
@@ -60,7 +60,7 @@ function stopShare(){
 }
 
 function share() {
-  frameShare = setInterval(interval, $('#nrefresh').Val());
+  frameShare = setInterval(interval, $('#nrefresh').val());
   $("#sliderEmetteur, #divkbytes, #video").show();
   $("#bShare").hide();
 }
