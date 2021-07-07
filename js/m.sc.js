@@ -202,7 +202,9 @@ $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', fu
 
 $(document).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
-  $("#bFull, #sliderEmetteur, #divkbytes, #bExitFull").hide();  
+  $("#bFull, #sliderEmetteur, #divkbytes, #bExitFull").hide();
+  imgQuality = $("#npurete").val() / 100;
+  scale = $('#nresizeCanvas').val() / 100;
 });
 
 $("#m_sc").on('shown.bs.modal', function () {
