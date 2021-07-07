@@ -75,7 +75,6 @@ function interval(){
   var kbytes = (uri.length * (1000 / $('#nrefresh').val()) / 1000)
   $("#kbytes").html(kbytes.toFixed(2));
   $('#video').attr('poster', uri);
-  
 }
 
 function onstopShare(){
@@ -144,7 +143,7 @@ $("#m_sc .modal-content").on('click', function () {
   }
 });
 
-//Scale du canvas en fonction de la capture 50% 75% 100% ; default 75%
+//Scale du canvas en fonction de la capture
 $("#nresizeCanvas").bootstrapSlider({formatter: function(value) {return value + "%";}});
 $("#nresizeCanvas").change(function(){
   scale = parseInt(this.value) / 100;
@@ -152,13 +151,13 @@ $("#nresizeCanvas").change(function(){
   canvas.height = video.videoHeight * scale;
 });
 
-//pureté image (cmpression jpg) 20% @ 100% step 20% :default 80%
+//pureté image (cmpression jpg)
 $("#npurete").bootstrapSlider({formatter: function(value) {return value + "%";}});
 $("#npurete").change(function(){
   imgQuality = parseInt(this.value) / 100;
 });
 
-//refresh rate en ms, 200ms @ 2000ms step 50ms : default 500ms
+//refresh rate en ms
 $("#nrefresh").bootstrapSlider({formatter: function(value) {return value + "ms";}});
 $("#nrefresh").change(function(){
   //frameRate = parseInt(this.value);
@@ -167,7 +166,6 @@ $("#nrefresh").change(function(){
 });
 
 $('#bFull').on('click', function(){
-  // FullScreen event
   document.documentElement.requestFullscreen().catch(function(error) {console.log(error.message);});
   $("#m_sc").addClass("modal-full");
   $("#m_sc, #modaleSC").css({"top": "", "left": ""});
@@ -185,7 +183,7 @@ function exitFunction(){
   $(".close, #bFull").show();
   $("#bExitFull").hide();
   $('#nresizeWindow').bootstrapSlider('refresh');
-  document.exitFullscreen().catch(function(error) {console.log(error.message);}); // Exit fullScreen
+  document.exitFullscreen().catch(function(error) {console.log(error.message);});
 }
 
 // Si exit fullScreen déclenché par le navigateur
