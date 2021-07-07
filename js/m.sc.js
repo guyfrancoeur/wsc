@@ -1,6 +1,6 @@
 var master = 0; // si master = 1 (-> celui qui partage)
-var imgQuality = $("#npurete").val() / 100;
-var scale = $('#nresizeCanvas').val() / 100;
+var imgQuality = 0.5; //$("#npurete").val() / 100;
+var scale = 0.5; //$('#nresizeCanvas').val() / 100;
 
 $('#m_sc .modal-content').resizable({
   minHeight: 265,
