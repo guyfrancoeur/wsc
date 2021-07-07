@@ -6,6 +6,7 @@
  - websocket
  - bootstrap
  - jquery
+ - bootstrap icon [lien](https://icons.getbootstrap.com/)
 
 #### Fonctionnalités
  - Visuellement agréable
