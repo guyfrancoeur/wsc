@@ -40,16 +40,23 @@ function initWsc() {
       }
     }
   }
-
-  wsc.onclose = function() { console.log("wsc closed"); }
-
+  
+  wsc.onclose = function() { console.log("wsc closed"); replace_video(); }
   wsc.onerror = function() { console.log("error wsc"); }
+}
+
+function replace_video(){
+  $('#video').remove();
+  var video = document.createElement('video');
+  video.id = "video";
+  $("#div_video").append(video);
+  $('#video').hide();
 }
 
 function stopShare(){
   console.log("case stop wsc");
-  $("#video, #bFull, #sliderEmetteur, #divkbytes").hide();
-  $('#vdieo').removeAttr("poster");
+  $("#bFull, #sliderEmetteur, #divkbytes").hide();
+  replace_video();
   $("#bShare").show();
   $('#nresizeWindow').bootstrapSlider('refresh');
   var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
@@ -64,6 +71,7 @@ function share() {
   frameShare = setInterval(interval, 1000);
   $("#sliderEmetteur, #divkbytes, #video").show();
   $("#bShare").hide();
+  
 }
 
 function interval(){
@@ -89,7 +97,7 @@ function onstopShare(){
 var canvas = document.createElement('canvas');
 var context = canvas.getContext('2d');
 var streamVideo;
-const video = document.getElementById('video');
+var video = document.getElementById('video');
 var constraints = { video: { frameRate: { ideal: 8, max: 12 } } };
 
 $('#bshareScreen').on('click', function(){
